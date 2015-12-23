@@ -15,6 +15,7 @@ import com.alinge.software.market.R;
  */
 public class BrandFragment extends BaseFragment {
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

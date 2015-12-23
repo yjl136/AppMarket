@@ -1,12 +1,18 @@
 package com.alinge.software.market.fragment;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import com.alinge.software.market.listener.PageChangeListener;
 import com.alinge.software.market.R;
+import com.alinge.software.market.view.PagerIndicatorView;
 
 /**
  * 作者： yejianlin
@@ -14,15 +20,58 @@ import com.alinge.software.market.R;
  * 作用：
  */
 public class HomeFragment extends BaseFragment {
-
+    private String[] mTitles = new String[] { "最新上架", "编辑推荐", "热门软件" };
+    private PagerIndicatorView mPagerIndicator;
+    private ViewPager mViewPager;
+    private Context activity;
+    private FragmentPagerAdapter mAdapter;
+    private  TabFragment[] mFragments = new TabFragment[mTitles.length];
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.activity=getActivity();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home,container,false);
+       View content= inflater.inflate(R.layout.fragment_home, container, false);
+        initView(content);
+        initDatas();
+        return content;
+    }
+
+    private void initView(View content) {
+        mPagerIndicator=(PagerIndicatorView)content.findViewById(R.id.pagerIndicator);
+        mViewPager=(ViewPager)content.findViewById(R.id.viewPager);
+    }
+    private void initDatas() {
+        mPagerIndicator.setTitles(mTitles);
+
+        for (int i = 0; i < mTitles.length; i++) {
+            mFragments[i] = (TabFragment) TabFragment.newInstance(mTitles[i]);
+        }
+
+        mAdapter = new FragmentPagerAdapter(getFragmentManager()) {
+            @Override
+            public int getCount() {
+                return mTitles.length;
+            }
+            @Override
+            public Fragment getItem(int position) {
+                return mFragments[position];
+            }
+        };
+        mViewPager.setAdapter(mAdapter);
+        mViewPager.setCurrentItem(0);
+    }
+    private void initEvents() {
+        mViewPager.addOnPageChangeListener(new PageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset,
+                                       int positionOffsetPixels) {
+                mPagerIndicator.scroll(position, positionOffset);
+            }
+        });
     }
 }

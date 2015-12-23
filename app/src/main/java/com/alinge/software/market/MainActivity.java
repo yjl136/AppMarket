@@ -5,7 +5,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
 import com.alinge.software.market.adapter.FragmentAdapter;
 import com.alinge.software.market.listener.PageChangeListener;
 import com.alinge.software.market.utils.LogUtils;
