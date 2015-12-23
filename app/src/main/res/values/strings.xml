@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">alinGe market</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="homeTabText">首页</string>
+    <string name="typeTabText">分类</string>
+    <string name="brandTabText">品牌</string>
+    <string name="managerTabText">管理</string>
+</resources>

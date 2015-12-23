@@ -1,0 +1,46 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.alinge.software.market.view.NoScrollViewPager
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <RadioGroup
+        android:id="@+id/tabGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/TabsColor"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/homeTab"
+            style="@style/TabStyle"
+            android:drawableTop="@drawable/bg_home"
+            android:text="@string/homeTabText" />
+
+        <RadioButton
+            android:id="@+id/typeTab"
+            style="@style/TabStyle"
+            android:drawableTop="@drawable/bg_type"
+            android:text="@string/typeTabText" />
+
+        <RadioButton
+            android:id="@+id/brandTab"
+            style="@style/TabStyle"
+            android:drawableTop="@drawable/bg_brand"
+            android:text="@string/brandTabText" />
+
+        <RadioButton
+            android:id="@+id/managerTab"
+            style="@style/TabStyle"
+            android:drawableTop="@drawable/bg_manager"
+            android:text="@string/managerTabText" />
+
+    </RadioGroup>
+
+
+</LinearLayout>
