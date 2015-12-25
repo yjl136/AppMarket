@@ -4,34 +4,36 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.alinge.software.iflytekvoice.recognizer.IflytekRecognizer;
 
 public class MainActivity extends AppCompatActivity {
+    private TextView resultTv;
+    private Button recognizerBt;
+    private IflytekRecognizer recognizer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        resultTv=(TextView)findViewById(R.id.showResult);
+        recognizerBt=(Button)findViewById(R.id.recognizer);
+        resultTv.setText("说说看");
+        recognizer=new IflytekRecognizer(this);
+        recognizerBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recognizer.recognizer(true);
+            }
+        });
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    protected void onDestroy() {
+        super.onDestroy();
+        recognizer.release();
     }
 }

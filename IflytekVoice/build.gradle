@@ -14,6 +14,7 @@ android {
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
+            assets.srcDirs=['assets']
         }
     }
     buildTypes {
@@ -27,6 +28,8 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:23.1.1'
+    compile files('libs/Msc.jar')
+    compile files('libs/Sunflower.jar')
 }
