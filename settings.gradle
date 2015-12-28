@@ -1,1 +1,1 @@
-include ':app', ':StackBlur_lib', ':IflytekVoice'
+include ':StackBlur_lib', ':IflytekVoice'
