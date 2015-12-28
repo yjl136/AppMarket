@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/AppMarket.iml" filepath="$PROJECT_DIR$/AppMarket.iml" />
       <module fileurl="file://$PROJECT_DIR$/IflytekVoice/IflytekVoice.iml" filepath="$PROJECT_DIR$/IflytekVoice/IflytekVoice.iml" />
       <module fileurl="file://$PROJECT_DIR$/StackBlur_lib/StackBlur_lib.iml" filepath="$PROJECT_DIR$/StackBlur_lib/StackBlur_lib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
 </project>
