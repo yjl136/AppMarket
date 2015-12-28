@@ -1,1 +1,1 @@
-include ':IflytekVoice'
+include ':IflytekVoice','app'
