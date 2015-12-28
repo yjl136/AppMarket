@@ -1,0 +1,21 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/showResult"
+        android:layout_width="match_parent"
+        android:layout_height="300dp" />
+    <Button
+        android:id="@+id/recognizer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="语音听写" />
+    <Button
+        android:id="@+id/synthesizer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="语音合成" />
+
+</LinearLayout>
