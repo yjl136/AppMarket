@@ -18,6 +18,7 @@ import com.iflytek.cloud.SpeechError;
 import com.iflytek.cloud.SpeechRecognizer;
 import com.iflytek.cloud.ui.RecognizerDialog;
 import com.iflytek.cloud.ui.RecognizerDialogListener;
+import com.iflytek.cloud.util.VolumeUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,6 +35,8 @@ public class IflytekRecognizer {
     private SpeechRecognizer mRecognizer;
     private RecognizerDialog mRecognizerDialog;
     private Context context;
+    //初始化为空闲状态
+    private int curentStatus = Code.FREE;
     //保留一次识别的结果
     private HashMap<String, String> mResults = new LinkedHashMap<String, String>();
 
@@ -41,34 +44,47 @@ public class IflytekRecognizer {
         this.context = context;
     }
 
-    private  RecognizerListener mRecognizerListener = new RecognizerListener() {
+    private RecognizerListener mRecognizerListener = new RecognizerListener() {
         @Override
         public void onVolumeChanged(int volume, byte[] bytes) {
             LogUtils.info(null, "volume:" + volume);
+            notifyStatusChange(Code.RECOGNIZER);
         }
+
         @Override
         public void onBeginOfSpeech() {
+            notifyStatusChange(Code.BEGIN_SPEECH);
             LogUtils.info(null, "onBeginOfSpeech");
         }
 
         @Override
         public void onEndOfSpeech() {
+            notifyStatusChange(Code.END_SPEECH);
             LogUtils.info(null, "onEndOfSpeech");
         }
+
         @Override
         public void onResult(RecognizerResult recognizerResult, boolean isLast) {
             if (recognizerResult != null) {
                 LogUtils.info(null, "resutlt:  " + recognizerResult.getResultString());
-                doResult(recognizerResult,isLast);
+                doResult(recognizerResult, isLast);
             } else {
                 LogUtils.info(null, "resutlt: null");
+                notifyStatusChange(Code.RECOGNIZER_FAILD);
             }
         }
+
         @Override
         public void onError(SpeechError speechError) {
             if (speechError != null) {
+                if (speechError.getErrorCode() == Code.NO_SPEEKING_XUNFEI) {
+                    notifyStatusChange(Code.NO_SPEEKING);
+                } else if (speechError.getErrorCode() == Code.NETWORK_ERROR_XUNFEI) {
+                    notifyStatusChange(Code.NETWORK_ERROR);
+                }
                 LogUtils.info(null, "speechError message:" + speechError.getMessage() + "   speeche error code:" + speechError.getErrorCode() + "   speeche error desc:" + speechError.getErrorDescription());
             } else {
+                notifyStatusChange(Code.RECOGNIZER_FAILD);
                 LogUtils.info(null, "speechError==null");
             }
         }
@@ -78,21 +94,29 @@ public class IflytekRecognizer {
         }
     };
 
-    private  RecognizerDialogListener mRecognizerDialogListener = new RecognizerDialogListener() {
+    private RecognizerDialogListener mRecognizerDialogListener = new RecognizerDialogListener() {
         @Override
         public void onResult(RecognizerResult recognizerResult, boolean islast) {
             if (recognizerResult != null) {
                 LogUtils.info(null, "resutlt:  " + recognizerResult.getResultString());
-                doResult(recognizerResult,islast);
+                doResult(recognizerResult, islast);
             } else {
                 LogUtils.info(null, "resutlt: null");
+                notifyStatusChange(Code.RECOGNIZER_FAILD);
             }
         }
+
         @Override
         public void onError(SpeechError speechError) {
             if (speechError != null) {
+                if (speechError.getErrorCode() == Code.NO_SPEEKING_XUNFEI) {
+                    notifyStatusChange(Code.NO_SPEEKING);
+                } else if (speechError.getErrorCode() == Code.NETWORK_ERROR_XUNFEI) {
+                    notifyStatusChange(Code.NETWORK_ERROR);
+                }
                 LogUtils.info(null, "speechError message:" + speechError.getMessage() + "   speeche error code:" + speechError.getErrorCode() + "   speeche error desc:" + speechError.getErrorDescription());
             } else {
+                notifyStatusChange(Code.RECOGNIZER_FAILD);
                 LogUtils.info(null, "speechError==null");
             }
 
@@ -114,21 +138,30 @@ public class IflytekRecognizer {
             for (String key : mResults.keySet()) {
                 resultBuffer.append(mResults.get(key));
             }
+            notifyStatusChange(resultBuffer.toString(), Code.RECOGNIZER_SUCCESS);
         }
     }
+
     /**
      * 开始录音识别
+     *
      * @param isShowDialog 在录音事是否显示ui
      */
     public void recognizer(boolean isShowDialog) {
+        //判断当前的状态是否我Code.FREE
+        if (curentStatus != Code.FREE) {
+            LogUtils.error(null, "当前不是空闲状态");
+            return;
+        }
         //将上一次的结果清空
-         clearResult();
+        clearResult();
         if (isShowDialog) {
             startRecognizerDialog();
         } else {
             startRecognizer();
         }
     }
+
     /**
      * 无界面识别
      */
@@ -143,6 +176,7 @@ public class IflytekRecognizer {
             }
         }
     }
+
     /**
      * 有界面识别
      */
@@ -161,21 +195,21 @@ public class IflytekRecognizer {
         }
         if (mRecognizerDialog != null) {
             mRecognizerDialog.setListener(mRecognizerDialogListener);
+            notifyStatusChange(Code.BEGIN_SPEECH);
             mRecognizerDialog.show();
         }
 
     }
 
-    private  void initRecognizer() {
+    private void initRecognizer() {
         if (mRecognizer == null) {
             //SpeechRecognizer默认是单列，先获取，获取不到才去创建
-            mRecognizer=SpeechRecognizer.getRecognizer();
-            if(mRecognizer==null){
+            mRecognizer = SpeechRecognizer.getRecognizer();
+            if (mRecognizer == null) {
                 mRecognizer = SpeechRecognizer.createRecognizer(context, new InitListener() {
                     @Override
                     public void onInit(int code) {
                         if (code == ErrorCode.SUCCESS) {
-
                             LogUtils.error(null, "SpeechRecognizer init susscess ");
                         } else {
                             LogUtils.error(null, "SpeechRecognizer init fail");
@@ -183,14 +217,15 @@ public class IflytekRecognizer {
                     }
                 });
             }
-            if(mRecognizer!=null){
+            if (mRecognizer != null) {
                 //成功设置参数
                 setParam();
             }
         }
     }
+
     /**
-     *设置相关默认参数
+     * 设置相关默认参数
      */
     public void setParam() {
         // 清空参数
@@ -217,25 +252,50 @@ public class IflytekRecognizer {
         // 注：该参数暂时只对在线听写有效
         mRecognizer.setParameter(SpeechConstant.ASR_DWA, "0");
     }
+
     public void release() {
         if (mRecognizer != null) {
             mRecognizer.cancel();
-            mRecognizer=null;
+            mRecognizer = null;
         }
         if (mRecognizerDialog != null) {
             mRecognizerDialog.cancel();
-            mRecognizerDialog=null;
+            mRecognizerDialog = null;
         }
     }
-    private void clearResult(){
-        if(mResults!=null && mResults.size()>=0){
+
+    private void clearResult() {
+        if (mResults != null && mResults.size() >= 0) {
             mResults.clear();
         }
     }
-    private void notifyStatusChange(int code){
-        Intent intent=new Intent();
+
+    private void notifyStatusChange(int code) {
+        notifyStatusChange(null, code);
+    }
+
+    private void notifyStatusChange(String result, int code) {
+        //改变内部状态
+        resetCurentStatus(code);
+        //发送广播通知外部状态改变
+        Intent intent = new Intent();
         intent.setAction(Code.RECOGNIZER_ACTION);
-        intent.putExtra(Code.STATUS_CODE,code);
+        intent.putExtra(Code.STATUS_CODE, code);
+        if (result != null) {
+            intent.putExtra(Code.RECOGNIZER_RESULT, result);
+        }
         context.sendBroadcast(intent);
+    }
+
+    private void resetCurentStatus(int code) {
+        if (code == Code.RECOGNIZER_FAILD ||
+                code == Code.RECOGNIZER_SUCCESS ||
+                code == Code.NETWORK_ERROR ||
+                code == Code.NO_SPEEKING) {
+            curentStatus = Code.FREE;
+
+        }else{
+            curentStatus=code;
+        }
     }
 }
