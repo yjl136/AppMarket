@@ -17,5 +17,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="语音合成" />
+    <Button
+        android:id="@+id/shake"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="摇晃" />
 
 </LinearLayout>

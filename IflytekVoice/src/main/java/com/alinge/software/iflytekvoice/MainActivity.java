@@ -1,22 +1,20 @@
 package com.alinge.software.iflytekvoice;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.alinge.software.iflytekvoice.recognizer.IflytekRecognizer;
 import com.alinge.software.iflytekvoice.recognizer.IflytekSynthesizer;
+import com.alinge.software.iflytekvoice.service.TipService;
 
 public class MainActivity extends AppCompatActivity {
     private TextView resultTv;
-    private Button recognizerBt,synthesizerBt;
+    private Button recognizerBt,synthesizerBt,shakeBt;
     private IflytekRecognizer recognizer;
-    int test;
-    int test2;
     private IflytekSynthesizer synthesizer;
 
     @Override
@@ -26,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         resultTv=(TextView)findViewById(R.id.showResult);
         recognizerBt=(Button)findViewById(R.id.recognizer);
         synthesizerBt=(Button)findViewById(R.id.synthesizer);
+        shakeBt=(Button)findViewById(R.id.shake);
         resultTv.setText("onSpeakProgress。。。。。");
         recognizer=new IflytekRecognizer(this);
         synthesizer=new IflytekSynthesizer(this);
@@ -43,6 +42,19 @@ public class MainActivity extends AppCompatActivity {
                 synthesizer.synthesizer(resultTv.getText().toString());
             }
         });
+
+        shakeBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startTipService();
+
+            }
+        });
+    }
+
+    private void startTipService() {
+        Intent intent=new Intent(this,TipService.class);
+        startService(intent);
     }
 
     @Override
