@@ -1,10 +1,12 @@
 package com.alinge.software.iflytekvoice.recognizer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.widget.Toast;
 
+import com.alinge.software.iflytekvoice.recognizer.code.Code;
 import com.alinge.software.iflytekvoice.recognizer.parser.JsonParser;
 import com.alinge.software.iflytekvoice.utils.LogUtils;
 import com.iflytek.cloud.ErrorCode;
@@ -229,5 +231,11 @@ public class IflytekRecognizer {
         if(mResults!=null && mResults.size()>=0){
             mResults.clear();
         }
+    }
+    private void notifyStatusChange(int code){
+        Intent intent=new Intent();
+        intent.setAction(Code.RECOGNIZER_ACTION);
+        intent.putExtra(Code.STATUS_CODE,code);
+        context.sendBroadcast(intent);
     }
 }
