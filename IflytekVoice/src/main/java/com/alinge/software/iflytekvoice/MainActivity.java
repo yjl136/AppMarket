@@ -14,6 +14,7 @@ import com.alinge.software.iflytekvoice.recognizer.IflytekRecognizer;
 import com.alinge.software.iflytekvoice.recognizer.IflytekSynthesizer;
 import com.alinge.software.iflytekvoice.recognizer.code.Code;
 import com.alinge.software.iflytekvoice.service.TipService;
+import com.alinge.software.iflytekvoice.utils.LogUtils;
 
 public class MainActivity extends AppCompatActivity {
     private TextView resultTv;
@@ -83,6 +84,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     private void doRecognizerResult(int code,String result){
-
+        LogUtils.info(null,"code:"+code+"  result:"+result);
     }
 }

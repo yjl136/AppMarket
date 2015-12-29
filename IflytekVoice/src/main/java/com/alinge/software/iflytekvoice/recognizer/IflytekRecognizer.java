@@ -18,7 +18,6 @@ import com.iflytek.cloud.SpeechError;
 import com.iflytek.cloud.SpeechRecognizer;
 import com.iflytek.cloud.ui.RecognizerDialog;
 import com.iflytek.cloud.ui.RecognizerDialogListener;
-import com.iflytek.cloud.util.VolumeUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,7 +35,7 @@ public class IflytekRecognizer {
     private RecognizerDialog mRecognizerDialog;
     private Context context;
     //初始化为空闲状态
-    private int curentStatus = Code.FREE;
+    private int curentStatus = Code.RECOGNIZER_FREE;
     //保留一次识别的结果
     private HashMap<String, String> mResults = new LinkedHashMap<String, String>();
 
@@ -48,7 +47,7 @@ public class IflytekRecognizer {
         @Override
         public void onVolumeChanged(int volume, byte[] bytes) {
             LogUtils.info(null, "volume:" + volume);
-            notifyStatusChange(Code.RECOGNIZER);
+            notifyStatusChange(Code.SPEECHING);
         }
 
         @Override
@@ -78,7 +77,7 @@ public class IflytekRecognizer {
         public void onError(SpeechError speechError) {
             if (speechError != null) {
                 if (speechError.getErrorCode() == Code.NO_SPEEKING_XUNFEI) {
-                    notifyStatusChange(Code.NO_SPEEKING);
+                    notifyStatusChange(Code.NO_SPEECH);
                 } else if (speechError.getErrorCode() == Code.NETWORK_ERROR_XUNFEI) {
                     notifyStatusChange(Code.NETWORK_ERROR);
                 }
@@ -110,7 +109,7 @@ public class IflytekRecognizer {
         public void onError(SpeechError speechError) {
             if (speechError != null) {
                 if (speechError.getErrorCode() == Code.NO_SPEEKING_XUNFEI) {
-                    notifyStatusChange(Code.NO_SPEEKING);
+                    notifyStatusChange(Code.NO_SPEECH);
                 } else if (speechError.getErrorCode() == Code.NETWORK_ERROR_XUNFEI) {
                     notifyStatusChange(Code.NETWORK_ERROR);
                 }
@@ -149,7 +148,7 @@ public class IflytekRecognizer {
      */
     public void recognizer(boolean isShowDialog) {
         //判断当前的状态是否我Code.FREE
-        if (curentStatus != Code.FREE) {
+        if (curentStatus != Code.RECOGNIZER_FREE) {
             LogUtils.error(null, "当前不是空闲状态");
             return;
         }
@@ -291,8 +290,8 @@ public class IflytekRecognizer {
         if (code == Code.RECOGNIZER_FAILD ||
                 code == Code.RECOGNIZER_SUCCESS ||
                 code == Code.NETWORK_ERROR ||
-                code == Code.NO_SPEEKING) {
-            curentStatus = Code.FREE;
+                code == Code.NO_SPEECH) {
+            curentStatus = Code.RECOGNIZER_FREE;
 
         }else{
             curentStatus=code;
