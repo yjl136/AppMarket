@@ -230,7 +230,7 @@ public class IflytekRecognizer {
         // 清空参数
         mRecognizer.setParameter(SpeechConstant.PARAMS, null);
         // 设置听写引擎
-        mRecognizer.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_CLOUD);
+        mRecognizer.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_MIX);
         // 设置返回结果格式
         mRecognizer.setParameter(SpeechConstant.RESULT_TYPE, "json");
         // 设置语言
