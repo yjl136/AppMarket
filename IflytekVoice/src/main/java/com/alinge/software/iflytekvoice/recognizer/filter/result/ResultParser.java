@@ -9,5 +9,5 @@ import org.json.JSONObject;
  * 作用：
  */
 public interface ResultParser {
-    public void fromJson(JSONObject obj)throws JSONException;
+     void fromJson(JSONObject obj)throws JSONException;
 }
