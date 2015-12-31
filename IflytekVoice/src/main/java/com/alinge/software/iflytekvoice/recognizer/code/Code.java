@@ -43,10 +43,17 @@ public class Code {
     public final static int SYNTHESIZER_SUCCESS = 0x205;
     //合成失败
     public final static int SYNTHESIZER_FAILD = 0x206;
-
+    /***************understander状态值******************/
+    //空闲状态
+    public  final static int UNDERSTANDER_FREE = 0x300;
+    //识别成功
+    public final static int UNDERSTANDER_SUCCESS = 0x307;
+    //识别失败
+    public final static int UNDERSTANDER_FAILD = 0x308;
     /***************广播action值******************/
     public final static String RECOGNIZER_ACTION="action_recognizer";
     public final static String SYNTHESIZER_ACTION="action_synthesizer";
+    public final static String UNDERSTANDER_ACTION="action_understander";
     /***************讯飞错误状态值******************/
     //没有说话
     public final static int NO_SPEEKING_XUNFEI =10118;

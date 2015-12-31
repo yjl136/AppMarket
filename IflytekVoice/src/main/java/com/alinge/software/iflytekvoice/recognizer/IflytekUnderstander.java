@@ -1,10 +1,12 @@
 package com.alinge.software.iflytekvoice.recognizer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.widget.Toast;
 
+import com.alinge.software.iflytekvoice.recognizer.code.Code;
 import com.alinge.software.iflytekvoice.recognizer.listener.KimiInitListener;
 import com.alinge.software.iflytekvoice.utils.LogUtils;
 import com.iflytek.cloud.ErrorCode;
@@ -25,7 +27,8 @@ public class IflytekUnderstander {
     private Context context;
     private TextUnderstander mTextUnderstander;
     private SpeechUnderstander mSpeechUnderstander;
-
+    //初始化为空闲状态
+    private int curentCode = Code.UNDERSTANDER_FREE;
     public IflytekUnderstander(Context context) {
         this.context = context;
     }
@@ -34,6 +37,10 @@ public class IflytekUnderstander {
      * 语音语义理解
      */
     public synchronized void understanderVoice() {
+        if(curentCode!=Code.UNDERSTANDER_FREE){
+            LogUtils.error(null,"wait for me....");
+            return ;
+        }
         initSpeechUnderstander();
         if (mSpeechUnderstander == null) {
             return;
@@ -55,23 +62,28 @@ public class IflytekUnderstander {
         @Override
         public void onVolumeChanged(int volume, byte[] bytes) {
             LogUtils.info(null, "volume:" + volume);
+            notifyStatusChange(Code.SPEECHING);
         }
 
         @Override
         public void onBeginOfSpeech() {
+            notifyStatusChange(Code.BEGIN_SPEECH);
             LogUtils.info(null, "onBeginOfSpeech");
         }
 
         @Override
         public void onEndOfSpeech() {
+            notifyStatusChange(Code.END_SPEECH);
             LogUtils.info(null, "onEndOfSpeech");
         }
 
         @Override
         public void onResult(UnderstanderResult understanderResult) {
             if (understanderResult != null) {
+                notifyStatusChange(understanderResult.getResultString(),Code.UNDERSTANDER_SUCCESS);
                 LogUtils.info(null, "result:" + understanderResult.getResultString());
             } else {
+                notifyStatusChange(Code.UNDERSTANDER_FAILD);
                 LogUtils.info(null, "understanderResult==null");
             }
         }
@@ -83,6 +95,7 @@ public class IflytekUnderstander {
             } else {
                 LogUtils.info(null, "speechError==null");
             }
+            notifyStatusChange(Code.UNDERSTANDER_FAILD);
         }
 
         @Override
@@ -128,8 +141,10 @@ public class IflytekUnderstander {
         @Override
         public void onResult(UnderstanderResult understanderResult) {
             if (understanderResult != null) {
+                notifyStatusChange(Code.UNDERSTANDER_SUCCESS);
                 LogUtils.info(null, "result:" + understanderResult.getResultString());
             } else {
+                notifyStatusChange(Code.UNDERSTANDER_FAILD);
                 LogUtils.info(null, "understanderResult==null");
             }
         }
@@ -139,8 +154,10 @@ public class IflytekUnderstander {
             if (speechError != null) {
                 LogUtils.info(null, "speechError message:" + speechError.getMessage() + "   speeche error code:" + speechError.getErrorCode() + "   speeche error desc:" + speechError.getErrorDescription());
             } else {
+                notifyStatusChange(Code.UNDERSTANDER_FAILD);
                 LogUtils.info(null, "speechError==null");
             }
+
         }
     };
 
@@ -148,6 +165,10 @@ public class IflytekUnderstander {
      * 文本语义理解
      */
     public void understanderText(String text) {
+        if(curentCode!=Code.UNDERSTANDER_FREE){
+            LogUtils.error(null,"wait for me....");
+            return ;
+        }
         initTextUnderstander();
         if (mTextUnderstander == null) {
             return;
@@ -183,6 +204,27 @@ public class IflytekUnderstander {
             mSpeechUnderstander.cancel();
             mSpeechUnderstander.destroy();
             mSpeechUnderstander = null;
+        }
+    }
+    private void notifyStatusChange(int code) {
+        notifyStatusChange(null, code);
+    }
+    private void notifyStatusChange(String result,int code) {
+        resetCurentStatus(code);
+        //发送广播通知外部状态改变
+        Intent intent = new Intent();
+        intent.setAction(Code.UNDERSTANDER_ACTION);
+        intent.putExtra(Code.STATUS_CODE, code);
+        if (result != null) {
+            intent.putExtra(Code.RECOGNIZER_RESULT, result);
+        }
+        context.sendBroadcast(intent);
+    }
+    private  void resetCurentStatus(int code){
+        if(code==Code.UNDERSTANDER_FAILD||code==Code.UNDERSTANDER_SUCCESS){
+            curentCode=Code.UNDERSTANDER_FREE;
+        }else{
+            curentCode=code;
         }
     }
 }

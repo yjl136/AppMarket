@@ -30,7 +30,6 @@ public class MessageSlots implements ResultParser {
     private String channel;
     public MessageSlots() {
     }
-
     public MessageSlots(String location, String name, String code, String category, String teleOperator, String content, String headNum, String tailNum, String messageType, String contentType, String nameType, String receiverLocation, String receiverHeadNum, String receiverTailNum, String receiverTeleOperator, String receiverCategory, String channel, String receiver) {
         this.location = location;
         this.name = name;
@@ -51,7 +50,6 @@ public class MessageSlots implements ResultParser {
         this.channel = channel;
         this.receiver = receiver;
     }
-
     public String getLocation() {
         return location;
     }
