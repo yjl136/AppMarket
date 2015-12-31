@@ -32,7 +32,13 @@ public class PropertyList {
     /***************Error**Info***************/
     public final static String code="code";
     public final static String message="message";
-    /***************Error**Info***************/
+    /***************Data**Info***************/
+    public final static String header="header";
+    public final static String headerTts="headerTts";
+    public final static String result="result";
+    /***************WebPage**Info***************/
+    public final static String url="url";
+    /***************WebPage**Info***************/
 
 
 }
