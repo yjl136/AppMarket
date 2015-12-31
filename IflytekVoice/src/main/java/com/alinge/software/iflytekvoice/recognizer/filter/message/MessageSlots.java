@@ -4,10 +4,9 @@ import com.alinge.software.iflytekvoice.recognizer.filter.PropertyList;
 import com.alinge.software.iflytekvoice.recognizer.filter.result.ResultParser;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 /**
  * 作者： yejianlin
- * 日期：2015/12/31
+ * 日期：  2015/12/31
  * 作用：
  */
 public class MessageSlots implements ResultParser {
@@ -22,22 +21,35 @@ public class MessageSlots implements ResultParser {
     private String messageType;
     private String contentType;
     private String nameType;
-
+    private String receiverLocation;
+    private String receiverHeadNum;
+    private String receiverTailNum;
+    private String receiverTeleOperator;
+    private String receiverCategory;
+    private String receiver;
+    private String channel;
     public MessageSlots() {
     }
 
-    public MessageSlots(String location, String name, String code, String category, String teleOperator, String tailNum, String headNum, String content, String messageType, String contentType, String nameType) {
+    public MessageSlots(String location, String name, String code, String category, String teleOperator, String content, String headNum, String tailNum, String messageType, String contentType, String nameType, String receiverLocation, String receiverHeadNum, String receiverTailNum, String receiverTeleOperator, String receiverCategory, String channel, String receiver) {
         this.location = location;
         this.name = name;
         this.code = code;
         this.category = category;
         this.teleOperator = teleOperator;
-        this.tailNum = tailNum;
-        this.headNum = headNum;
         this.content = content;
+        this.headNum = headNum;
+        this.tailNum = tailNum;
         this.messageType = messageType;
         this.contentType = contentType;
         this.nameType = nameType;
+        this.receiverLocation = receiverLocation;
+        this.receiverHeadNum = receiverHeadNum;
+        this.receiverTailNum = receiverTailNum;
+        this.receiverTeleOperator = receiverTeleOperator;
+        this.receiverCategory = receiverCategory;
+        this.channel = channel;
+        this.receiver = receiver;
     }
 
     public String getLocation() {
@@ -162,6 +174,27 @@ public class MessageSlots implements ResultParser {
         }
         if (obj.has(PropertyList.content)) {
             content = obj.getString(PropertyList.content);
+        }
+        if (obj.has(PropertyList.receiverCategory)) {
+            receiverCategory = obj.getString(PropertyList.receiverCategory);
+        }
+        if (obj.has(PropertyList.receiverTeleOperator)) {
+            receiverTeleOperator = obj.getString(PropertyList.receiverTeleOperator);
+        }
+        if (obj.has(PropertyList.receiverTailNum)) {
+            receiverTailNum = obj.getString(PropertyList.receiverTailNum);
+        }
+        if (obj.has(PropertyList.receiverHeadNum)) {
+            receiverHeadNum = obj.getString(PropertyList.receiverHeadNum);
+        }
+        if (obj.has(PropertyList.receiverLocation)) {
+            receiverLocation = obj.getString(PropertyList.receiverLocation);
+        }
+        if (obj.has(PropertyList.receiver)) {
+            receiver = obj.getString(PropertyList.receiver);
+        }
+        if (obj.has(PropertyList.channel)) {
+            channel = obj.getString(PropertyList.channel);
         }
     }
 }

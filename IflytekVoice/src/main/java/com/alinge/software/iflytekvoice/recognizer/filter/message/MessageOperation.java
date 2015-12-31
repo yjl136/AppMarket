@@ -1,10 +1,5 @@
 package com.alinge.software.iflytekvoice.recognizer.filter.message;
 
-import com.alinge.software.iflytekvoice.recognizer.filter.result.ResultParser;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 /**
  * 作者： yejianlin
  * 日期：2015/12/31

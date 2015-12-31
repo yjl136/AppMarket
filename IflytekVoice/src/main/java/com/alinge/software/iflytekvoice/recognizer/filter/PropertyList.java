@@ -65,7 +65,13 @@ public class PropertyList {
     public final static String messageType="messageType";
     public final static String contentType="contentType";
     public final static String nameType="nameType";
-    public final static String content="content";
+    public final static String receiverLocation="receiverLocation";
+    public final static String receiverHeadNum="receiverHeadNum";
+    public final static String receiverTailNum="receiverTailNum";
+    public final static String receiverTeleOperator="receiverTeleOperator";
+    public final static String receiverCategory="receiverCategory";
+    public final static String receiver="receiver";
+    public final static String channel="channel";
     /***************Telephone**Slots**Info***************/
 
 
