@@ -6,7 +6,7 @@
     <TextView
         android:id="@+id/showResult"
         android:layout_width="match_parent"
-        android:layout_height="300dp" />
+        android:layout_height="100dp" />
     <Button
         android:id="@+id/recognizer"
         android:layout_width="match_parent"
@@ -22,5 +22,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="摇晃" />
+    <Button
+        android:id="@+id/understander"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="语音语义" />
+    <Button
+        android:id="@+id/textUnderstander"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="文本语义" />
 
 </LinearLayout>

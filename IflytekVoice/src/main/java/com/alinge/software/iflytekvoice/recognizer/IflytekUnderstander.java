@@ -26,7 +26,7 @@ public class IflytekUnderstander {
     private TextUnderstander mTextUnderstander;
     private SpeechUnderstander mSpeechUnderstander;
 
-    private IflytekUnderstander(Context context) {
+    public IflytekUnderstander(Context context) {
         this.context = context;
     }
 

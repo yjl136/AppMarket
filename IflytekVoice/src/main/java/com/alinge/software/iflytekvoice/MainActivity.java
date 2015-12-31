@@ -9,19 +9,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import com.alinge.software.iflytekvoice.recognizer.IflytekRecognizer;
 import com.alinge.software.iflytekvoice.recognizer.IflytekSynthesizer;
+import com.alinge.software.iflytekvoice.recognizer.IflytekUnderstander;
 import com.alinge.software.iflytekvoice.recognizer.code.Code;
 import com.alinge.software.iflytekvoice.service.TipService;
 import com.alinge.software.iflytekvoice.utils.LogUtils;
 
 public class MainActivity extends AppCompatActivity {
     private TextView resultTv;
-    private Button recognizerBt, synthesizerBt, shakeBt;
+    private Button recognizerBt, synthesizerBt, shakeBt,understanderBt,textUnderstanderBt;
     private IflytekRecognizer recognizer;
     private IflytekSynthesizer synthesizer;
     private RecognizerReceiver mRecognizerReceiver;
+    private IflytekUnderstander understander;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +32,13 @@ public class MainActivity extends AppCompatActivity {
         resultTv = (TextView) findViewById(R.id.showResult);
         recognizerBt = (Button) findViewById(R.id.recognizer);
         synthesizerBt = (Button) findViewById(R.id.synthesizer);
+        understanderBt = (Button) findViewById(R.id.understander);
+        textUnderstanderBt = (Button) findViewById(R.id.textUnderstander);
         shakeBt = (Button) findViewById(R.id.shake);
         resultTv.setText("onSpeakProgress。。。。。");
         recognizer = new IflytekRecognizer(this);
         synthesizer = new IflytekSynthesizer(this);
+        understander=new IflytekUnderstander(this);
         recognizerBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,6 +56,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startTipService();
+            }
+        });
+
+        understanderBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                understander.understanderVoice();
+            }
+        });
+        textUnderstanderBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                understander.understanderText("斗鱼Tv");
             }
         });
 
