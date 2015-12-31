@@ -13,8 +13,11 @@ import com.alinge.software.iflytekvoice.recognizer.IflytekRecognizer;
 import com.alinge.software.iflytekvoice.recognizer.IflytekSynthesizer;
 import com.alinge.software.iflytekvoice.recognizer.IflytekUnderstander;
 import com.alinge.software.iflytekvoice.recognizer.code.Code;
+import com.alinge.software.iflytekvoice.recognizer.filter.FilterResult;
 import com.alinge.software.iflytekvoice.service.TipService;
 import com.alinge.software.iflytekvoice.utils.LogUtils;
+
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
     private TextView resultTv;
@@ -77,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
     private void initReceiver() {
         IntentFilter filter = new IntentFilter();
         filter.addAction(Code.RECOGNIZER_ACTION);
+        filter.addAction(Code.UNDERSTANDER_ACTION);
         mRecognizerReceiver=new RecognizerReceiver();
         registerReceiver(mRecognizerReceiver,filter);
     }
@@ -102,5 +106,16 @@ public class MainActivity extends AppCompatActivity {
     }
     private void doRecognizerResult(int code,String result){
         LogUtils.info(null,"code:"+code+"  result:"+result);
+        try{
+            if(code==Code.UNDERSTANDER_SUCCESS){
+                JSONObject obj=new JSONObject(result);
+                FilterResult filterResult=new FilterResult();
+                filterResult.fromJson(obj);
+               // LogUtils.info(null,filterResult.toString());
+            }
+        }catch (Exception e){
+            LogUtils.info(null," exception:"+e.getMessage());
+        }
+
     }
 }

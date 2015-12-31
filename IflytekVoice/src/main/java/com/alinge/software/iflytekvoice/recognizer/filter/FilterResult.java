@@ -1,4 +1,6 @@
 package com.alinge.software.iflytekvoice.recognizer.filter;
+import android.text.TextUtils;
+
 import com.alinge.software.iflytekvoice.recognizer.filter.result.ResultParser;
 
 import org.json.JSONException;
@@ -147,7 +149,46 @@ public class FilterResult implements ResultParser{
     public void setSemantic(String semantic) {
         this.semantic = semantic;
     }
-
+    public AnswerResult getAnswerResult() throws  JSONException{
+        AnswerResult answerResult=new AnswerResult();
+        if(!TextUtils.isEmpty(answer)){
+            JSONObject obj=new JSONObject(answer);
+            answerResult.fromJson(obj);
+        }
+        return answerResult;
+    }
+    public ErrorResult getErrorResult()throws  JSONException{
+        ErrorResult errorResult=new ErrorResult();
+        if(!TextUtils.isEmpty(error)){
+            JSONObject obj=new JSONObject(error);
+            errorResult.fromJson(obj);
+        }
+        return errorResult;
+    }
+    public DataResult getDataResult()throws  JSONException{
+        DataResult dataResult=new DataResult();
+        if(!TextUtils.isEmpty(data)){
+            JSONObject obj=new JSONObject(data);
+            dataResult.fromJson(obj);
+        }
+        return dataResult;
+    }
+    public WebPageResult getWebPageResult()throws  JSONException{
+        WebPageResult webPageResult=new WebPageResult();
+        if(!TextUtils.isEmpty(webPage)){
+            JSONObject obj=new JSONObject(webPage);
+            webPageResult.fromJson(obj);
+        }
+        return webPageResult;
+    }
+    public SemanticResult getSemanticResult()throws  JSONException{
+        SemanticResult semanticResult=new SemanticResult();
+        if(!TextUtils.isEmpty(semantic)){
+            JSONObject obj=new JSONObject(semantic);
+            semanticResult.fromJson(obj);
+        }
+        return semanticResult;
+    }
     public void fromJson(JSONObject obj) throws JSONException {
         if (obj.has(PropertyList.rc)) {
             rc = obj.getInt(PropertyList.rc);
@@ -187,4 +228,19 @@ public class FilterResult implements ResultParser{
         }
     }
 
+    @Override
+    public String toString() {
+        StringBuffer buffer=new StringBuffer();
+        buffer.append("rc:"+rc);
+        buffer.append("   rawText:"+rawText);
+        buffer.append("   operation:"+operation);
+        buffer.append("   service:"+service);
+        buffer.append("   data:"+data);
+        buffer.append("   webPage:"+webPage);
+        buffer.append("   answer:"+answer);
+        buffer.append("   semantic:"+semantic);
+        buffer.append("   moreResults:"+moreResults);
+        return buffer.toString();
+
+    }
 }
