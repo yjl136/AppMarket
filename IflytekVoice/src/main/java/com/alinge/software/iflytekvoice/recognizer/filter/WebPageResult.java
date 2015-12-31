@@ -23,15 +23,12 @@ public class WebPageResult implements ResultParser {
         this.header = header;
         this.url = url;
     }
-
     public String getUrl() {
         return url;
     }
-
     public void setUrl(String url) {
         this.url = url;
     }
-
     public String getHeaderTts() {
         return headerTts;
     }

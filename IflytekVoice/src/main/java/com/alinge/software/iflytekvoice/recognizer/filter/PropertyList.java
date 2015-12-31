@@ -23,6 +23,9 @@ public class PropertyList {
 
     public final static String type="type";
     public final static String text="text";
+    public final static String imgUrl="imgUrl";
+    public final static String imgDesc="imgDesc";
+    public final static String urlDesc="urlDesc";
     /***************Semantic**Info***************/
     public final static String slots="slots";
     public final static String normalPrompt="normalPrompt";
@@ -38,7 +41,23 @@ public class PropertyList {
     public final static String result="result";
     /***************WebPage**Info***************/
     public final static String url="url";
-    /***************WebPage**Info***************/
+    /***************App**Slots**Info***************/
+    public final static String name="name";
+    public final static String category="category";
+    public final static String price="price";
+    public final static String keyword="keyword";
+    /***************Map**Slots**Info***************/
+    public final static String location="location";
+    public final static String startLoc="startLoc";
+    public final static String endLoc="endLoc";
+    /***************Schedule**Slots**Info***************/
+    public final static String datetime="datetime";
+    public final static String repeat="repeat";
+    public final static String content="content";
+    /***************Translation**Slots**Info***************/
+    public final static String source="source";
+    public final static String target="target";
+    /***************App**Slots**Info***************/
 
 
 }
