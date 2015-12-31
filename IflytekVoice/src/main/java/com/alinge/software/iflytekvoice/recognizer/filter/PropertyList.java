@@ -57,7 +57,16 @@ public class PropertyList {
     /***************Translation**Slots**Info***************/
     public final static String source="source";
     public final static String target="target";
-    /***************App**Slots**Info***************/
+    /***************Telephone**Slots**Info***************/
+    public final static String teleOperator="teleOperator";
+    public final static String headNum="headNum";
+    public final static String tailNum="tailNum";
+    /***************Message**Slots**Info***************/
+    public final static String messageType="messageType";
+    public final static String contentType="contentType";
+    public final static String nameType="nameType";
+    public final static String content="content";
+    /***************Telephone**Slots**Info***************/
 
 
 }
