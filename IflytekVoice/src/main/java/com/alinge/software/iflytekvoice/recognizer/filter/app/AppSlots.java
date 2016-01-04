@@ -1,5 +1,6 @@
 package com.alinge.software.iflytekvoice.recognizer.filter.app;
 
+import com.alinge.software.iflytekvoice.recognizer.filter.ISlots;
 import com.alinge.software.iflytekvoice.recognizer.filter.PropertyList;
 import com.alinge.software.iflytekvoice.recognizer.filter.result.ResultParser;
 
@@ -11,7 +12,7 @@ import org.json.JSONObject;
  * 日期：2015/12/31
  * 作用：
  */
-public class AppSlots implements ResultParser {
+public class AppSlots  extends ISlots{
     private String  name;
     private String  category;
     private String  keyword;
@@ -57,6 +58,11 @@ public class AppSlots implements ResultParser {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    @Override
+    public ISlots getSlots() {
+        return this;
     }
 
     @Override

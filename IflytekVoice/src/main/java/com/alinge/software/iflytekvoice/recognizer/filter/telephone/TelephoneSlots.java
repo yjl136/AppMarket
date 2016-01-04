@@ -1,5 +1,6 @@
 package com.alinge.software.iflytekvoice.recognizer.filter.telephone;
 
+import com.alinge.software.iflytekvoice.recognizer.filter.ISlots;
 import com.alinge.software.iflytekvoice.recognizer.filter.PropertyList;
 import com.alinge.software.iflytekvoice.recognizer.filter.result.ResultParser;
 
@@ -11,7 +12,7 @@ import org.json.JSONObject;
  * 日期：2015/12/31
  * 作用：
  */
-public class TelephoneSlots implements ResultParser {
+public class TelephoneSlots extends ISlots {
     private String name;
     private String code;
     private String category;
@@ -87,6 +88,11 @@ public class TelephoneSlots implements ResultParser {
 
     public void setTailNum(String tailNum) {
         this.tailNum = tailNum;
+    }
+
+    @Override
+    public ISlots getSlots() {
+        return this;
     }
 
     @Override

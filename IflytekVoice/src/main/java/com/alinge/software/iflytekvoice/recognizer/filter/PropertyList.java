@@ -50,10 +50,13 @@ public class PropertyList {
     public final static String location="location";
     public final static String startLoc="startLoc";
     public final static String endLoc="endLoc";
+    public final static String poi="poi";
     /***************Schedule**Slots**Info***************/
     public final static String datetime="datetime";
     public final static String repeat="repeat";
     public final static String content="content";
+    public final static String timeOrig="timeOrig";
+    public final static String time="time";
     /***************Translation**Slots**Info***************/
     public final static String source="source";
     public final static String target="target";
@@ -72,6 +75,22 @@ public class PropertyList {
     public final static String receiverCategory="receiverCategory";
     public final static String receiver="receiver";
     public final static String channel="channel";
+    /***************Weather**Slots**Info***************/
+    public final static String dateOrig="dateOrig";
+    public final static String date="date";
+    public final static String cityAddr="cityAddr";
+    public final static String city="city";
+    public final static String sightspot="sightspot";
+    public final static String airQuality="airQuality";
+    public final static String sourceName="sourceName";
+    public final static String lastUpdateTime="lastUpdateTime";
+    public final static String dateLong="dateLong";
+    public final static String wind="wind";
+    public final static String humidity="humidity";
+    public final static String windLevel="windLevel";
+    public final static String weather="windLevel";
+    public final static String tempRange="tempRange";
+    public final static String province="province";
     /***************Telephone**Slots**Info***************/
 
 

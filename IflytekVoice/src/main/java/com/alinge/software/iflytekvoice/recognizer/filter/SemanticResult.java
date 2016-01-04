@@ -12,9 +12,9 @@ import org.json.JSONObject;
  */
 public class SemanticResult implements ResultParser {
     //获取到数据时的导语文字，可为空
-    private  String normalPrompt;
+    private String normalPrompt;
     //获取到数据时的导语播报内容，若字段不存在，则取值与normalPrompt相同
-    private  String normalPromptTts;
+    private String normalPromptTts;
     //获取不到数据时的导语文字,可以为空,如当slots就返回一个url的时候
     private String noDataPrompt;
     //获取不到数据时的导语播报内容，若字段不存在，则取值与noDataPrompt相同
@@ -31,6 +31,11 @@ public class SemanticResult implements ResultParser {
         this.noDataPrompt = noDataPrompt;
         this.noDataPromptTts = noDataPromptTts;
         this.slots = slots;
+    }
+
+    public ISlots getSlots(String type) throws  JSONException{
+        JSONObject obj=new JSONObject();
+        return  ISlotsFactory.createISlots(type,obj);
     }
 
     @Override

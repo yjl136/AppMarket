@@ -17,7 +17,6 @@ public class AnswerResult implements ResultParser {
     private String imgDesc;
     private String urlDesc;
     private String url;
-
     public AnswerResult() {
     }
 

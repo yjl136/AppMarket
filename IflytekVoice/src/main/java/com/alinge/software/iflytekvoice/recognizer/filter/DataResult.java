@@ -1,9 +1,15 @@
 package com.alinge.software.iflytekvoice.recognizer.filter;
 
+import android.text.TextUtils;
+
 import com.alinge.software.iflytekvoice.recognizer.filter.result.ResultParser;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 作者： yejianlin
@@ -46,6 +52,19 @@ public class DataResult implements ResultParser {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public List<IResullt> getResults(String type) throws JSONException {
+        List<IResullt> results = new ArrayList<IResullt>();
+        if (!TextUtils.isEmpty(result)) {
+            JSONArray array = new JSONArray(result);
+            for (int index = 0; index < array.length(); index++) {
+                JSONObject obj = array.getJSONObject(index);
+                IResullt result = IResultFactory.createIResult(type, obj);
+                results.add(result);
+            }
+        }
+        return results;
     }
 
     @Override

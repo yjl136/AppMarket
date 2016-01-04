@@ -1,5 +1,6 @@
 package com.alinge.software.iflytekvoice.recognizer.filter.message;
 
+import com.alinge.software.iflytekvoice.recognizer.filter.ISlots;
 import com.alinge.software.iflytekvoice.recognizer.filter.PropertyList;
 import com.alinge.software.iflytekvoice.recognizer.filter.result.ResultParser;
 import org.json.JSONException;
@@ -9,7 +10,7 @@ import org.json.JSONObject;
  * 日期：  2015/12/31
  * 作用：
  */
-public class MessageSlots implements ResultParser {
+public class MessageSlots extends ISlots {
     private String location;
     private String name;
     private String code;
@@ -136,6 +137,11 @@ public class MessageSlots implements ResultParser {
 
     public void setNameType(String nameType) {
         this.nameType = nameType;
+    }
+
+    @Override
+    public ISlots getSlots() {
+        return this;
     }
 
     @Override

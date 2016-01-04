@@ -1,7 +1,9 @@
 package com.alinge.software.iflytekvoice.recognizer.filter.schedule;
 
+import android.text.TextUtils;
+
+import com.alinge.software.iflytekvoice.recognizer.filter.ISlots;
 import com.alinge.software.iflytekvoice.recognizer.filter.PropertyList;
-import com.alinge.software.iflytekvoice.recognizer.filter.result.ResultParser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,7 +13,7 @@ import org.json.JSONObject;
  * 日期：2015/12/31
  * 作用：
  */
-public class ScheduleSlots implements ResultParser {
+public class ScheduleSlots extends ISlots {
     private String name;
     private String datetime;
     private String repeat;
@@ -67,6 +69,18 @@ public class ScheduleSlots implements ResultParser {
 
     public void setDatetime(String datetime) {
         this.datetime = datetime;
+    }
+    public  DateTime getDataTimes()throws  JSONException{
+        DateTime dt=new DateTime();
+        if(!TextUtils.isEmpty(datetime)){
+            JSONObject obj=new JSONObject();
+            dt.fromJson(obj);
+        }
+        return dt;
+    }
+    @Override
+    public ISlots getSlots() {
+        return this;
     }
 
     @Override

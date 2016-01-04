@@ -34,4 +34,6 @@ public class ServiceType {
     public final static String MESSAGE="message";
     //网页搜索
     public final static String WEBSEARCH="websearch";
+    //地图
+    public final static String MAP="map";
 }

@@ -3,8 +3,12 @@ import android.text.TextUtils;
 
 import com.alinge.software.iflytekvoice.recognizer.filter.result.ResultParser;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 作者： yejianlin
@@ -189,6 +193,19 @@ public class FilterResult implements ResultParser{
         }
         return semanticResult;
     }
+    public List<FilterResult> getSelectResults() throws  JSONException{
+        List<FilterResult> results = new ArrayList<FilterResult>();
+        if(!TextUtils.isEmpty(moreResults)){
+            JSONArray array=new JSONArray(moreResults);
+            for(int index=0;index<array.length();index++){
+               JSONObject obj= array.getJSONObject(index);
+                FilterResult result=new FilterResult();
+                result.fromJson(obj);
+                results.add(result);
+            }
+        }
+        return results;
+    }
     public void fromJson(JSONObject obj) throws JSONException {
         if (obj.has(PropertyList.rc)) {
             rc = obj.getInt(PropertyList.rc);
@@ -227,7 +244,6 @@ public class FilterResult implements ResultParser{
             data = obj.getString(PropertyList.data);
         }
     }
-
     @Override
     public String toString() {
         StringBuffer buffer=new StringBuffer();
