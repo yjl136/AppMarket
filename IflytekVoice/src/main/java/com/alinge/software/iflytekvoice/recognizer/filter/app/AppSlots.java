@@ -3,6 +3,7 @@ package com.alinge.software.iflytekvoice.recognizer.filter.app;
 import com.alinge.software.iflytekvoice.recognizer.filter.ISlots;
 import com.alinge.software.iflytekvoice.recognizer.filter.PropertyList;
 import com.alinge.software.iflytekvoice.recognizer.filter.result.ResultParser;
+import com.alinge.software.iflytekvoice.utils.LogUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;

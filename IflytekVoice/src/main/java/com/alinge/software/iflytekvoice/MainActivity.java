@@ -16,7 +16,12 @@ import com.alinge.software.iflytekvoice.recognizer.IflytekUnderstander;
 import com.alinge.software.iflytekvoice.recognizer.code.Code;
 import com.alinge.software.iflytekvoice.recognizer.filter.AnswerResult;
 import com.alinge.software.iflytekvoice.recognizer.filter.FilterResult;
+import com.alinge.software.iflytekvoice.recognizer.filter.ISlots;
+import com.alinge.software.iflytekvoice.recognizer.filter.SemanticResult;
 import com.alinge.software.iflytekvoice.recognizer.filter.ServiceType;
+import com.alinge.software.iflytekvoice.recognizer.filter.app.AppOperation;
+import com.alinge.software.iflytekvoice.recognizer.filter.app.AppSlots;
+import com.alinge.software.iflytekvoice.recognizer.filter.utils.AppHelper;
 import com.alinge.software.iflytekvoice.service.TipService;
 import com.alinge.software.iflytekvoice.utils.LogUtils;
 
@@ -121,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
                     String serviceType = filterResult.getService();
                     doFilter(serviceType,filterResult);
                 } else {
+
                     LogUtils.error(null, "rc:" + rc + "  rawText" + filterResult.getRawText());
                 }
             }
@@ -131,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void doFilter(String serviceType,FilterResult filterResult) throws JSONException{
+        String opration=filterResult.getOperation();
         if (ServiceType.BAI_KE.equals(serviceType)
                 || ServiceType.FQA.equals(serviceType)
                 || ServiceType.OPEN_QA.equals(serviceType)
@@ -139,12 +146,21 @@ public class MainActivity extends AppCompatActivity {
                 || ServiceType.CALC.equals(serviceType)) {
                 AnswerResult ar=filterResult.getAnswerResult();
                 String text=ar.getText();
-                String opration=filterResult.getOperation();
                 synthesizer.synthesizer(text);
                 LogUtils.info(null,"text:"+text+" oparation:"+opration);
 
         }else if(ServiceType.APP.equals(serviceType)){
-
+            SemanticResult semantic=filterResult.getSemanticResult();
+            AppSlots slots= (AppSlots)semantic.getSlots(serviceType);
+            String appName=slots.getName();
+            LogUtils.info(null,"open app name:"+appName);
+            if(AppOperation.LAUNCH.equals(opration)){
+                AppHelper.launchApp(this,appName);
+            }else if(AppOperation.UNINSTALL.equals(opration)){
+                AppHelper.uninstallApp(this,appName);
+            }else{
+                LogUtils.info(null," app oparation:"+opration);
+            }
         }else if(ServiceType.MAP.equals(serviceType)){
 
         }else if(ServiceType.MESSAGE.equals(serviceType)){

@@ -34,7 +34,7 @@ public class SemanticResult implements ResultParser {
     }
 
     public ISlots getSlots(String type) throws  JSONException{
-        JSONObject obj=new JSONObject();
+        JSONObject obj=new JSONObject(slots);
         return  ISlotsFactory.createISlots(type,obj);
     }
 
@@ -55,5 +55,13 @@ public class SemanticResult implements ResultParser {
         if (obj.has(PropertyList.normalPromptTts)) {
             normalPromptTts = obj.getString(PropertyList.normalPromptTts);
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuffer buffer=new StringBuffer();
+        buffer.append("slots");
+        buffer.append(slots);
+        return buffer.toString();
     }
 }
