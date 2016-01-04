@@ -6,6 +6,8 @@ import com.alinge.software.iflytekvoice.recognizer.filter.message.MessageSlots;
 import com.alinge.software.iflytekvoice.recognizer.filter.schedule.ScheduleSlots;
 import com.alinge.software.iflytekvoice.recognizer.filter.telephone.TelephoneSlots;
 import com.alinge.software.iflytekvoice.recognizer.filter.translation.TranslationSlots;
+import com.alinge.software.iflytekvoice.recognizer.filter.websearch.WebSearchSlot;
+import com.alinge.software.iflytekvoice.recognizer.filter.website.WebsiteSlot;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,6 +39,12 @@ public class ISlotsFactory {
         }else if(ServiceType.MAP.equals(type)){
             //地图
             slots=new MapSlots();
+        }else if(ServiceType.WEBSEARCH.equals(type)){
+            //网页搜
+            slots=new WebSearchSlot();
+        }else if(ServiceType.WEBSITE.equals(type)){
+            //打开网站
+            slots=new WebsiteSlot();
         }
         slots.fromJson(obj);
         return slots;

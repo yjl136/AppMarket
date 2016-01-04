@@ -91,6 +91,8 @@ public class PropertyList {
     public final static String weather="windLevel";
     public final static String tempRange="tempRange";
     public final static String province="province";
+    /***************WebSearche**Slots**Info***************/
+    public final static String keywords="keywords";
     /***************Telephone**Slots**Info***************/
 
 
