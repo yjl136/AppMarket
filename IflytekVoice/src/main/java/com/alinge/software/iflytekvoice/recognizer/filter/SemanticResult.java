@@ -1,5 +1,7 @@
 package com.alinge.software.iflytekvoice.recognizer.filter;
 
+import android.text.TextUtils;
+
 import com.alinge.software.iflytekvoice.recognizer.filter.result.ResultParser;
 
 import org.json.JSONException;
@@ -34,6 +36,9 @@ public class SemanticResult implements ResultParser {
     }
 
     public ISlots getSlots(String type) throws  JSONException{
+        if(TextUtils.isEmpty(slots)){
+            return null;
+        }
         JSONObject obj=new JSONObject(slots);
         return  ISlotsFactory.createISlots(type,obj);
     }

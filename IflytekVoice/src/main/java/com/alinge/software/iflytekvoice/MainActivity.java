@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,7 +22,10 @@ import com.alinge.software.iflytekvoice.recognizer.filter.SemanticResult;
 import com.alinge.software.iflytekvoice.recognizer.filter.ServiceType;
 import com.alinge.software.iflytekvoice.recognizer.filter.app.AppOperation;
 import com.alinge.software.iflytekvoice.recognizer.filter.app.AppSlots;
+import com.alinge.software.iflytekvoice.recognizer.filter.message.MessageOperation;
+import com.alinge.software.iflytekvoice.recognizer.filter.message.MessageSlots;
 import com.alinge.software.iflytekvoice.recognizer.filter.utils.AppHelper;
+import com.alinge.software.iflytekvoice.recognizer.filter.utils.MessageHelper;
 import com.alinge.software.iflytekvoice.service.TipService;
 import com.alinge.software.iflytekvoice.utils.LogUtils;
 
@@ -126,7 +130,6 @@ public class MainActivity extends AppCompatActivity {
                     String serviceType = filterResult.getService();
                     doFilter(serviceType,filterResult);
                 } else {
-
                     LogUtils.error(null, "rc:" + rc + "  rawText" + filterResult.getRawText());
                 }
             }
@@ -164,6 +167,19 @@ public class MainActivity extends AppCompatActivity {
         }else if(ServiceType.MAP.equals(serviceType)){
 
         }else if(ServiceType.MESSAGE.equals(serviceType)){
+            SemanticResult sms=filterResult.getSemanticResult();
+            MessageSlots smsSlots=(MessageSlots)sms.getSlots(serviceType);
+            if (MessageOperation.SEND.equalsIgnoreCase(opration)){
+                if(smsSlots!=null){
+                    String content=smsSlots.getContent();
+                    String name=smsSlots.getName();
+                    MessageHelper.sendMesaage(this,name,content);
+                }else{
+                    MessageHelper.sendMessage(this);
+                }
+            }else if(MessageOperation.VIEW.equalsIgnoreCase(opration)){
+                    MessageHelper.viewMessage(this);
+            }
 
         }else if(ServiceType.TELEPHONE.equals(serviceType)){
 
