@@ -11,6 +11,7 @@ import com.alinge.software.iflytekvoice.recognizer.parser.JsonParser;
 import com.alinge.software.iflytekvoice.utils.LogUtils;
 import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.InitListener;
+import com.iflytek.cloud.LexiconListener;
 import com.iflytek.cloud.RecognizerListener;
 import com.iflytek.cloud.RecognizerResult;
 import com.iflytek.cloud.SpeechConstant;
@@ -139,6 +140,27 @@ public class IflytekRecognizer {
             }
             notifyStatusChange(resultBuffer.toString(), Code.RECOGNIZER_SUCCESS);
         }
+    }
+
+    /**
+     * 上传用户词表，提高识别
+     * @param content
+     */
+    public void uploadUserWords(String content) {
+        mRecognizer.setParameter(SpeechConstant.TEXT_ENCODING,"utf-8");
+       int code= mRecognizer.updateLexicon("userword", content, new LexiconListener() {
+            @Override
+            public void onLexiconUpdated(String s, SpeechError speechError) {
+                if(speechError==null){
+                    LogUtils.info(null,"上传用户词表成功");
+                }else{
+                    LogUtils.info(null,"上传用户词表失败");
+                }
+            }
+        });
+    if(code!=ErrorCode.SUCCESS){
+        Toast.makeText(context,"上传用户词表失败"+code,Toast.LENGTH_SHORT).show();
+    }
     }
 
     /**
@@ -293,8 +315,8 @@ public class IflytekRecognizer {
                 code == Code.NO_SPEECH) {
             curentStatus = Code.RECOGNIZER_FREE;
 
-        }else{
-            curentStatus=code;
+        } else {
+            curentStatus = code;
         }
     }
 }

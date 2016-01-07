@@ -28,9 +28,12 @@ import com.alinge.software.iflytekvoice.recognizer.filter.utils.AppHelper;
 import com.alinge.software.iflytekvoice.recognizer.filter.utils.MessageHelper;
 import com.alinge.software.iflytekvoice.service.TipService;
 import com.alinge.software.iflytekvoice.utils.LogUtils;
+import com.iflytek.cloud.util.UserWords;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private TextView resultTv;
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private IflytekSynthesizer synthesizer;
     private RecognizerReceiver mRecognizerReceiver;
     private IflytekUnderstander understander;
+    private  Button uploadBt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         synthesizerBt = (Button) findViewById(R.id.synthesizer);
         understanderBt = (Button) findViewById(R.id.understander);
         textUnderstanderBt = (Button) findViewById(R.id.textUnderstander);
+       uploadBt=(Button) findViewById(R.id.upload);
         shakeBt = (Button) findViewById(R.id.shake);
         resultTv.setText("onSpeakProgress。。。。。");
         recognizer = new IflytekRecognizer(this);
@@ -85,6 +90,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 understander.understanderText("斗鱼Tv");
+            }
+        });
+        uploadBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserWords uw=new UserWords();
+                ArrayList<String> words=new ArrayList<String>();
+                words.add("app");
+                words.add("应用");
+                words.add("APP");
+                uw.putWords("家长助手", words);
+                recognizer.uploadUserWords(uw.toString());
             }
         });
 

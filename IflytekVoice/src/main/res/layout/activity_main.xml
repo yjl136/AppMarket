@@ -32,5 +32,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="文本语义" />
+    <Button
+        android:id="@+id/upload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="上传用户词表" />
 
 </LinearLayout>
