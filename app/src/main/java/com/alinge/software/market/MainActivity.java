@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         initView();
     }
@@ -32,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new PageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                LogUtils.info(null, "positon:" + position);
             }
         });
         mFragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), mRadioGroup.getChildCount());
@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                LogUtils.info(null, "checked id:" + checkedId);
                 RadioButton curButton = (RadioButton) group.findViewById(checkedId);
                 if (curButton != null && preButton != curButton) {
                     if (preButton != null) {

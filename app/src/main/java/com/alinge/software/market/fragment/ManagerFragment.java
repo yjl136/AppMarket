@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alinge.software.market.R;
+import com.alinge.software.market.utils.LogUtils;
 
 /**
  * 作者： yejianlin
@@ -19,8 +20,8 @@ public class ManagerFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LogUtils.info(null, "ManagerFragment------->onCreate");
     }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

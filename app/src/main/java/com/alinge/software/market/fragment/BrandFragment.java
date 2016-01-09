@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alinge.software.market.R;
+import com.alinge.software.market.utils.LogUtils;
 
 /**
  * 作者： yejianlin
@@ -19,6 +20,7 @@ public class BrandFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LogUtils.info(null, "BrandFragment------->onCreate");
     }
 
     @Override

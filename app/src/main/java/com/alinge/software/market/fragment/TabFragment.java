@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.alinge.software.market.R;
+import com.alinge.software.market.utils.LogUtils;
 
 public class TabFragment extends Fragment
 {
@@ -22,7 +23,20 @@ public class TabFragment extends Fragment
 		if (getArguments() != null)
 		{
 			mTitle = getArguments().getString(TITLE);
+			LogUtils.info(null,"title:"+mTitle+"------oncreate---------");
 		}
+	}
+
+	@Override
+	public void onDetach() {
+		super.onDetach();
+		LogUtils.info(null, "title:" + mTitle + "------onDetach---------");
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		LogUtils.info(null, "title:" + mTitle + "------onDestroy---------");
 	}
 
 	@Override

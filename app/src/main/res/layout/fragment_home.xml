@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.alinge.software.market.view.StickyNavLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.alinge.software.market.view.StickyNavLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -7,7 +8,8 @@
     <RelativeLayout
         android:id="@+id/topView"
         android:layout_width="match_parent"
-        android:layout_height="160dp">
+        android:background="#ef0000ef"
+        android:layout_height="250dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -20,11 +22,12 @@
         android:id="@+id/pagerIndicator"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="#2000ef00"
        /> 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
+        android:layout_weight="1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/holo_green_light"
+        android:layout_height="0dp"
         />
 </com.alinge.software.market.view.StickyNavLayout>
