@@ -5,6 +5,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+import com.alinge.software.market.adapter.FragentStateAdapter;
 import com.alinge.software.market.adapter.FragmentAdapter;
 import com.alinge.software.market.listener.PageChangeListener;
 import com.alinge.software.market.utils.LogUtils;
@@ -18,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private RadioGroup mRadioGroup;
     private FragmentAdapter mFragmentAdapter;
+  //  private FragentStateAdapter mFragmentAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +39,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mFragmentAdapter = new FragmentAdapter(getSupportFragmentManager(), mRadioGroup.getChildCount());
+      //  mFragmentAdapter = new FragentStateAdapter(getSupportFragmentManager(), mRadioGroup.getChildCount());
         mViewPager.setAdapter(mFragmentAdapter);
-
+        mViewPager.setOffscreenPageLimit(3);
 
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             RadioButton preButton;

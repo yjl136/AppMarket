@@ -27,7 +27,7 @@ public class HomeFragment extends BaseFragment {
     private PagerIndicatorView mPagerIndicator;
     private ViewPager mViewPager;
     private Context activity;
-    private FragmentStatePagerAdapter mAdapter;
+    private FragmentPagerAdapter mAdapter;
     private TabFragment[] mFragments = new TabFragment[mTitles.length];
 
     @Override
@@ -44,7 +44,44 @@ public class HomeFragment extends BaseFragment {
         initView(content);
         initDatas();
         initEvents();
+        LogUtils.info(null, "HomeFragment------->onCreateView");
         return content;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        LogUtils.info(null, "HomeFragment------->onDestroyView");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        LogUtils.info(null, "HomeFragment------->onPause");
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        LogUtils.info(null, "HomeFragment------->onStart");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        LogUtils.info(null, "HomeFragment------->onResume");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        LogUtils.info(null, "HomeFragment------->onStop");
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        LogUtils.info(null, "HomeFragment------->onActivityCreated");
     }
 
     @Override
@@ -70,7 +107,7 @@ public class HomeFragment extends BaseFragment {
         for (int i = 0; i < mTitles.length; i++) {
             mFragments[i] = (TabFragment) TabFragment.newInstance(mTitles[i]);
         }
-        mAdapter = new FragmentStatePagerAdapter(getChildFragmentManager()) {
+    /*    mAdapter = new FragmentStatePagerAdapter(getChildFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
                 return mFragments[position];
@@ -79,8 +116,8 @@ public class HomeFragment extends BaseFragment {
             public int getCount() {
                 return mTitles.length;
             }
-        };
-       /* mAdapter = new FragmentPagerAdapter(getChildFragmentManager()){
+        };*/
+        mAdapter = new FragmentPagerAdapter(getChildFragmentManager()){
             @Override
             public int getCount() {
                 return mTitles.length;
@@ -90,7 +127,7 @@ public class HomeFragment extends BaseFragment {
             public Fragment getItem(int position) {
                 return mFragments[position];
             }
-        };*/
+        };
         mViewPager.setAdapter(mAdapter);
         mViewPager.setCurrentItem(0);
     }

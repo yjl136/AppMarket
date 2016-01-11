@@ -1,19 +1,19 @@
 package com.alinge.software.market.view;
 
 import android.content.Context;
-import android.support.v4.view.ViewCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
-import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.OverScroller;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 
 import com.alinge.software.market.R;
 import com.alinge.software.market.utils.LogUtils;
@@ -37,6 +37,7 @@ public class StickyNavLayout extends LinearLayout {
     private int mMaxVelocity;
     private int mMinVeloctiy;
     private boolean isTopViewHiden;
+    private ViewGroup scrollView;
 
 
     public StickyNavLayout(Context context) {
@@ -52,8 +53,8 @@ public class StickyNavLayout extends LinearLayout {
         mScroller = new OverScroller(context);
         mVelocityTracker = VelocityTracker.obtain();
         ViewConfiguration vc = ViewConfiguration.get(context);
-        //可以认为用户在滚动的最小距离
         mTouchSlop = vc.getScaledTouchSlop();
+        LogUtils.info(null,"mTouchSlop"+mTouchSlop);
         mMaxVelocity = vc.getScaledMaximumFlingVelocity();
         mMinVeloctiy = vc.getScaledMinimumFlingVelocity();
     }
@@ -78,8 +79,10 @@ public class StickyNavLayout extends LinearLayout {
                     scrollBy(0, (int) -dy);
                     lastY = y;
                 }
+
                 break;
             case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
                 float scrollY = getScrollY();
                 if (Math.abs(scrollY) >= mTopViewHeight / 2) {
                     //显示
@@ -97,25 +100,51 @@ public class StickyNavLayout extends LinearLayout {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        LogUtils.info(null,"onInterceptTouchEvent");
         int action = ev.getAction();
         float y = ev.getY();
-        switch (ev.getAction()) {
+        switch (action) {
             case MotionEvent.ACTION_DOWN:
                 lastY = y;
                 break;
             case MotionEvent.ACTION_MOVE:
                 float dy = y - lastY;
-                ScrollView scrollView = (ScrollView) mViewpager.findViewById(R.id.sv);
+                LogUtils.info(null,"dy11:"+dy);
+                getCurrentScrollView();
                 if (Math.abs(dy) > mTouchSlop) {
+                    LogUtils.info(null,"dy22:"+dy  +"  ishide:"+isTopViewHiden+ "    scrollview scrolly:"+scrollView.getScrollY());
                     if (!isTopViewHiden || (scrollView.getScrollY() == 0 && isTopViewHiden && dy > 0)) {
                         return true;
                     }
+                    lastY=y;
                 }
+                break;
+            case MotionEvent.ACTION_CANCEL:
+            case MotionEvent.ACTION_UP:
+                isDraging=false;
                 break;
         }
         return super.onInterceptTouchEvent(ev);
     }
+    private void getCurrentScrollView() {
 
+        int currentItem = mViewpager.getCurrentItem();
+        PagerAdapter a = mViewpager.getAdapter();
+        if (a instanceof FragmentPagerAdapter) {
+            FragmentPagerAdapter fadapter = (FragmentPagerAdapter) a;
+            Fragment item = (Fragment) fadapter.instantiateItem(mViewpager,
+                    currentItem);
+            scrollView = (ViewGroup) (item.getView()
+                    .findViewById(R.id.sv));
+        } else if (a instanceof FragmentStatePagerAdapter) {
+            FragmentStatePagerAdapter fsAdapter = (FragmentStatePagerAdapter) a;
+            Fragment item = (Fragment) fsAdapter.instantiateItem(mViewpager,
+                    currentItem);
+            scrollView = (ViewGroup) (item.getView()
+                    .findViewById(R.id.sv));
+        }
+
+    }
     @Override
     public void computeScroll() {
         super.computeScroll();
@@ -124,7 +153,6 @@ public class StickyNavLayout extends LinearLayout {
             invalidate();
         }
     }
-
     @Override
     public void scrollTo(int x, int y) {
         if (y < 0) {
@@ -133,20 +161,18 @@ public class StickyNavLayout extends LinearLayout {
         if (y > mTopViewHeight) {
             y = mTopViewHeight;
         }
-        super.scrollTo(x, y);
-        isTopViewHiden = getScrollY() == mTopViewHeight;
+        if(y!=getScrollY()){
+            super.scrollTo(x, y);
+        }
+        isTopViewHiden = getScrollY()>= mTopViewHeight;
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         LogUtils.info(null, "onMeasure");
-        //应为vp中里面包含有scrolView，vp默认测量规则是如果为mode为at_most,exactly,直接从parent中读取
-       /*int fixHeightMeasureSpec = MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE / 2, MeasureSpec.AT_MOST);
-        mViewpager.measure(widthMeasureSpec, fixHeightMeasureSpec);*/
         ViewGroup.LayoutParams params = mViewpager.getLayoutParams();
         params.height = getMeasuredHeight()-mPagerIndicator.getMeasuredHeight();
-        mViewpager.setLayoutParams(params);
     }
 
 
@@ -162,5 +188,8 @@ public class StickyNavLayout extends LinearLayout {
         mTopView = (RelativeLayout) findViewById(R.id.topView);
         mPagerIndicator = (PagerIndicatorView) findViewById(R.id.pagerIndicator);
         mViewpager = (ViewPager) findViewById(R.id.viewPager);
+
+      //  View child=scrollView.getChildAt(0);
+
     }
 }
