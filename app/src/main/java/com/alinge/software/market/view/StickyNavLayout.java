@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.OverScroller;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.alinge.software.market.R;
 import com.alinge.software.market.utils.LogUtils;
@@ -38,6 +39,9 @@ public class StickyNavLayout extends LinearLayout {
     private int mMinVeloctiy;
     private boolean isTopViewHiden;
     private ViewGroup scrollView;
+    private ViewPager picViewPager;
+    private TextView titleName;
+
 
 
     public StickyNavLayout(Context context) {
@@ -54,7 +58,6 @@ public class StickyNavLayout extends LinearLayout {
         mVelocityTracker = VelocityTracker.obtain();
         ViewConfiguration vc = ViewConfiguration.get(context);
         mTouchSlop = vc.getScaledTouchSlop();
-        LogUtils.info(null,"mTouchSlop"+mTouchSlop);
         mMaxVelocity = vc.getScaledMaximumFlingVelocity();
         mMinVeloctiy = vc.getScaledMinimumFlingVelocity();
     }
@@ -188,6 +191,8 @@ public class StickyNavLayout extends LinearLayout {
         mTopView = (RelativeLayout) findViewById(R.id.topView);
         mPagerIndicator = (PagerIndicatorView) findViewById(R.id.pagerIndicator);
         mViewpager = (ViewPager) findViewById(R.id.viewPager);
+        picViewPager= (ViewPager) mTopView.findViewById(R.id.picVp);
+        titleName=(TextView) mTopView.findViewById(R.id.tv);
 
       //  View child=scrollView.getChildAt(0);
 

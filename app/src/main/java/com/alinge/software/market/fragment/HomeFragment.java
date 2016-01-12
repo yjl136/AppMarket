@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alinge.software.market.MainActivity;
+import com.alinge.software.market.adapter.PictureAdapter;
 import com.alinge.software.market.listener.PageChangeListener;
 import com.alinge.software.market.R;
 import com.alinge.software.market.utils.LogUtils;
@@ -26,10 +27,11 @@ public class HomeFragment extends BaseFragment {
     private String[] mTitles = new String[]{"最新上架", "编辑推荐", "热门软件", "个人推荐"};
     private PagerIndicatorView mPagerIndicator;
     private ViewPager mViewPager;
+    private ViewPager picViewPager;
     private Context activity;
     private FragmentPagerAdapter mAdapter;
     private TabFragment[] mFragments = new TabFragment[mTitles.length];
-
+    private int[] png=new int[]{R.mipmap.a,R.mipmap.b,R.mipmap.c};
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,6 +101,10 @@ public class HomeFragment extends BaseFragment {
     private void initView(View content) {
         mPagerIndicator = (PagerIndicatorView) content.findViewById(R.id.pagerIndicator);
         mViewPager = (ViewPager) content.findViewById(R.id.viewPager);
+        picViewPager=(ViewPager) content.findViewById(R.id.picVp);
+        PictureAdapter pictureAdapter=new PictureAdapter(png,activity);
+        picViewPager.setAdapter(pictureAdapter);
+
     }
 
     private void initDatas() {

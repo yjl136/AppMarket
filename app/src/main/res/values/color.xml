@@ -3,5 +3,6 @@
     <color name="white">#ffffff</color>
     <color name="TabsColor">#bec0be</color>
     <color name="TabsTextColor">#33c8f2</color>
+    <color name="HomeTextColor">#1033c8f2</color>
 
 </resources>

@@ -1,32 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.alinge.software.market.view.StickyNavLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <RelativeLayout
-        android:id="@+id/topView"
-        android:layout_width="match_parent"
-        android:background="#ef0000ef"
-        android:layout_height="250dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textColor="@android:color/holo_red_light"
-            android:textSize="25sp"
-            android:text="home" />
-    </RelativeLayout>
-    <com.alinge.software.market.view.PagerIndicatorView
-        android:id="@+id/pagerIndicator"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#2000ef00"
-       /> 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
+    android:layout_height="match_parent">
+    <com.alinge.software.market.view.StickyNavLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
-</com.alinge.software.market.view.StickyNavLayout>
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/topView"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="#ef0000ef">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/picVp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </RelativeLayout>
+
+        <com.alinge.software.market.view.PagerIndicatorView
+            android:id="@+id/pagerIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#2000ef00" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.alinge.software.market.view.StickyNavLayout>
+    <TextView
+        android:id="@+id/tv"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/HomeTextColor"
+        android:gravity="center"
+        android:text="home"
+        android:textSize="25sp" />
+</RelativeLayout>
