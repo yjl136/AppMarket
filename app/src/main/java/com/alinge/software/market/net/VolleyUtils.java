@@ -2,8 +2,8 @@ package com.alinge.software.market.net;
 
 import android.content.Context;
 
+import com.alinge.software.market.net.utils.UrlUtils;
 import com.alinge.software.market.utils.LogUtils;
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -42,10 +42,10 @@ public class VolleyUtils {
     /**
      *
      * @param url 请求地址url
-     * @param method  请求方式
+     * @param method  请求方式 0为get 1为post
      * @param requestJson 请求json串
      */
-    public static void requestByJson(String url,int method,JSONObject requestJson){
+    public static void request(String url,int method,JSONObject requestJson){
         JsonObjectRequest request=new JsonObjectRequest(method, url,requestJson, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject jsonObject) {
@@ -61,5 +61,52 @@ public class VolleyUtils {
             }
         });
         queue.add(request);
+    }
+
+    /**
+     * get请求
+     * @param url
+     * @param params
+     */
+    public static  void requestGet(String url,Map<String,String> params){
+        String requestUrl=getUrl(url,params);
+        LogUtils.info(null,"requestUrl:"+requestUrl);
+        JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, requestUrl, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject object) {
+                LogUtils.info(null,"result:"+object.toString());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                if(volleyError!=null){
+                    LogUtils.info(null,"result error:"+volleyError.getMessage());
+                }
+            }
+        });
+        queue.add(request);
+    }
+
+    /**
+     *
+     * @param url 不包含host的url
+     * @param params get请求参数
+     * @return 拼接后的url
+     */
+    public static String getUrl(String url,Map<String,String> params){
+        StringBuffer buffer=new StringBuffer(UrlUtils.HOST);
+        buffer.append(url);
+        if(params!=null && params.size()>0){
+            buffer.append("?");
+            for(String key:params.keySet()){
+                buffer.append(key);
+                buffer.append("=");
+                buffer.append(params.get(key));
+                buffer.append("&");
+            }
+            int lastIndex=buffer.lastIndexOf("&");
+            buffer.deleteCharAt(lastIndex);
+        }
+        return buffer.toString();
     }
 }

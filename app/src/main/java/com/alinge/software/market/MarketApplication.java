@@ -1,3 +1,5 @@
+package com.alinge.software.market;
+
 import android.app.Application;
 
 import com.alinge.software.market.net.VolleyUtils;

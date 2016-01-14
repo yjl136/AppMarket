@@ -15,8 +15,13 @@ import com.alinge.software.market.MainActivity;
 import com.alinge.software.market.adapter.PictureAdapter;
 import com.alinge.software.market.listener.PageChangeListener;
 import com.alinge.software.market.R;
+import com.alinge.software.market.net.VolleyUtils;
+import com.alinge.software.market.net.utils.UrlUtils;
 import com.alinge.software.market.utils.LogUtils;
 import com.alinge.software.market.view.PagerIndicatorView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 作者： yejianlin
@@ -31,7 +36,8 @@ public class HomeFragment extends BaseFragment {
     private Context activity;
     private FragmentPagerAdapter mAdapter;
     private TabFragment[] mFragments = new TabFragment[mTitles.length];
-    private int[] png=new int[]{R.mipmap.a,R.mipmap.b,R.mipmap.c};
+    private int[] png = new int[]{R.mipmap.a, R.mipmap.b, R.mipmap.c};
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +52,19 @@ public class HomeFragment extends BaseFragment {
         initView(content);
         initDatas();
         initEvents();
+        getData();
         LogUtils.info(null, "HomeFragment------->onCreateView");
         return content;
+    }
+
+    private void getData() {
+        Map<String ,String> params=new HashMap<String,String>();
+        params.put("token",UrlUtils.getAppKey(getActivity().getApplicationContext()));
+        params.put("productId",UrlUtils.PRODUCT_ID);
+        params.put("count",UrlUtils.ITEM_COUNT);
+        params.put("bannerCount",UrlUtils.ITEM_COUNT);
+        params.put("machineName",UrlUtils.getMachineType());
+        VolleyUtils.requestGet(UrlUtils.QUALITY_MAIN_URI,params);
     }
 
     @Override
@@ -101,8 +118,8 @@ public class HomeFragment extends BaseFragment {
     private void initView(View content) {
         mPagerIndicator = (PagerIndicatorView) content.findViewById(R.id.pagerIndicator);
         mViewPager = (ViewPager) content.findViewById(R.id.viewPager);
-        picViewPager=(ViewPager) content.findViewById(R.id.picVp);
-        PictureAdapter pictureAdapter=new PictureAdapter(png,activity);
+        picViewPager = (ViewPager) content.findViewById(R.id.picVp);
+        PictureAdapter pictureAdapter = new PictureAdapter(png, activity);
         picViewPager.setAdapter(pictureAdapter);
 
     }
@@ -123,7 +140,7 @@ public class HomeFragment extends BaseFragment {
                 return mTitles.length;
             }
         };*/
-        mAdapter = new FragmentPagerAdapter(getChildFragmentManager()){
+        mAdapter = new FragmentPagerAdapter(getChildFragmentManager()) {
             @Override
             public int getCount() {
                 return mTitles.length;

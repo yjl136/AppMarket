@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.alinge.software.market.R;
 import com.alinge.software.market.utils.LogUtils;
+import com.alinge.software.market.utils.StutasBarUtils;
 
 /**
  * 作者： yejianlin
@@ -43,6 +44,7 @@ public class StickyNavLayout extends LinearLayout {
     private ViewGroup scrollView;
     private int titleBarHeight;
     private  View titleBar;
+    private  int statusBarHeight;
 
 
 
@@ -62,6 +64,7 @@ public class StickyNavLayout extends LinearLayout {
         mTouchSlop = vc.getScaledTouchSlop();
         mMaxVelocity = vc.getScaledMaximumFlingVelocity();
         mMinVeloctiy = vc.getScaledMinimumFlingVelocity();
+       statusBarHeight= StutasBarUtils.getStatusBarHeight(context);
     }
 
     @Override
@@ -105,7 +108,6 @@ public class StickyNavLayout extends LinearLayout {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        LogUtils.info(null,"onInterceptTouchEvent");
         int action = ev.getAction();
         float y = ev.getY();
         switch (action) {
@@ -114,10 +116,10 @@ public class StickyNavLayout extends LinearLayout {
                 break;
             case MotionEvent.ACTION_MOVE:
                 float dy = y - lastY;
-                LogUtils.info(null,"dy11:"+dy);
+               // LogUtils.info(null,"dy11:"+dy);
                 getCurrentScrollView();
                 if (Math.abs(dy) > mTouchSlop) {
-                    LogUtils.info(null,"dy22:"+dy  +"  ishide:"+isTopViewHiden+ "    scrollview scrolly:"+scrollView.getScrollY());
+                   // LogUtils.info(null,"dy22:"+dy  +"  ishide:"+isTopViewHiden+ "    scrollview scrolly:"+scrollView.getScrollY());
                     if (!isTopViewHiden || (scrollView.getScrollY() == 0 && isTopViewHiden && dy > 0)) {
                         return true;
                     }
@@ -171,20 +173,19 @@ public class StickyNavLayout extends LinearLayout {
         }
         float percent=getScrollY()*1.0f/(mTopViewHeight-titleBarHeight);
         setTitleBarAlpha(percent);
-        LogUtils.info(null,"percent:"+percent);
+       // LogUtils.info(null,"percent:"+percent);
         isTopViewHiden = getScrollY()>= mTopViewHeight-titleBarHeight;
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        LogUtils.info(null, "onMeasure");
-        //获取到titlbar的高度
+        //LogUtils.info(null, "onMeasure");
         calTitleBarHeight();
-        LogUtils.info(null, "titleBarHeight:" + titleBarHeight);
+       // LogUtils.info(null, "titleBarHeight:" + titleBarHeight);
         ViewGroup.LayoutParams params = mViewpager.getLayoutParams();
         params.height = getMeasuredHeight()-mPagerIndicator.getMeasuredHeight()-titleBarHeight;
-        LogUtils.info(null,"height:"+getMeasuredHeight()+"  PagerIndicator height:"+mPagerIndicator.getMeasuredHeight());
+       // LogUtils.info(null,"height:"+getMeasuredHeight()+"  PagerIndicator height:"+mPagerIndicator.getMeasuredHeight());
     }
 
     private void calTitleBarHeight() {

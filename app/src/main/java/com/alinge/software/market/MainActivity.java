@@ -1,16 +1,13 @@
 package com.alinge.software.market;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.alinge.software.market.adapter.FragentStateAdapter;
 import com.alinge.software.market.adapter.FragmentAdapter;
 import com.alinge.software.market.listener.PageChangeListener;
-import com.alinge.software.market.utils.LogUtils;
 import com.alinge.software.market.utils.StutasBarUtils;
 
 /**
@@ -28,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        StutasBarUtils.compat(this,getResources().getColor(R.color.HomeTitleBarBg));
+       // StutasBarUtils.compat(this,getResources().getColor(R.color.HomeTitleBarBg));
     }
 
     private void initView() {
