@@ -1,2 +1,4 @@
 1:在Fragment里面使用viewpager + fragment这样的结构时 必须使用getChildFragmentManager
 2:FragmentstatePagerAdapter:占内存小，动态销毁、大数据集 FragmentPagerAdapter：适用于静态页面，不需要动态更新,不销毁数据
+3:Volley是一个集asyncHttpClient和image—loader于一身的矿框架，适合那些请求数据量小，但是频繁的网络请求
+4:
