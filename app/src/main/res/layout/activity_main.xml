@@ -5,6 +5,7 @@
 
     <com.alinge.software.market.view.NoScrollViewPager
         android:id="@+id/vp"
+        android:fitsSystemWindows="true"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />

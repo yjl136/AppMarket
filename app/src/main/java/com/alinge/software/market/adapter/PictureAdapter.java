@@ -1,11 +1,9 @@
 package com.alinge.software.market.adapter;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 /**
@@ -35,7 +33,7 @@ public class PictureAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         ImageView iv=new ImageView(context);
         iv.setImageResource(picId[position]);
-        iv.setScaleType(ImageView.ScaleType.MATRIX);
+        iv.setScaleType(ImageView.ScaleType.FIT_XY);
         iv.setTag(position);
         container.addView(iv,new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
         return iv;

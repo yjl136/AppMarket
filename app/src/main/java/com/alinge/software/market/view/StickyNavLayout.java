@@ -9,8 +9,10 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
+import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.LinearLayout;
 import android.widget.OverScroller;
 import android.widget.RelativeLayout;
@@ -39,8 +41,8 @@ public class StickyNavLayout extends LinearLayout {
     private int mMinVeloctiy;
     private boolean isTopViewHiden;
     private ViewGroup scrollView;
-    private ViewPager picViewPager;
-    private TextView titleName;
+    private int titleBarHeight;
+    private  View titleBar;
 
 
 
@@ -87,12 +89,12 @@ public class StickyNavLayout extends LinearLayout {
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
                 float scrollY = getScrollY();
-                if (Math.abs(scrollY) >= mTopViewHeight / 2) {
+                if (Math.abs(scrollY) >= (mTopViewHeight -titleBarHeight)/ 2) {
                     //显示
-                    mScroller.startScroll(getScrollX(), getScrollY(), 0, mTopViewHeight / 2);
+                    mScroller.startScroll(getScrollX(), getScrollY(), 0, (mTopViewHeight -titleBarHeight)/ 2);
                 } else {
                     //隐藏
-                    mScroller.startScroll(getScrollX(), getScrollY(), 0, -mTopViewHeight / 2);
+                    mScroller.startScroll(getScrollX(), getScrollY(), 0, -(mTopViewHeight -titleBarHeight)/ 2);
                 }
                 isDraging = false;
                 invalidate();
@@ -161,21 +163,42 @@ public class StickyNavLayout extends LinearLayout {
         if (y < 0) {
             y = 0;
         }
-        if (y > mTopViewHeight) {
-            y = mTopViewHeight;
+        if (y > mTopViewHeight-titleBarHeight) {
+            y = mTopViewHeight-titleBarHeight;
         }
         if(y!=getScrollY()){
             super.scrollTo(x, y);
         }
-        isTopViewHiden = getScrollY()>= mTopViewHeight;
+        float percent=getScrollY()*1.0f/(mTopViewHeight-titleBarHeight);
+        setTitleBarAlpha(percent);
+        LogUtils.info(null,"percent:"+percent);
+        isTopViewHiden = getScrollY()>= mTopViewHeight-titleBarHeight;
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         LogUtils.info(null, "onMeasure");
+        //获取到titlbar的高度
+        calTitleBarHeight();
+        LogUtils.info(null, "titleBarHeight:" + titleBarHeight);
         ViewGroup.LayoutParams params = mViewpager.getLayoutParams();
-        params.height = getMeasuredHeight()-mPagerIndicator.getMeasuredHeight();
+        params.height = getMeasuredHeight()-mPagerIndicator.getMeasuredHeight()-titleBarHeight;
+        LogUtils.info(null,"height:"+getMeasuredHeight()+"  PagerIndicator height:"+mPagerIndicator.getMeasuredHeight());
+    }
+
+    private void calTitleBarHeight() {
+        ViewParent viewParent=getParent();
+        RelativeLayout layout=(RelativeLayout)viewParent;
+        titleBar=layout.findViewById(R.id.tilteBar);
+        titleBar.measure(0, 0);
+        titleBarHeight= titleBar.getMeasuredHeight();
+        //设置titlbar默认的alpha
+        if(!isTopViewHiden){
+            titleBar.setAlpha(0.0f);
+        }
+
+
     }
 
 
@@ -185,16 +208,19 @@ public class StickyNavLayout extends LinearLayout {
         mTopViewHeight = mTopView.getMeasuredHeight();
     }
 
+    /**
+     * 更具移动的距离百分比来设置titlebar的alpha
+     * @param percent
+     */
+    private void setTitleBarAlpha(float percent){
+        titleBar.setAlpha(percent);
+    }
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
         mTopView = (RelativeLayout) findViewById(R.id.topView);
         mPagerIndicator = (PagerIndicatorView) findViewById(R.id.pagerIndicator);
         mViewpager = (ViewPager) findViewById(R.id.viewPager);
-        picViewPager= (ViewPager) mTopView.findViewById(R.id.picVp);
-        titleName=(TextView) mTopView.findViewById(R.id.tv);
-
-      //  View child=scrollView.getChildAt(0);
 
     }
 }
