@@ -27,7 +27,9 @@ import com.alinge.software.iflytekvoice.recognizer.filter.message.MessageSlots;
 import com.alinge.software.iflytekvoice.recognizer.filter.utils.AppHelper;
 import com.alinge.software.iflytekvoice.recognizer.filter.utils.MessageHelper;
 import com.alinge.software.iflytekvoice.service.TipService;
+import com.alinge.software.iflytekvoice.utils.ApkInstaller;
 import com.alinge.software.iflytekvoice.utils.LogUtils;
+import com.iflytek.cloud.SpeechUtility;
 import com.iflytek.cloud.util.UserWords;
 
 import org.json.JSONException;
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private IflytekSynthesizer synthesizer;
     private RecognizerReceiver mRecognizerReceiver;
     private IflytekUnderstander understander;
-    private  Button uploadBt;
+    private Button uploadBt, voiceHelper, changeFileName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +55,10 @@ public class MainActivity extends AppCompatActivity {
         recognizerBt = (Button) findViewById(R.id.recognizer);
         synthesizerBt = (Button) findViewById(R.id.synthesizer);
         understanderBt = (Button) findViewById(R.id.understander);
+        voiceHelper = (Button) findViewById(R.id.voiceHelper);
+        changeFileName = (Button) findViewById(R.id.changeFileName);
         textUnderstanderBt = (Button) findViewById(R.id.textUnderstander);
-       uploadBt=(Button) findViewById(R.id.upload);
+        uploadBt = (Button) findViewById(R.id.upload);
         shakeBt = (Button) findViewById(R.id.shake);
         resultTv.setText("onSpeakProgress。。。。。");
         recognizer = new IflytekRecognizer(this);
@@ -95,8 +99,8 @@ public class MainActivity extends AppCompatActivity {
         uploadBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserWords uw=new UserWords();
-                ArrayList<String> words=new ArrayList<String>();
+                UserWords uw = new UserWords();
+                ArrayList<String> words = new ArrayList<String>();
                 words.add("app");
                 words.add("应用");
                 words.add("APP");
@@ -104,7 +108,26 @@ public class MainActivity extends AppCompatActivity {
                 recognizer.uploadUserWords(uw.toString());
             }
         });
+        voiceHelper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //检查是否安装了语记
+                if(!SpeechUtility.getUtility().checkServiceInstalled()){
+                    ApkInstaller installer=new ApkInstaller(MainActivity.this);
+                    installer.install();
+                }else{
+                    //已经安装了语记
+                    Intent intent=new Intent(MainActivity.this,VoiceHelperActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+        changeFileName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
     }
 
     private void initReceiver() {
@@ -145,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
                 int rc = filterResult.getRc();
                 if (rc == 0) {
                     String serviceType = filterResult.getService();
-                    doFilter(serviceType,filterResult);
+                    doFilter(serviceType, filterResult);
                 } else {
                     LogUtils.error(null, "rc:" + rc + "  rawText" + filterResult.getRawText());
                 }
@@ -156,59 +179,59 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void doFilter(String serviceType,FilterResult filterResult) throws JSONException{
-        String opration=filterResult.getOperation();
+    private void doFilter(String serviceType, FilterResult filterResult) throws JSONException {
+        String opration = filterResult.getOperation();
         if (ServiceType.BAI_KE.equals(serviceType)
                 || ServiceType.FQA.equals(serviceType)
                 || ServiceType.OPEN_QA.equals(serviceType)
                 || ServiceType.CHAT.equals(serviceType)
-                ||ServiceType.DATE_TIME.equals(serviceType)
+                || ServiceType.DATE_TIME.equals(serviceType)
                 || ServiceType.CALC.equals(serviceType)) {
-                AnswerResult ar=filterResult.getAnswerResult();
-                String text=ar.getText();
-                synthesizer.synthesizer(text);
-                LogUtils.info(null,"text:"+text+" oparation:"+opration);
+            AnswerResult ar = filterResult.getAnswerResult();
+            String text = ar.getText();
+            synthesizer.synthesizer(text);
+            LogUtils.info(null, "text:" + text + " oparation:" + opration);
 
-        }else if(ServiceType.APP.equals(serviceType)){
-            SemanticResult semantic=filterResult.getSemanticResult();
-            AppSlots slots= (AppSlots)semantic.getSlots(serviceType);
-            String appName=slots.getName();
-            LogUtils.info(null,"open app name:"+appName);
-            if(AppOperation.LAUNCH.equals(opration)){
-                AppHelper.launchApp(this,appName);
-            }else if(AppOperation.UNINSTALL.equals(opration)){
-                AppHelper.uninstallApp(this,appName);
-            }else{
-                LogUtils.info(null," app oparation:"+opration);
+        } else if (ServiceType.APP.equals(serviceType)) {
+            SemanticResult semantic = filterResult.getSemanticResult();
+            AppSlots slots = (AppSlots) semantic.getSlots(serviceType);
+            String appName = slots.getName();
+            LogUtils.info(null, "open app name:" + appName);
+            if (AppOperation.LAUNCH.equals(opration)) {
+                AppHelper.launchApp(this, appName);
+            } else if (AppOperation.UNINSTALL.equals(opration)) {
+                AppHelper.uninstallApp(this, appName);
+            } else {
+                LogUtils.info(null, " app oparation:" + opration);
             }
-        }else if(ServiceType.MAP.equals(serviceType)){
+        } else if (ServiceType.MAP.equals(serviceType)) {
 
-        }else if(ServiceType.MESSAGE.equals(serviceType)){
-            SemanticResult sms=filterResult.getSemanticResult();
-            MessageSlots smsSlots=(MessageSlots)sms.getSlots(serviceType);
-            if (MessageOperation.SEND.equalsIgnoreCase(opration)){
-                if(smsSlots!=null){
-                    String content=smsSlots.getContent();
-                    String name=smsSlots.getName();
-                    MessageHelper.sendMesaage(this,name,content);
-                }else{
+        } else if (ServiceType.MESSAGE.equals(serviceType)) {
+            SemanticResult sms = filterResult.getSemanticResult();
+            MessageSlots smsSlots = (MessageSlots) sms.getSlots(serviceType);
+            if (MessageOperation.SEND.equalsIgnoreCase(opration)) {
+                if (smsSlots != null) {
+                    String content = smsSlots.getContent();
+                    String name = smsSlots.getName();
+                    MessageHelper.sendMesaage(this, name, content);
+                } else {
                     MessageHelper.sendMessage(this);
                 }
-            }else if(MessageOperation.VIEW.equalsIgnoreCase(opration)){
-                    MessageHelper.viewMessage(this);
+            } else if (MessageOperation.VIEW.equalsIgnoreCase(opration)) {
+                MessageHelper.viewMessage(this);
             }
 
-        }else if(ServiceType.TELEPHONE.equals(serviceType)){
+        } else if (ServiceType.TELEPHONE.equals(serviceType)) {
 
-        }else if(ServiceType.SCHEDULE.equals(serviceType)){
+        } else if (ServiceType.SCHEDULE.equals(serviceType)) {
 
-        }else if(ServiceType.TRANSLATION.equals(serviceType)){
+        } else if (ServiceType.TRANSLATION.equals(serviceType)) {
 
-        }else if(ServiceType.WEATHER.equals(serviceType)){
+        } else if (ServiceType.WEATHER.equals(serviceType)) {
 
-        }else if(ServiceType.WEBSITE.equals(serviceType)){
+        } else if (ServiceType.WEBSITE.equals(serviceType)) {
 
-        }else if(ServiceType.WEBSEARCH.equals(serviceType)){
+        } else if (ServiceType.WEBSEARCH.equals(serviceType)) {
 
         }
 

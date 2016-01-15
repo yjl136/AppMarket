@@ -3,14 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <Button
+        android:id="@+id/voiceHelper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="语音租手" />
+    <Button
+        android:id="@+id/changeFileName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="更改文件名" />
+
     <TextView
         android:id="@+id/showResult"
         android:layout_width="match_parent"
-        android:layout_height="100dp" />
+        android:layout_height="100dp"
+        android:visibility="gone"
+        />
     <Button
         android:id="@+id/recognizer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:text="语音听写" />
     <Button
         android:id="@+id/synthesizer"
@@ -26,16 +40,19 @@
         android:id="@+id/understander"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:text="语音语义" />
     <Button
         android:id="@+id/textUnderstander"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:text="文本语义" />
     <Button
         android:id="@+id/upload"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:text="上传用户词表" />
 
 </LinearLayout>
