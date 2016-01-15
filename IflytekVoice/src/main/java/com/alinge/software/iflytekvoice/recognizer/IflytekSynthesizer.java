@@ -115,14 +115,14 @@ public class IflytekSynthesizer {
         mSynthesizer.setParameter(SpeechConstant.PARAMS, null);
         mSynthesizer.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_CLOUD);
         // 设置在线合成发音人
-        mSynthesizer.setParameter(SpeechConstant.VOICE_NAME, "nannan");
+        mSynthesizer.setParameter(SpeechConstant.VOICE_NAME, "aisxa");
         //设置合成语速
-        mSynthesizer.setParameter(SpeechConstant.SPEED, "50");
-        mSynthesizer.setParameter(SpeechConstant.BACKGROUND_SOUND,"1");
+        mSynthesizer.setParameter(SpeechConstant.SPEED, "90");
+      //  mSynthesizer.setParameter(SpeechConstant.BACKGROUND_SOUND,"1");
         //设置合成音调
-        mSynthesizer.setParameter(SpeechConstant.PITCH, "50");
+        mSynthesizer.setParameter(SpeechConstant.PITCH, "70");
         //设置合成音量
-        mSynthesizer.setParameter(SpeechConstant.VOLUME, "50");
+        mSynthesizer.setParameter(SpeechConstant.VOLUME, "100");
         //设置播放器音频流类型
         mSynthesizer.setParameter(SpeechConstant.STREAM_TYPE, "3");
         // 设置播放合成音频打断音乐播放，默认为true
