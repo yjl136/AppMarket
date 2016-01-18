@@ -2,4 +2,5 @@
 <resources>
     <integer name="voice_morning_duration" >10</integer>
     <integer name="voice_speek_duration">10</integer>
+    <integer name="voice_hear_duration">10</integer>
 </resources>

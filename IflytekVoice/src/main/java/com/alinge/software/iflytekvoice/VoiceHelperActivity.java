@@ -48,12 +48,14 @@ public class VoiceHelperActivity extends Activity {
         synthesizer = new IflytekSynthesizer(this);
         understander=new IflytekUnderstander(this);
         initReceiver();
+        imageView.setBackgroundResource(R.drawable.voice_morning_animation);
+        drawable=(AnimationDrawable)imageView.getBackground();
+        synthesizer.synthesizer("早上好！小朋友");
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imageView.setBackgroundResource(R.drawable.voice_morning_animation);
+                imageView.setBackgroundResource(R.drawable.voice_speek_animation);
                 drawable=(AnimationDrawable)imageView.getBackground();
-                //synthesizer.synthesizer("早上好！小朋友");
                 understander.understanderVoice();
             }
         });
