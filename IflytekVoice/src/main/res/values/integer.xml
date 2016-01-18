@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer name="helper_duration" >10</integer>
+    <integer name="voice_morning_duration" >10</integer>
+    <integer name="voice_speek_duration">10</integer>
 </resources>

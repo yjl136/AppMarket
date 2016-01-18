@@ -5,12 +5,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.alinge.software.iflytekvoice.recognizer.IflytekSynthesizer;
@@ -47,7 +44,6 @@ public class VoiceHelperActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_helper);
-
         imageView= (ImageView) findViewById(R.id.helper);
         synthesizer = new IflytekSynthesizer(this);
         understander=new IflytekUnderstander(this);
@@ -55,14 +51,12 @@ public class VoiceHelperActivity extends Activity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imageView.setBackgroundResource(R.drawable.voice_animation);
+                imageView.setBackgroundResource(R.drawable.voice_morning_animation);
                 drawable=(AnimationDrawable)imageView.getBackground();
                 //synthesizer.synthesizer("早上好！小朋友");
                 understander.understanderVoice();
             }
         });
-
-
     }
     private void initReceiver() {
         IntentFilter filter = new IntentFilter();
