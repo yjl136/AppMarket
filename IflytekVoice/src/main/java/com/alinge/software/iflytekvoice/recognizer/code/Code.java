@@ -57,5 +57,9 @@ public class Code {
     /***************讯飞错误状态值******************/
     //没有说话
     public final static int NO_SPEEKING_XUNFEI =10118;
+    //没有检测到网络
     public final static int NETWORK_ERROR_XUNFEI =20001;
+    //网络链接超时
+    public final static int NETWORK_TIMEOUT_XUNFEI =20002;
+
 }

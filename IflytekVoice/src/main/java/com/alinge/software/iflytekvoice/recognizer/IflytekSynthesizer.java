@@ -22,7 +22,7 @@ import com.iflytek.cloud.SynthesizerListener;
 public class IflytekSynthesizer {
     private Context context;
     private SpeechSynthesizer mSynthesizer;
-    private int curentCode=Code.SYNTHESIZER_FREE;
+    private int curentCode = Code.SYNTHESIZER_FREE;
 
     public IflytekSynthesizer(Context context) {
         this.context = context;
@@ -110,6 +110,14 @@ public class IflytekSynthesizer {
 
     }
 
+    public void release() {
+        if (mSynthesizer != null) {
+            mSynthesizer.destroy();
+            mSynthesizer = null;
+        }
+
+    }
+
     private void setParam() {
         // 清空参数
         mSynthesizer.setParameter(SpeechConstant.PARAMS, null);
@@ -117,10 +125,10 @@ public class IflytekSynthesizer {
         // 设置在线合成发音人
         mSynthesizer.setParameter(SpeechConstant.VOICE_NAME, "aisxa");
         //设置合成语速
-        mSynthesizer.setParameter(SpeechConstant.SPEED, "90");
-      //  mSynthesizer.setParameter(SpeechConstant.BACKGROUND_SOUND,"1");
+        mSynthesizer.setParameter(SpeechConstant.SPEED, "80");
+        //  mSynthesizer.setParameter(SpeechConstant.BACKGROUND_SOUND,"1");
         //设置合成音调
-        mSynthesizer.setParameter(SpeechConstant.PITCH, "70");
+        mSynthesizer.setParameter(SpeechConstant.PITCH, "60");
         //设置合成音量
         mSynthesizer.setParameter(SpeechConstant.VOLUME, "100");
         //设置播放器音频流类型
@@ -141,11 +149,12 @@ public class IflytekSynthesizer {
         intent.putExtra(Code.STATUS_CODE, code);
         context.sendBroadcast(intent);
     }
-    private  void resetCurentStatus(int code){
-        if(code==Code.SYNTHESIZER_FAILD||code==Code.SYNTHESIZER_SUCCESS){
-            curentCode=Code.SYNTHESIZER_FREE;
-        }else{
-            curentCode=code;
+
+    private void resetCurentStatus(int code) {
+        if (code == Code.SYNTHESIZER_FAILD || code == Code.SYNTHESIZER_SUCCESS) {
+            curentCode = Code.SYNTHESIZER_FREE;
+        } else {
+            curentCode = code;
         }
     }
 

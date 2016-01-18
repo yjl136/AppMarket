@@ -29,6 +29,7 @@ public class IflytekUnderstander {
     private SpeechUnderstander mSpeechUnderstander;
     //初始化为空闲状态
     private int curentCode = Code.UNDERSTANDER_FREE;
+
     public IflytekUnderstander(Context context) {
         this.context = context;
     }
@@ -37,9 +38,9 @@ public class IflytekUnderstander {
      * 语音语义理解
      */
     public synchronized void understanderVoice() {
-        if(curentCode!=Code.UNDERSTANDER_FREE){
-            LogUtils.error(null,"wait for me....");
-            return ;
+        if (curentCode != Code.UNDERSTANDER_FREE) {
+            LogUtils.error(null, "wait for me....");
+            return;
         }
         initSpeechUnderstander();
         if (mSpeechUnderstander == null) {
@@ -61,7 +62,7 @@ public class IflytekUnderstander {
     private SpeechUnderstanderListener mUnderstanderListener = new SpeechUnderstanderListener() {
         @Override
         public void onVolumeChanged(int volume, byte[] bytes) {
-            LogUtils.info(null, "volume:" + volume);
+            // LogUtils.info(null, "volume:" + volume);
             notifyStatusChange(Code.SPEECHING);
         }
 
@@ -80,7 +81,7 @@ public class IflytekUnderstander {
         @Override
         public void onResult(UnderstanderResult understanderResult) {
             if (understanderResult != null) {
-                notifyStatusChange(understanderResult.getResultString(),Code.UNDERSTANDER_SUCCESS);
+                notifyStatusChange(understanderResult.getResultString(), Code.UNDERSTANDER_SUCCESS);
                 LogUtils.info(null, "result:" + understanderResult.getResultString());
             } else {
                 notifyStatusChange(Code.UNDERSTANDER_FAILD);
@@ -91,11 +92,13 @@ public class IflytekUnderstander {
         @Override
         public void onError(SpeechError speechError) {
             if (speechError != null) {
+                doSpeechError(speechError);
                 LogUtils.info(null, "speechError message:" + speechError.getMessage() + "   speeche error code:" + speechError.getErrorCode() + "   speeche error desc:" + speechError.getErrorDescription());
             } else {
                 LogUtils.info(null, "speechError==null");
+                notifyStatusChange(Code.UNDERSTANDER_FAILD);
             }
-            notifyStatusChange(Code.UNDERSTANDER_FAILD);
+
         }
 
         @Override
@@ -103,6 +106,16 @@ public class IflytekUnderstander {
 
         }
     };
+
+    private void doSpeechError(SpeechError speechError) {
+        if (speechError.getErrorCode() == Code.NO_SPEEKING_XUNFEI) {
+            notifyStatusChange(Code.NO_SPEEKING_XUNFEI);
+        } else if (speechError.getErrorCode() == Code.NETWORK_ERROR_XUNFEI) {
+            notifyStatusChange(Code.NETWORK_ERROR_XUNFEI);
+        } else if (speechError.getErrorCode() == Code.NETWORK_TIMEOUT_XUNFEI) {
+            notifyStatusChange(Code.NETWORK_TIMEOUT_XUNFEI);
+        }
+    }
 
     private void initSpeechUnderstander() {
         if (mSpeechUnderstander == null) {
@@ -129,7 +142,7 @@ public class IflytekUnderstander {
         // 设置语音后端点:后端点静音检测时间，即用户停止说话多长时间内即认为不再输入， 自动停止录音
         mSpeechUnderstander.setParameter(SpeechConstant.VAD_EOS, "1000");
         //网络链接超时
-        mSpeechUnderstander.setParameter(SpeechConstant.NET_TIMEOUT,"3000");
+        mSpeechUnderstander.setParameter(SpeechConstant.NET_TIMEOUT, "3000");
         // 设置标点符号，默认：1（有标点）
         mSpeechUnderstander.setParameter(SpeechConstant.ASR_PTT, "1");
         // 设置音频保存路径，保存音频格式支持pcm、wav，设置路径为sd卡请注意WRITE_EXTERNAL_STORAGE权限
@@ -154,6 +167,7 @@ public class IflytekUnderstander {
         @Override
         public void onError(SpeechError speechError) {
             if (speechError != null) {
+                doSpeechError(speechError);
                 LogUtils.info(null, "speechError message:" + speechError.getMessage() + "   speeche error code:" + speechError.getErrorCode() + "   speeche error desc:" + speechError.getErrorDescription());
             } else {
                 notifyStatusChange(Code.UNDERSTANDER_FAILD);
@@ -167,9 +181,9 @@ public class IflytekUnderstander {
      * 文本语义理解
      */
     public void understanderText(String text) {
-        if(curentCode!=Code.UNDERSTANDER_FREE){
-            LogUtils.error(null,"wait for me....");
-            return ;
+        if (curentCode != Code.UNDERSTANDER_FREE) {
+            LogUtils.error(null, "wait for me....");
+            return;
         }
         initTextUnderstander();
         if (mTextUnderstander == null) {
@@ -208,10 +222,12 @@ public class IflytekUnderstander {
             mSpeechUnderstander = null;
         }
     }
+
     private void notifyStatusChange(int code) {
         notifyStatusChange(null, code);
     }
-    private void notifyStatusChange(String result,int code) {
+
+    private void notifyStatusChange(String result, int code) {
         resetCurentStatus(code);
         //发送广播通知外部状态改变
         Intent intent = new Intent();
@@ -222,11 +238,16 @@ public class IflytekUnderstander {
         }
         context.sendBroadcast(intent);
     }
-    private  void resetCurentStatus(int code){
-        if(code==Code.UNDERSTANDER_FAILD||code==Code.UNDERSTANDER_SUCCESS){
-            curentCode=Code.UNDERSTANDER_FREE;
-        }else{
-            curentCode=code;
+
+    private void resetCurentStatus(int code) {
+        if (code == Code.UNDERSTANDER_FAILD
+                || code == Code.UNDERSTANDER_SUCCESS
+                || code == Code.NETWORK_ERROR_XUNFEI
+                || code==Code.NETWORK_TIMEOUT_XUNFEI
+                || code==Code.NO_SPEEKING_XUNFEI) {
+            curentCode = Code.UNDERSTANDER_FREE;
+        } else {
+            curentCode = code;
         }
     }
 }

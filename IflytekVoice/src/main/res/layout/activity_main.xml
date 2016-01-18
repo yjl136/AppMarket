@@ -40,7 +40,6 @@
         android:id="@+id/understander"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:text="语音语义" />
     <Button
         android:id="@+id/textUnderstander"
