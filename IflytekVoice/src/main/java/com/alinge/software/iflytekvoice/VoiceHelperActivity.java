@@ -23,6 +23,7 @@ import com.alinge.software.iflytekvoice.recognizer.filter.message.MessageOperati
 import com.alinge.software.iflytekvoice.recognizer.filter.message.MessageSlots;
 import com.alinge.software.iflytekvoice.recognizer.filter.utils.AppHelper;
 import com.alinge.software.iflytekvoice.recognizer.filter.utils.MessageHelper;
+import com.alinge.software.iflytekvoice.recognizer.filter.utils.TimeHelper;
 import com.alinge.software.iflytekvoice.utils.LogUtils;
 
 import org.json.JSONException;
@@ -39,7 +40,7 @@ public class VoiceHelperActivity extends Activity {
     private RecognizerReceiver mRecognizerReceiver;
     private  SynthesizerReceiver mSynthesizerReceiver;
     private IflytekUnderstander understander;
-    private    AnimationDrawable drawable;
+    private   AnimationDrawable drawable;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,17 +49,42 @@ public class VoiceHelperActivity extends Activity {
         synthesizer = new IflytekSynthesizer(this);
         understander=new IflytekUnderstander(this);
         initReceiver();
-        imageView.setBackgroundResource(R.drawable.voice_morning_animation);
-        drawable=(AnimationDrawable)imageView.getBackground();
-        synthesizer.synthesizer("早上好！小朋友");
+checkHours();
+
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imageView.setBackgroundResource(R.drawable.voice_speek_animation);
+                imageView.setBackgroundResource(R.drawable.voice_hear_animation);
                 drawable=(AnimationDrawable)imageView.getBackground();
+                drawable.start();
                 understander.understanderVoice();
             }
         });
+    }
+    private  void checkHours(){
+        int drawble;
+        String text;
+        int hours=TimeHelper.getHours();
+        if(hours<10){
+            //早上
+            drawble=R.drawable.voice_morning_animation;
+          text="早上好！，好朋友";
+        }else if(hours>=10 && hours<=14){
+            //中午
+            drawble=R.drawable.voice_midday_animation;
+           text="中午好！，小朋友";
+        }else if(hours>14 && hours<20){
+            //下午
+            drawble=R.drawable.voice_morning_animation;
+            text="下午好！，小朋友";
+        }else {
+            //晚上
+            drawble=R.drawable.voice_night_animation;
+            text="晚上好！，小朋友";
+        }
+        imageView.setBackgroundResource(drawble);
+        drawable=(AnimationDrawable)imageView.getBackground();
+        synthesizer.synthesizer(text);
     }
     private void initReceiver() {
         IntentFilter filter = new IntentFilter();
@@ -76,6 +102,8 @@ public class VoiceHelperActivity extends Activity {
         @Override
         public void onReceive(Context context, Intent intent) {
             int code = intent.getIntExtra(Code.STATUS_CODE, 0);
+            imageView.setBackgroundResource(R.drawable.voice_speek_animation);
+            drawable = (AnimationDrawable)imageView.getBackground();
             if(code==Code.NO_SPEEKING_XUNFEI){
                 synthesizer.synthesizer("你好像没有说话哦！");
                 return;
@@ -83,10 +111,9 @@ public class VoiceHelperActivity extends Activity {
                 synthesizer.synthesizer("网络错误，快叫爸爸、妈妈来连接网络吧！");
                 return;
             }else if (code==Code.UNDERSTANDER_FAILD){
-                synthesizer.synthesizer("我听你清楚。");
+                synthesizer.synthesizer("我听不清楚，请大点声");
                 return;
             }
-
             String result = intent.getStringExtra(Code.RECOGNIZER_RESULT);
             doRecognizerResult(code, result);
         }
@@ -123,6 +150,7 @@ public class VoiceHelperActivity extends Activity {
             }else if( code==Code.SYNTHESIZER_FAILD||code==Code.SYNTHESIZER_SUCCESS){
                 if(drawable!=null && drawable.isRunning()){
                     drawable.stop();
+                    imageView.setBackgroundResource(R.mipmap.speek48);
                 }
             }
         }
