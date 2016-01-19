@@ -5,7 +5,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ResolveInfo;
 import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -49,8 +51,7 @@ public class VoiceHelperActivity extends Activity {
         synthesizer = new IflytekSynthesizer(this);
         understander=new IflytekUnderstander(this);
         initReceiver();
-checkHours();
-
+        checkHours();
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,7 +69,7 @@ checkHours();
         if(hours<10){
             //早上
             drawble=R.drawable.voice_morning_animation;
-          text="早上好！，好朋友";
+          text="早上好！，小朋友";
         }else if(hours>=10 && hours<=14){
             //中午
             drawble=R.drawable.voice_midday_animation;
@@ -95,7 +96,7 @@ checkHours();
         IntentFilter synthesizerFilter=new IntentFilter();
         synthesizerFilter.addAction(Code.SYNTHESIZER_ACTION);
         SynthesizerReceiver msynSynthesizerReceiver=new SynthesizerReceiver();
-        registerReceiver(msynSynthesizerReceiver,synthesizerFilter);
+        registerReceiver(msynSynthesizerReceiver, synthesizerFilter);
 
     }
     private class RecognizerReceiver extends BroadcastReceiver {
@@ -131,6 +132,20 @@ checkHours();
                     doFilter(serviceType, filterResult);
                 } else {
                     LogUtils.error(null, "rc:" + rc + "  rawText" + filterResult.getRawText());
+                    String rawText=filterResult.getRawText();
+                    ResolveInfo resolveInfo=AppHelper.queryApp(this, rawText);
+                    if(resolveInfo!=null){
+                        if(rawText.contains("打开")){
+                            AppHelper.launchApp(this,resolveInfo);
+                        }else if(rawText.contains("删除")){
+                            AppHelper.uninstallApp(this,resolveInfo);
+                        }else{
+                            AppHelper.launchApp(this,resolveInfo);
+                        }
+                    }else{
+                        synthesizer.synthesizer("你说清楚点，我不知道你想干什么");
+                    }
+
                 }
             }
         } catch (Exception e) {
@@ -141,8 +156,8 @@ checkHours();
     private class SynthesizerReceiver extends  BroadcastReceiver{
         @Override
         public void onReceive(Context context, Intent intent) {
-            int code=intent.getIntExtra(Code.STATUS_CODE, 0);
-            LogUtils.info("1/","systhesizer code:"+code);
+            int code = intent.getIntExtra(Code.STATUS_CODE, 0);
+            LogUtils.info("1/", "systhesizer code:" + code);
             if(code==Code.BEGIN_SPEEK){
                 if(drawable!=null && !drawable.isRunning()){
                     drawable.start();
@@ -150,7 +165,10 @@ checkHours();
             }else if( code==Code.SYNTHESIZER_FAILD||code==Code.SYNTHESIZER_SUCCESS){
                 if(drawable!=null && drawable.isRunning()){
                     drawable.stop();
-                    imageView.setBackgroundResource(R.mipmap.speek48);
+                    //暂停的时候在动画最后一帧
+                    int frameNum=drawable.getNumberOfFrames();
+                    Drawable lastDrawable=drawable.getFrame(frameNum - 1);
+                    imageView.setBackground(lastDrawable);
                 }
             }
         }
