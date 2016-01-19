@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,7 +16,6 @@ import com.alinge.software.iflytekvoice.recognizer.IflytekUnderstander;
 import com.alinge.software.iflytekvoice.recognizer.code.Code;
 import com.alinge.software.iflytekvoice.recognizer.filter.AnswerResult;
 import com.alinge.software.iflytekvoice.recognizer.filter.FilterResult;
-import com.alinge.software.iflytekvoice.recognizer.filter.ISlots;
 import com.alinge.software.iflytekvoice.recognizer.filter.SemanticResult;
 import com.alinge.software.iflytekvoice.recognizer.filter.ServiceType;
 import com.alinge.software.iflytekvoice.recognizer.filter.app.AppOperation;
@@ -171,6 +169,7 @@ public class MainActivity extends AppCompatActivity {
                     doFilter(serviceType, filterResult);
                 } else {
                     LogUtils.error(null, "rc:" + rc + "  rawText" + filterResult.getRawText());
+                    String rawText=filterResult.getRawText();
                 }
             }
         } catch (Exception e) {
