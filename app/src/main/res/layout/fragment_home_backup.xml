@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.alinge.software.market.view.StickyNavLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/topView"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="#ef0000ef">
+            <android.support.v4.view.ViewPager
+                android:id="@+id/picVp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </RelativeLayout>
+
+        <com.alinge.software.market.view.PagerIndicatorView
+            android:id="@+id/pagerIndicator"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/HomePagerIndicatorBg" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.alinge.software.market.view.StickyNavLayout>
+    <LinearLayout
+        android:id="@+id/tilteBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:background="@color/HomeTitleBarBg"
+        >
+        <ImageView
+            android:id="@+id/user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:layout_alignParentLeft="true"
+            android:visibility="gone"
+            android:src="@mipmap/user"
+            />
+        <TextView
+            android:id="@+id/titleName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/HomeTextColor"
+            android:text="精品"
+            android:textSize="25sp" />
+    </LinearLayout>
+</RelativeLayout>
