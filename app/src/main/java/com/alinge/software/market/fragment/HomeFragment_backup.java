@@ -46,7 +46,7 @@ public class HomeFragment_backup extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View content = inflater.inflate(R.layout.fragment_home, container, false);
+        View content = inflater.inflate(R.layout.fragment_home_backup, container, false);
         initView(content);
         initDatas();
         initEvents();
