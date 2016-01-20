@@ -10,6 +10,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/IflytekVoice" />
+            <option value="$PROJECT_DIR$/ViewPageIndictor_lib" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
