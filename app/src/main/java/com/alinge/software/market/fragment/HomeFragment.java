@@ -19,6 +19,7 @@ import com.alinge.software.market.net.VolleyUtils;
 import com.alinge.software.market.net.utils.UrlUtils;
 import com.alinge.software.market.utils.LogUtils;
 import com.alinge.software.market.view.PagerIndicatorView;
+import com.viewpagerindicator.TitlePageIndicator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,14 +30,12 @@ import java.util.Map;
  * 作用：
  */
 public class HomeFragment extends BaseFragment {
-    private String[] mTitles = new String[]{"最新上架", "编辑推荐", "热门软件", "个人推荐"};
-    private PagerIndicatorView mPagerIndicator;
+    private String[] mTitles = new String[]{"最新上架", "编辑推荐", "热门软件"};
+    private TitlePageIndicator mPagerIndicator;
     private ViewPager mViewPager;
-    private ViewPager picViewPager;
     private Context activity;
     private FragmentPagerAdapter mAdapter;
     private TabFragment[] mFragments = new TabFragment[mTitles.length];
-    private int[] png = new int[]{R.mipmap.a, R.mipmap.b, R.mipmap.c};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -116,16 +115,13 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void initView(View content) {
-        mPagerIndicator = (PagerIndicatorView) content.findViewById(R.id.pagerIndicator);
+        mPagerIndicator = (TitlePageIndicator) content.findViewById(R.id.pagerIndicator);
         mViewPager = (ViewPager) content.findViewById(R.id.viewPager);
-        picViewPager = (ViewPager) content.findViewById(R.id.picVp);
-        PictureAdapter pictureAdapter = new PictureAdapter(png, activity);
-        picViewPager.setAdapter(pictureAdapter);
 
     }
 
     private void initDatas() {
-        mPagerIndicator.setTitles(mTitles);
+
 
         for (int i = 0; i < mTitles.length; i++) {
             mFragments[i] = (TabFragment) TabFragment.newInstance(mTitles[i]);
@@ -150,18 +146,23 @@ public class HomeFragment extends BaseFragment {
             public Fragment getItem(int position) {
                 return mFragments[position];
             }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return mTitles[position % mTitles.length];
+            }
         };
         mViewPager.setAdapter(mAdapter);
-        mViewPager.setCurrentItem(0);
+        mPagerIndicator.setViewPager(mViewPager);
     }
 
     private void initEvents() {
-        mViewPager.addOnPageChangeListener(new PageChangeListener() {
+       /* mViewPager.addOnPageChangeListener(new PageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset,
                                        int positionOffsetPixels) {
                 mPagerIndicator.scroll(position, positionOffset);
             }
-        });
+        });*/
     }
 }

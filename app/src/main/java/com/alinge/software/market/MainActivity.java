@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-       // StutasBarUtils.compat(this,getResources().getColor(R.color.HomeTitleBarBg));
+        StutasBarUtils.compat(this,getResources().getColor(R.color.HomeTitleBarBg));
     }
 
     private void initView() {
