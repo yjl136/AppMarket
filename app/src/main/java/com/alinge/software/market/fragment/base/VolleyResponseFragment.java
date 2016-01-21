@@ -1,4 +1,4 @@
-package com.alinge.software.market.fragment;
+package com.alinge.software.market.fragment.base;
 
 import android.support.v4.app.Fragment;
 

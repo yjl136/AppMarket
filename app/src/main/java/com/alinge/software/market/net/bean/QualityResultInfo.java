@@ -1,9 +1,15 @@
 package com.alinge.software.market.net.bean;
 
+import android.text.TextUtils;
+
 import com.alinge.software.market.net.utils.FieldUtils;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 作者： yejianlin
@@ -12,7 +18,7 @@ import org.json.JSONObject;
  */
 public class QualityResultInfo extends Info {
     private int GiftsCount;
-    private  String GiftsList;
+    private String GiftsList;
     private int NewestCount;
     private String NewestList;
     private int RecommendCount;
@@ -89,29 +95,69 @@ public class QualityResultInfo extends Info {
         GiftsCount = giftsCount;
     }
 
+    public List<AppInfo> getGiftsLists() throws JSONException {
+        return getLists(GiftsList);
+    }
+    public List<AppInfo> getNewestLists() throws JSONException {
+        return getLists(NewestList);
+    }
+    public List<AppInfo> getRecommendLists() throws JSONException {
+        return getLists(RecommendList);
+    }
+    /**
+     * 获取各个类型的集合
+     * @param json
+     * @return
+     */
+    private List<AppInfo> getLists(String json) throws JSONException {
+        List<AppInfo> apps = new ArrayList<AppInfo>();
+        if (TextUtils.isEmpty(json)) {
+            return apps;
+        }
+        JSONArray array = new JSONArray(json);
+        for (int index = 0; index < array.length(); index++) {
+            JSONObject object = array.getJSONObject(index);
+            AppInfo app = toAppInfo(object);
+            apps.add(app);
+        }
+        return apps;
+    }
+
+    /**
+     * 将jsonObject转换为appInfo
+     * @param object
+     * @return
+     * @throws JSONException
+     */
+    private AppInfo toAppInfo(JSONObject object) throws JSONException {
+        AppInfo appInfo = new AppInfo();
+        appInfo.fromJson(object);
+        return appInfo;
+    }
+
     @Override
     public void fromJson(JSONObject obj) throws JSONException {
         super.fromJson(obj);
-        if(obj.has(FieldUtils.GiftsList)){
-            GiftsList=obj.getString(FieldUtils.GiftsList);
+        if (obj.has(FieldUtils.GiftsList)) {
+            GiftsList = obj.getString(FieldUtils.GiftsList);
         }
-        if(obj.has(FieldUtils.RecommendList)){
-            RecommendList=obj.getString(FieldUtils.RecommendList);
+        if (obj.has(FieldUtils.RecommendList)) {
+            RecommendList = obj.getString(FieldUtils.RecommendList);
         }
-        if(obj.has(FieldUtils.BannerList)){
-            BannerList=obj.getString(FieldUtils.BannerList);
+        if (obj.has(FieldUtils.BannerList)) {
+            BannerList = obj.getString(FieldUtils.BannerList);
         }
-        if(obj.has(FieldUtils.NewestList)){
-            NewestList=obj.getString(FieldUtils.NewestList);
+        if (obj.has(FieldUtils.NewestList)) {
+            NewestList = obj.getString(FieldUtils.NewestList);
         }
-        if(obj.has(FieldUtils.NewestCount)){
-            NewestCount=obj.getInt(FieldUtils.NewestCount);
+        if (obj.has(FieldUtils.NewestCount)) {
+            NewestCount = obj.getInt(FieldUtils.NewestCount);
         }
-        if(obj.has(FieldUtils.RecommendCount)){
-            RecommendCount=obj.getInt(FieldUtils.RecommendCount);
+        if (obj.has(FieldUtils.RecommendCount)) {
+            RecommendCount = obj.getInt(FieldUtils.RecommendCount);
         }
-        if(obj.has(FieldUtils.GiftsCount)){
-            GiftsCount=obj.getInt(FieldUtils.GiftsCount);
+        if (obj.has(FieldUtils.GiftsCount)) {
+            GiftsCount = obj.getInt(FieldUtils.GiftsCount);
         }
     }
 }

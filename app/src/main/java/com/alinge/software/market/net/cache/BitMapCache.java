@@ -29,9 +29,9 @@ public class BitMapCache implements ImageLoader.ImageCache {
      * @return
      */
     public static BitMapCache getInstance() {
-        if (mBitMapCache != null) {
+        if (mBitMapCache == null) {
             synchronized (BitMapCache.class){
-                if(mBitMapCache!=null){
+                if(mBitMapCache==null){
                     mBitMapCache = new BitMapCache();
                 }
             }

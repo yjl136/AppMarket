@@ -1,4 +1,4 @@
-package com.alinge.software.market.fragment;
+package com.alinge.software.market.fragment.home;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,31 +10,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alinge.software.market.fragment.base.BaseFragment;
 import com.alinge.software.market.R;
-import com.alinge.software.market.adapter.PictureAdapter;
-import com.alinge.software.market.listener.PageChangeListener;
-import com.alinge.software.market.net.VolleyUtils;
-import com.alinge.software.market.net.utils.UrlUtils;
 import com.alinge.software.market.utils.LogUtils;
-import com.alinge.software.market.view.PagerIndicatorView;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.viewpagerindicator.TitlePageIndicator;
 
 /**
  * 作者： yejianlin
  * 日期：2015/12/23
  * 作用：
  */
-public class HomeFragment_backup extends BaseFragment {
-    private String[] mTitles = new String[]{"最新上架", "编辑推荐", "热门软件", "个人推荐"};
-    private PagerIndicatorView mPagerIndicator;
+public class HomeFragment extends BaseFragment {
+
+    private String[] mTitles = new String[]{Type.NEWS, Type.RECOMMEND, Type.HOTS};
+    private TitlePageIndicator mPagerIndicator;
     private ViewPager mViewPager;
-    private ViewPager picViewPager;
     private Context activity;
     private FragmentPagerAdapter mAdapter;
     private TabFragment[] mFragments = new TabFragment[mTitles.length];
-    private int[] png = new int[]{R.mipmap.a, R.mipmap.b, R.mipmap.c};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,24 +39,15 @@ public class HomeFragment_backup extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View content = inflater.inflate(R.layout.fragment_home_backup, container, false);
+        View content = inflater.inflate(R.layout.fragment_home, container, false);
         initView(content);
         initDatas();
         initEvents();
-        getData();
         LogUtils.info(null, "HomeFragment------->onCreateView");
         return content;
     }
 
-    private void getData() {
-        Map<String ,String> params=new HashMap<String,String>();
-        params.put("token",UrlUtils.getAppKey(getActivity().getApplicationContext()));
-        params.put("productId",UrlUtils.PRODUCT_ID);
-        params.put("count",UrlUtils.ITEM_COUNT);
-        params.put("bannerCount",UrlUtils.ITEM_COUNT);
-        params.put("machineName",UrlUtils.getMachineType());
-      //  VolleyUtils.requestGet(UrlUtils.QUALITY_MAIN_URI,params);
-    }
+
 
     @Override
     public void onDestroyView() {
@@ -114,16 +98,13 @@ public class HomeFragment_backup extends BaseFragment {
     }
 
     private void initView(View content) {
-        mPagerIndicator = (PagerIndicatorView) content.findViewById(R.id.pagerIndicator);
+        mPagerIndicator = (TitlePageIndicator) content.findViewById(R.id.pagerIndicator);
         mViewPager = (ViewPager) content.findViewById(R.id.viewPager);
-        picViewPager = (ViewPager) content.findViewById(R.id.picVp);
-        PictureAdapter pictureAdapter = new PictureAdapter(png, activity);
-        picViewPager.setAdapter(pictureAdapter);
 
     }
 
     private void initDatas() {
-        mPagerIndicator.setTitles(mTitles);
+
 
         for (int i = 0; i < mTitles.length; i++) {
             mFragments[i] = (TabFragment) TabFragment.newInstance(mTitles[i]);
@@ -148,18 +129,23 @@ public class HomeFragment_backup extends BaseFragment {
             public Fragment getItem(int position) {
                 return mFragments[position];
             }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return mTitles[position % mTitles.length];
+            }
         };
         mViewPager.setAdapter(mAdapter);
-        mViewPager.setCurrentItem(0);
+        mPagerIndicator.setViewPager(mViewPager);
     }
 
     private void initEvents() {
-        mViewPager.addOnPageChangeListener(new PageChangeListener() {
+       /* mViewPager.addOnPageChangeListener(new PageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset,
                                        int positionOffsetPixels) {
                 mPagerIndicator.scroll(position, positionOffset);
             }
-        });
+        });*/
     }
 }

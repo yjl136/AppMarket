@@ -1,23 +1,36 @@
-package com.alinge.software.market.fragment;
+package com.alinge.software.market.fragment.home;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.alinge.software.market.R;
+import com.alinge.software.market.adapter.AppAdapter;
+import com.alinge.software.market.fragment.base.VolleyResponseFragment;
 import com.alinge.software.market.net.VolleyUtils;
+import com.alinge.software.market.net.bean.AppInfo;
+import com.alinge.software.market.net.bean.QualityResultInfo;
 import com.alinge.software.market.net.utils.UrlUtils;
 import com.alinge.software.market.utils.LogUtils;
 import com.alinge.software.market.view.LoadPageView;
 import com.android.volley.VolleyError;
+
+import org.json.JSONObject;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-public class TabFragment extends VolleyResponseFragment{
+
+public class TabFragment extends VolleyResponseFragment {
     public static final String TITLE = "title";
     private String mTitle = "Defaut Value";
     private LoadPageView loadPageView;
+    private AppAdapter mAppAdapter;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,12 +72,16 @@ public class TabFragment extends VolleyResponseFragment{
 
     /**
      * 创建成功时候的view
+     *
      * @return
      */
     private View createSuccessView() {
-         LayoutInflater inflate= LayoutInflater.from(getActivity());
-        View view=inflate.inflate(R.layout.fragment_tab, null);
-        RecyclerView recyclerView=(RecyclerView)view.findViewById(R.id.recyclerView);
+        LayoutInflater inflate = LayoutInflater.from(getActivity());
+        View view = inflate.inflate(R.layout.fragment_tab, null);
+        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mAppAdapter = new AppAdapter(getActivity());
+        recyclerView.setAdapter(mAppAdapter);
         return view;
     }
 
@@ -78,17 +95,18 @@ public class TabFragment extends VolleyResponseFragment{
         params.put("count", UrlUtils.ITEM_COUNT);
         params.put("bannerCount", UrlUtils.ITEM_COUNT);
         params.put("machineName", UrlUtils.getMachineType());
-        VolleyUtils.requestGet(UrlUtils.QUALITY_MAIN_URI, params,this);
+        VolleyUtils.requestGet(UrlUtils.QUALITY_MAIN_URI, params, this);
     }
 
 
     /**
      * 加载成功回调
+     *
      * @param volleyError
      */
     @Override
     public void onErrorResponse(VolleyError volleyError) {
-        if(volleyError!=null){
+        if (volleyError != null) {
             loadPageView.stateChange(LoadPageView.STATE_ERROR);
         }
     }
@@ -99,9 +117,24 @@ public class TabFragment extends VolleyResponseFragment{
      */
     @Override
     public void onResponse(Object object) {
-        if(!TextUtils.isEmpty(object.toString())){
-            loadPageView.stateChange(LoadPageView.STATE_SUCCESS);
-        }else{
+        if (!TextUtils.isEmpty(object.toString())) {
+            try {
+                QualityResultInfo result = new QualityResultInfo();
+                result.fromJson((JSONObject)object);
+                List<AppInfo> apps=null;
+                if (Type.HOTS.equals(mTitle)) {
+                    apps=result.getGiftsLists();
+                } else if (Type.RECOMMEND.equals(mTitle)) {
+                    apps=result.getRecommendLists();
+                } else if (Type.NEWS.equals(mTitle)) {
+                    apps=result.getNewestLists();
+                }
+                mAppAdapter.setLists(apps);
+                loadPageView.stateChange(LoadPageView.STATE_SUCCESS);
+            } catch (Exception e) {
+                loadPageView.stateChange(LoadPageView.STATE_ERROR);
+            }
+        } else {
             loadPageView.stateChange(LoadPageView.STATE_EMPTY);
         }
     }

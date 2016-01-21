@@ -1,13 +1,12 @@
-package com.alinge.software.market.fragment;
+package com.alinge.software.market.fragment.Brand;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.alinge.software.market.R;
+import com.alinge.software.market.fragment.base.BaseFragment;
 import com.alinge.software.market.utils.LogUtils;
 
 /**

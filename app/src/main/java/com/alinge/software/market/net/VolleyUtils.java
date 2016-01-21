@@ -2,7 +2,7 @@ package com.alinge.software.market.net;
 import android.content.Context;
 
 import com.alinge.software.market.R;
-import com.alinge.software.market.fragment.VolleyResponseFragment;
+import com.alinge.software.market.fragment.base.VolleyResponseFragment;
 import com.alinge.software.market.net.cache.BitMapCache;
 import com.alinge.software.market.net.utils.UrlUtils;
 import com.alinge.software.market.utils.LogUtils;

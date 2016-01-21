@@ -1,11 +1,11 @@
 package com.alinge.software.market.fragment.factory;
 
 import android.support.v4.app.Fragment;
-import com.alinge.software.market.fragment.BaseFragment;
-import com.alinge.software.market.fragment.BrandFragment;
-import com.alinge.software.market.fragment.CategoryFragment;
-import com.alinge.software.market.fragment.HomeFragment;
-import com.alinge.software.market.fragment.ManagerFragment;
+import com.alinge.software.market.fragment.base.BaseFragment;
+import com.alinge.software.market.fragment.Brand.BrandFragment;
+import com.alinge.software.market.fragment.category.CategoryFragment;
+import com.alinge.software.market.fragment.home.HomeFragment;
+import com.alinge.software.market.fragment.manager.ManagerFragment;
 import java.util.HashMap;
 import java.util.Map;
 
