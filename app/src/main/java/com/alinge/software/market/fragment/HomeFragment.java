@@ -51,20 +51,11 @@ public class HomeFragment extends BaseFragment {
         initView(content);
         initDatas();
         initEvents();
-        getData();
         LogUtils.info(null, "HomeFragment------->onCreateView");
         return content;
     }
 
-    private void getData() {
-        Map<String ,String> params=new HashMap<String,String>();
-        params.put("token",UrlUtils.getAppKey(getActivity().getApplicationContext()));
-        params.put("productId",UrlUtils.PRODUCT_ID);
-        params.put("count",UrlUtils.ITEM_COUNT);
-        params.put("bannerCount",UrlUtils.ITEM_COUNT);
-        params.put("machineName",UrlUtils.getMachineType());
-        VolleyUtils.requestGet(UrlUtils.QUALITY_MAIN_URI,params);
-    }
+
 
     @Override
     public void onDestroyView() {

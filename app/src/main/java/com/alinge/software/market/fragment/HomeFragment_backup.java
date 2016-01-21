@@ -62,7 +62,7 @@ public class HomeFragment_backup extends BaseFragment {
         params.put("count",UrlUtils.ITEM_COUNT);
         params.put("bannerCount",UrlUtils.ITEM_COUNT);
         params.put("machineName",UrlUtils.getMachineType());
-        VolleyUtils.requestGet(UrlUtils.QUALITY_MAIN_URI,params);
+      //  VolleyUtils.requestGet(UrlUtils.QUALITY_MAIN_URI,params);
     }
 
     @Override

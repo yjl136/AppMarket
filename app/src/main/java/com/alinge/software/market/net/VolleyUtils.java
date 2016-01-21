@@ -1,13 +1,17 @@
 package com.alinge.software.market.net;
-
 import android.content.Context;
 
+import com.alinge.software.market.R;
+import com.alinge.software.market.fragment.VolleyResponseFragment;
+import com.alinge.software.market.net.cache.BitMapCache;
 import com.alinge.software.market.net.utils.UrlUtils;
 import com.alinge.software.market.utils.LogUtils;
+import com.alinge.software.market.view.AsycImageView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -67,18 +71,21 @@ public class VolleyUtils {
      * get请求
      * @param url
      * @param params
+     * @param response
      */
-    public static  void requestGet(String url,Map<String,String> params){
+    public static  void requestGet(String url,Map<String,String> params, final VolleyResponseFragment response){
         String requestUrl=getUrl(url,params);
         LogUtils.info(null,"requestUrl:"+requestUrl);
         JsonObjectRequest request=new JsonObjectRequest(Request.Method.GET, requestUrl, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject object) {
                 LogUtils.info(null,"result:"+object.toString());
+                response.onResponse(object);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
+                response.onErrorResponse(volleyError);
                 if(volleyError!=null){
                     LogUtils.info(null,"result error:"+volleyError.getMessage());
                 }
@@ -108,5 +115,33 @@ public class VolleyUtils {
             buffer.deleteCharAt(lastIndex);
         }
         return buffer.toString();
+    }
+
+    /**
+     * 异步加载显示图片
+     * @param imageView 控件
+     * @param url 图片地址
+     */
+    public static void display(AsycImageView imageView,String url){
+        BitMapCache cache=BitMapCache.getInstance();
+        ImageLoader loader=new ImageLoader(queue,cache);
+        imageView.setImageUrl(url, loader);
+    }
+
+    /**
+     *
+     * @param imageView 显示图片的控件
+     * @param url  图片地址
+     * @param errorImage 加载失败是显示的图片
+     * @param defaultImage 加载中显示的图片
+     */
+    public static void display(AsycImageView imageView,String url,int errorImage,int defaultImage){
+        if(errorImage != 0){
+            imageView.setErrorImageResId(errorImage);
+        }
+        if(defaultImage != 0){
+            imageView.setDefaultImageResId(R.mipmap.icon_empty);
+        }
+        display(imageView,url);
     }
 }
