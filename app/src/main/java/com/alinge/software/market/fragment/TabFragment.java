@@ -43,7 +43,7 @@ public class TabFragment extends Fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
 	{
-		View view = inflater.inflate(R.layout.fragment_tab_backup, container, false);
+		View view = inflater.inflate(R.layout.fragment_tab, container, false);
 		mTextView = (TextView) view.findViewById(R.id.id_info);
 		mTextView.setText(mTitle);
 		return view;
