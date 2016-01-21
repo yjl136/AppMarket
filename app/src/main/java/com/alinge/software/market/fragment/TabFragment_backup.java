@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.alinge.software.market.R;
 import com.alinge.software.market.utils.LogUtils;
 
-public class TabFragment extends Fragment
+public class TabFragment_backup extends Fragment
 {
 	public static final String TITLE = "title";
 	private String mTitle = "Defaut Value";
@@ -43,16 +43,16 @@ public class TabFragment extends Fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState)
 	{
-		View view = inflater.inflate(R.layout.fragment_tab_backup, container, false);
+		View view = inflater.inflate(R.layout.fragment_tab, container, false);
 		mTextView = (TextView) view.findViewById(R.id.id_info);
 		mTextView.setText(mTitle);
 		return view;
 
 	}
 
-	public static TabFragment newInstance(String title)
+	public static TabFragment_backup newInstance(String title)
 	{
-		TabFragment tabFragment = new TabFragment();
+		TabFragment_backup tabFragment = new TabFragment_backup();
 		Bundle bundle = new Bundle();
 		bundle.putString(TITLE, title);
 		tabFragment.setArguments(bundle);
