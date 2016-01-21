@@ -11,7 +11,6 @@ import com.alinge.software.market.R;
 import com.alinge.software.market.net.VolleyUtils;
 import com.alinge.software.market.net.bean.AppInfo;
 import com.alinge.software.market.view.AsycImageView;
-
 import java.util.ArrayList;
 import java.util.List;
 
