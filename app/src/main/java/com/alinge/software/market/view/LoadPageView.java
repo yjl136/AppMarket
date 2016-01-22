@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.alinge.software.market.R;
+
 /**
  * 作者： yejianlin
  * 日期：2016/1/21
@@ -25,7 +27,6 @@ public abstract class LoadPageView extends FrameLayout {
     private View successView;
     private View errorView;
     private View emptyView;
-
     public LoadPageView(Context context) {
         this(context, null);
     }
@@ -68,10 +69,8 @@ public abstract class LoadPageView extends FrameLayout {
      * @return
      */
     private View createLoadingView() {
-        TextView tv=new TextView(getContext());
-        tv.setText("加载中。。。。");
-        tv.setTextSize(25);
-        return tv;
+        View view=View.inflate(getContext(), R.layout.loading_layout, null);
+        return view;
     }
 
     /**
@@ -80,10 +79,8 @@ public abstract class LoadPageView extends FrameLayout {
      * @return
      */
     private View createErrorView() {
-        TextView tv=new TextView(getContext());
-        tv.setText("加载失败");
-        tv.setTextSize(25);
-        return tv;
+     View view=View.inflate(getContext(), R.layout.loading_layout, null);
+        return view;
     }
 
     /**

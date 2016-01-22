@@ -43,6 +43,7 @@ public class VoiceHelperActivity extends Activity {
     private  SynthesizerReceiver mSynthesizerReceiver;
     private IflytekUnderstander understander;
     private   AnimationDrawable drawable;
+    private SynthesizerReceiver msynSynthesizerReceiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +96,7 @@ public class VoiceHelperActivity extends Activity {
 
         IntentFilter synthesizerFilter=new IntentFilter();
         synthesizerFilter.addAction(Code.SYNTHESIZER_ACTION);
-        SynthesizerReceiver msynSynthesizerReceiver=new SynthesizerReceiver();
+         msynSynthesizerReceiver=new SynthesizerReceiver();
         registerReceiver(msynSynthesizerReceiver, synthesizerFilter);
 
     }
@@ -238,6 +239,18 @@ public class VoiceHelperActivity extends Activity {
         }
         if(synthesizer!=null){
             synthesizer.release();
+        }
+        if(mRecognizerReceiver!=null){
+            unregisterReceiver(mRecognizerReceiver);
+            mRecognizerReceiver=null;
+        }
+        if(msynSynthesizerReceiver!=null){
+            unregisterReceiver(msynSynthesizerReceiver);
+            msynSynthesizerReceiver=null;
+        }
+        if(mSynthesizerReceiver!=null){
+            unregisterReceiver(msynSynthesizerReceiver);
+            mSynthesizerReceiver=null;
         }
     }
 }

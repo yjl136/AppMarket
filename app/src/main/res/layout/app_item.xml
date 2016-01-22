@@ -11,8 +11,8 @@
     >
     <com.alinge.software.market.view.AsycImageView
         android:id="@+id/appIcon"
-        android:layout_width="86dp"
-        android:layout_height="86dp"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
         android:layout_marginLeft="5dp"
         android:src="@mipmap/icon_empty"
         />
