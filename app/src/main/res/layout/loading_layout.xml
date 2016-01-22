@@ -13,11 +13,11 @@
         android:layout_marginTop="10dp"
         android:id="@+id/linearLayout">
         <TextView
-            android:text="Loading"
+            android:text="加载中"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/primary_text_light"
-            android:textSize="35sp" />
+            android:textSize="20sp" />
 
         <com.alinge.software.market.view.DotsTextView
             android:layout_width="wrap_content"

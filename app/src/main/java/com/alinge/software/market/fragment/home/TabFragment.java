@@ -1,6 +1,8 @@
 package com.alinge.software.market.fragment.home;
 
+import android.animation.LayoutTransition;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -10,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.alinge.software.market.R;
 import com.alinge.software.market.adapter.AppAdapter;
+import com.alinge.software.market.adapter.decoration.AppItemDecoration;
 import com.alinge.software.market.fragment.base.VolleyResponseFragment;
 import com.alinge.software.market.net.VolleyUtils;
 import com.alinge.software.market.net.bean.AppInfo;
@@ -80,6 +83,8 @@ public class TabFragment extends VolleyResponseFragment {
         View view = inflate.inflate(R.layout.fragment_tab, null);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+       recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new AppItemDecoration());
         mAppAdapter = new AppAdapter(getActivity());
         recyclerView.setAdapter(mAppAdapter);
         return view;
