@@ -1,0 +1,1141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+     
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    
+<head>   
+    
+     
+    <script type="text/javascript" src="http://c.csdnimg.cn/pubfooter/js/tracking.js" charset="utf-8"></script>  
+
+    <script type="text/javascript">
+        var protocol = window.location.protocol;
+        document.write('<script type="text/javascript" src="' + protocol + '//csdnimg.cn/pubfooter/js/repoAddr2.js?v=' + Math.random() + '"></' + 'script>');
+    </script>
+
+  
+ <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+
+    <title>Android应用坐标系统全面详解 - 工匠若水
+        - 博客频道 - CSDN.NET</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="第一招：把紧自己的嘴巴，三思而后答面试场上，考官们经常采用的一个基本策略就是尽量让应试者多讲话，目的在于多了解一些应试者在书面材料中没有反映的情况。你在面试时一定要注意把紧自己的嘴巴，如果认为已经回答完了，就不要再讲。最好不要为了自我推销而试图采用多讲话的策略，来谋求在较短的时间内让招聘方多了解自己，事实上这种方式对大多数人来讲并不可取。该讲的讲，不该讲的绝不要多讲，更不要采取主动出击的办" />
+    <script src="http://static.blog.csdn.net/scripts/jquery.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/ad.js?v=1.1"></script>
+        <!--new top-->
+               <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/toolbar/css/index.css">        <!--new top-->
+
+    <link rel="Stylesheet" type="text/css" href="http://static.blog.csdn.net/skin/skin-white/css/style.css?v=1.1" />
+    <link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="/yanbober/rss/list" />
+    <link rel="shortcut icon" href="http://c.csdnimg.cn/public/favicon.ico" />
+    <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+ 
+
+
+</head>
+<body>
+    
+   
+      <!--new top-->
+    <script id="toolbar-tpl-scriptId" fixed="true" prod="blog" skin="black" src="http://c.csdnimg.cn/public/common/toolbar/js/html.js" type="text/javascript"></script>
+     <!--new top-->
+    <div id="container">
+        <div id="header">
+    <div class="header">
+        <div id="blog_title">
+            <h2>
+                <a href="http://blog.csdn.net/yanbober">工匠若水</a></h2>
+            <h3>知道+做到=得到 </h3>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+</div>
+<div id="navigator">
+    <div class="navigator_bg">
+    </div>
+    <div class="navigator">
+        <ul>
+            
+                <li id="btnContents"><a href="http://blog.csdn.net/yanbober?viewmode=contents"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_mulu'])">
+                    <img src="http://static.blog.csdn.net/images/ico_list.gif">目录视图</span></a></li>
+                <li id="btnView"><a href="http://blog.csdn.net/yanbober?viewmode=list"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_zhaiyao'])">
+                    <img src="http://static.blog.csdn.net/images/ico_summary.gif">摘要视图</span></a></li>
+                <li id="btnRss"><a href="http://blog.csdn.net/yanbober/rss/list"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_RSS'])">
+                    <img src="http://static.blog.csdn.net/images/ico_rss.gif">订阅</span></a></li>                
+
+            </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    var username = "yanbober";
+    var _blogger = username;
+    var blog_address = "http://blog.csdn.net/yanbober";
+    var static_host = "http://static.blog.csdn.net";
+    var currentUserName = "";  
+</script>
+
+        <div id="body">
+            <div id="main">
+                <div class="main">
+                        <div class="ad_class">
+<div class="notice tracking-ad" data-mod='popu_3' > 
+
+<a href="http://huiyi.csdn.net/activity/product/goods_list?project_id=2741">
+<font color=red>2016软考项目经理实战班
+</font></a>
+&nbsp;&nbsp;&nbsp;
+
+<a href="http://edu.csdn.net/yearPromotion">
+<font color=blue>学院周年礼-顶尖课程钜惠呈现
+</font></a>
+&nbsp;&nbsp;&nbsp;
+<a href="http://huiyi.csdn.net/activity/product/goods_list?project_id=2792">
+<font color=red>Hadoop英雄会—暨Hadoop 10周年生日大趴</font>
+&nbsp;&nbsp;&nbsp;
+<a href="http://blog.csdn.net/dba_huangzj/article/details/50469185">
+<font color=blue>【博客专家】有奖试读—Windows PowerShell实战指南
+</font></a>
+
+</div>                        </div>
+                        
+
+<!--AdForward Begin:-->
+<script type="text/javascript" ads-src="http://csdnim.qtmojo.com/main/s?user=csdn|blog|fumeiti&db=csdnim&border=0&local=yes&js=ie" src="http://creatim.qtmojo.cn/td/AllyesDeliver.min.js" charset="gbk"></script>
+<!--AdForward End-->
+
+  
+<link href="http://static.blog.csdn.net/css/comment1.css" type="text/css" rel="stylesheet" />
+<link href="http://static.blog.csdn.net/css/style1.css" type="text/css" rel="stylesheet" />
+<script language='JavaScript' type='text/javascript' src='http://download.csdn.net/js/jquery.cookie.js'></script>
+<script type="text/javascript" src="http://c.csdnimg.cn/rabbit/search-service/main.js"></script>
+<link rel="stylesheet" href="http://static.blog.csdn.net/public/res-min/markdown_views.css?v=1.0" />
+<link rel="stylesheet" href="http://static.blog.csdn.net/css/category.css?v=1.0" />
+<script type="text/javascript" src="http://static.blog.csdn.net/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+
+  <script type="text/ecmascript">
+      window.quickReplyflag = true;
+           
+            var isBole = false;
+            
+          
+    </script>
+<div id="article_details" class="details">
+    <div class="article_title">   
+         <span class="ico ico_type_Original"></span>
+
+
+    <h1>
+        <span class="link_title"><a href="/yanbober/article/details/50419117">
+        Android应用坐标系统全面详解            
+        </a></span>
+    </h1>
+</div>
+
+   
+
+        <div class="article_manage clearfix">
+        <div class="article_l">
+            <span class="link_categories">
+            标签：
+              <a href='http://www.csdn.net/tag/android' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">android</a><a href='http://www.csdn.net/tag/android%e5%ba%94%e7%94%a8' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">android应用</a><a href='http://www.csdn.net/tag/%e6%8e%a7%e4%bb%b6' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">控件</a><a href='http://www.csdn.net/tag/%e5%9d%90%e6%a0%87' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">坐标</a><a href='http://www.csdn.net/tag/Android%e5%9d%90%e6%a0%87' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">Android坐标</a>
+            </span>
+        </div>
+        <div class="article_r">
+            <span class="link_postdate">2016-01-05 20:20</span>
+            <span class="link_view" title="阅读次数">2234人阅读</span>
+            <span class="link_comments" title="评论次数"> <a href="#comments" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_pinglun'])">评论</a>(31)</span>
+            <span class="link_collect"> <a href="javascript:void(0);" onclick="javascript:collectArticle('Android应用坐标系统全面详解','50419117');return false;" title="收藏">收藏</a></span>
+             <span class="link_report"> <a href="#report" onclick="javascript:report(50419117,2);return false;" title="举报">举报</a></span>
+
+        </div>
+    </div>
+      <div class="category clearfix">
+        <div class="category_l">
+           <img src="http://static.blog.csdn.net/images/category_icon.jpg">
+            <span>分类：</span>
+        </div>
+        <div class="category_r">
+                    <label  onclick="GetCategoryArticles('1688987','yanbober','top','50419117');">
+                        <span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_fenlei']);">Android应用开发<em>（10）</em></span>
+                      <img class="arrow-down" src="http://static.blog.csdn.net/images/arrow_triangle _down.jpg" style="display:inline;">
+                      <img class="arrow-up" src="http://static.blog.csdn.net/images/arrow_triangle_up.jpg" style="display:none;">
+                        <div class="subItem">
+                            <div class="subItem_t"><a  href="http://blog.csdn.net/yanbober/article/category/1688987">作者同类文章</a><i class="J_close">X</i></div>
+                            <ul class="subItem_l" id="top_1688987">                            
+                            </ul>
+                        </div>
+                    </label>                    
+        </div>
+    </div>
+    <script   type="text/javascript" src="http://static.blog.csdn.net/scripts/category.js"></script>  
+        <div   class="bog_copyright">         
+            <p  class="copyright_p" >版权声明：本文为博主原创文章，未经博主允许不得转载。</p>
+        </div>
+
+  
+
+  
+  
+     
+
+<div id="article_content" class="article_content">
+        <div class="markdown_views"><h1 id="1-背景"><strong>1 背景</strong></h1>
+
+<p>去年有很多人私信告诉我让说说自定义控件，其实通观网络上的很多博客都在讲各种自定义控件，但是大多数都是授之以鱼，却很少有较为系统性授之于渔的文章，同时由于自己也迟迟没有时间规划这一系列文章，最近想将这一系列文章重新提起来，所以就来先总结一下自定义控件的一个核心知识点——坐标系。</p>
+
+<p>很多人可能不屑一顾Android的坐标系，但是如果你想彻底学会自定义控件，我想说了解Android各种坐标系及一些API的坐标含义绝对算一个小而不可忽视的技能；所谓Android自定义View那几大主要onXXX()方法的重写实质其实大多数都是在处理坐标逻辑运算，所以我们就先来就题重谈一下Android坐标系。</p>
+
+<p><strong>【工匠若水 <a href="http://blog.csdn.net/yanbober">http://blog.csdn.net/yanbober</a> 未经允许严禁转载，请尊重作者劳动成果。<a href="http://weibo.com/yanbober">私信联系我</a>】</strong></p>
+
+
+
+<h1 id="2-android坐标系"><strong>2 Android坐标系</strong></h1>
+
+<p>说到Android坐标系其实就是一个三维坐标，Z轴向上，X轴向右，Y轴向下。这三维坐标的点处理就能构成Android丰富的界面或者动画等效果，所以Android坐标系在整个Android界面中算是盖楼房的尺寸草图，下面我们就来看看这些相关的概念。</p>
+
+
+
+<h2 id="2-1-android屏幕区域划分"><strong>2-1 Android屏幕区域划分</strong></h2>
+
+<p>我们先看一副图来了解一下Android屏幕的区域划分（关于这个东西的深入探讨你可以看下<a href="http://blog.csdn.net/yanbober/article/details/45970721">《Android应用setContentView与LayoutInflater加载解析机制源码分析 》</a>一文，那儿给出了部分原理的解释），如下：</p>
+
+<p><img src="http://img.blog.csdn.net/20160104150213656" alt="这里写图片描述" title=""></p>
+
+<p>通过上图我们可以很直观的看到Android对于屏幕的划分定义。下面我们就给出这些区域里常用区域的一些坐标或者度量方式。如下：</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs "><span class="hljs-comment">//获取屏幕区域的宽高等尺寸获取</span>
+DisplayMetrics metrics = <span class="hljs-keyword">new</span> DisplayMetrics();
+getWindowManager().getDefaultDisplay().getMetrics(metrics);
+<span class="hljs-keyword">int</span> widthPixels = metrics.widthPixels;
+<span class="hljs-keyword">int</span> heightPixels = metrics.heightPixels;</code></pre>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs"><span class="hljs-comment">//应用程序App区域宽高等尺寸获取</span>
+Rect rect = <span class="hljs-keyword">new</span> Rect();
+getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);</code></pre>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs"><span class="hljs-comment">//获取状态栏高度</span>
+Rect rect= <span class="hljs-keyword">new</span> Rect();
+getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
+<span class="hljs-keyword">int</span> statusBarHeight = rectangle.top;</code></pre>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs "><span class="hljs-comment">//View布局区域宽高等尺寸获取</span>
+Rect rect = <span class="hljs-keyword">new</span> Rect();  
+getWindow().findViewById(Window.ID_ANDROID_CONTENT).getDrawingRect(rect);  </code></pre>
+
+<p><strong>特别注意：</strong>上面这些方法最好在Activity的onWindowFocusChanged ()方法或者之后调运，因为只有这时候才是真正的显示OK，不懂的可以看我之前关于setContentView相关的博客。</p>
+
+
+
+<h2 id="2-2-android-view绝对相对坐标系"><strong>2-2 Android View绝对相对坐标系</strong></h2>
+
+<p>上面我们分析了Android屏幕的划分，可以发现我们平时开发的重点其实都在关注View布局区域，那么下面我们就来细说一下View区域相关的各种坐标系。先看下面这幅图：</p>
+
+<p><img src="http://img.blog.csdn.net/20160104113905961" alt="这里写图片描述" title=""></p>
+
+<p>通过上图我们可以很直观的给出View一些坐标相关的方法解释，不过必须要明确的是上面这些方法必须要在layout之后才有效，如下：</p>
+
+<table>
+<thead>
+<tr>
+  <th>View的静态坐标方法</th>
+  <th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>getLeft()</td>
+  <td>返回View自身左边到父布局左边的距离</td>
+</tr>
+<tr>
+  <td>getTop()</td>
+  <td>返回View自身顶边到父布局顶边的距离</td>
+</tr>
+<tr>
+  <td>getRight()</td>
+  <td>返回View自身右边到父布局左边的距离</td>
+</tr>
+<tr>
+  <td>getBottom()</td>
+  <td>返回View自身底边到父布局顶边的距离</td>
+</tr>
+<tr>
+  <td>getX()</td>
+  <td>返回值为getLeft()+getTranslationX()，当setTranslationX()时getLeft()不变，getX()变。</td>
+</tr>
+<tr>
+  <td>getY()</td>
+  <td>返回值为getTop()+getTranslationY()，当setTranslationY()时getTop()不变，getY()变。</td>
+</tr>
+</tbody></table>
+
+
+<p><br>
+同时也可以看见上图中给出了手指触摸屏幕时MotionEvent提供的一些方法解释，如下：</p>
+
+<table>
+<thead>
+<tr>
+  <th>MotionEvent坐标方法</th>
+  <th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>getX()</td>
+  <td>当前触摸事件距离当前View左边的距离</td>
+</tr>
+<tr>
+  <td>getY()</td>
+  <td>当前触摸事件距离当前View顶边的距离</td>
+</tr>
+<tr>
+  <td>getRawX()</td>
+  <td>当前触摸事件距离整个屏幕左边的距离</td>
+</tr>
+<tr>
+  <td>getRawY()</td>
+  <td>当前触摸事件距离整个屏幕顶边的距离</td>
+</tr>
+</tbody></table>
+
+
+<p><br>
+上面就解释了你在很多代码中看见各种getXXX方法进行数学逻辑运算判断的含义。不过上面只是说了一些相对静止的Android坐标点关系，下面我们来看看几个和上面方法紧密相关的View方法。如下：</p>
+
+<table>
+<thead>
+<tr>
+  <th>View宽高方法</th>
+  <th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>getWidth()</td>
+  <td>layout后有效，返回值是mRight-mLeft，一般会参考measure的宽度（measure可能没用），但不是必须的。</td>
+</tr>
+<tr>
+  <td>getHeight()</td>
+  <td>layout后有效，返回值是mBottom-mTop，一般会参考measure的高度（measure可能没用），但不是必须的。</td>
+</tr>
+<tr>
+  <td>getMeasuredWidth()</td>
+  <td>返回measure过程得到的mMeasuredWidth值，供layout参考，或许没用。</td>
+</tr>
+<tr>
+  <td>getMeasuredHeight()</td>
+  <td>返回measure过程得到的mMeasuredHeight值，供layout参考，或许没用。</td>
+</tr>
+</tbody></table>
+
+
+<p><br>
+上面解释了自定义View时各种获取宽高的一些含义，下面我们再来看看关于View获取屏幕中位置的一些方法，不过这些方法需要在Activity的onWindowFocusChanged ()方法之后才能使用。如下图：</p>
+
+<p><img src="http://img.blog.csdn.net/20160104174730818" alt="这里写图片描述" title=""></p>
+
+<p>下面我们就给出上面这幅图涉及的View的一些坐标方法的结果（结果采用使用方法返回的实际坐标，不依赖上面实际绝对坐标转换，上面绝对坐标只是为了说明例子中的位置而已），如下：</p>
+
+<table>
+<thead>
+<tr>
+  <th>View的方法</th>
+  <th>上图View1结果</th>
+  <th>上图View2结果</th>
+  <th>结论描述</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>getLocalVisibleRect()</td>
+  <td>(0, 0 - 410, 100)</td>
+  <td>(0, 0 - 410, 470)</td>
+  <td>获取View自身可见的坐标区域，坐标以自己的左上角为原点(0,0)，另一点为可见区域右下角相对自己(0,0)点的坐标，其实View2当前height为550，可见height为470。</td>
+</tr>
+<tr>
+  <td>getGlobalVisibleRect()</td>
+  <td>(30, 100 - 440, 200)</td>
+  <td>(30, 250 - 440, 720)</td>
+  <td>获取View在屏幕绝对坐标系中的可视区域，坐标以屏幕左上角为原点(0,0)，另一个点为可见区域右下角相对屏幕原点(0,0)点的坐标。</td>
+</tr>
+<tr>
+  <td>getLocationOnScreen()</td>
+  <td>(30, 100)</td>
+  <td>(30, 250)</td>
+  <td>坐标是相对整个屏幕而言，Y坐标为View左上角到屏幕顶部的距离。</td>
+</tr>
+<tr>
+  <td>getLocationInWindow()</td>
+  <td>(30, 100)</td>
+  <td>(30, 250)</td>
+  <td>如果为普通Activity则Y坐标为View左上角到屏幕顶部（此时Window与屏幕一样大）；如果为对话框式的Activity则Y坐标为当前Dialog模式Activity的标题栏顶部到View左上角的距离。</td>
+</tr>
+</tbody></table>
+
+
+<p><br>
+到此常用的相关View的静态坐标获取处理的方法和含义都已经叙述完了，下面我们看看动态的一些解释（所谓动静只是我个人称呼而已）。</p>
+
+
+
+<h2 id="2-3-android-view动画相关坐标系"><strong>2-3 Android View动画相关坐标系</strong></h2>
+
+<p>其实在我们使用动画时，尤其是补间动画时，你会发现其中涉及很多坐标参数，一会儿为相对的，一会儿为绝对的，你可能会各种蒙圈。那么不妨看下<a href="http://blog.csdn.net/yanbober/article/details/46481171">《Android应用开发之所有动画使用详解 》</a>这篇博客，这里面详细介绍了关于Android动画相关的坐标系统，这里不再累赘叙述。</p>
+
+
+
+<h2 id="2-4-android-view滑动相关坐标系"><strong>2-4 Android View滑动相关坐标系</strong></h2>
+
+<p>关于View提供的与坐标息息相关的另一组常用的重要方法就是滚动或者滑动相关的，下面我们给出相关的解释（<strong>特别注意：View的scrollTo()和scrollBy()是用于滑动View中的内容，而不是改变View的位置；改变View在屏幕中的位置可以使用offsetLeftAndRight()和offsetTopAndBottom()方法，他会导致getLeft()等值改变。</strong>），如下：</p>
+
+<table>
+<thead>
+<tr>
+  <th>View的滑动方法</th>
+  <th>效果及描述</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>offsetLeftAndRight(int offset)</td>
+  <td>水平方向挪动View，offset为正则x轴正向移动，移动的是整个View，getLeft()会变的，<strong>自定义View很有用</strong>。</td>
+</tr>
+<tr>
+  <td>offsetTopAndBottom(int offset)</td>
+  <td>垂直方向挪动View，offset为正则y轴正向移动，移动的是整个View，getTop()会变的，<strong>自定义View很有用</strong>。</td>
+</tr>
+<tr>
+  <td>scrollTo(int x, int y)</td>
+  <td>将<strong>View中内容（不是整个View）</strong>滑动到相应的位置，参考坐标原点为ParentView左上角，x，y为正则向xy轴反方向移动，反之同理。</td>
+</tr>
+<tr>
+  <td>scrollBy(int x, int y)</td>
+  <td>在scrollTo()的基础上继续滑动xy。</td>
+</tr>
+<tr>
+  <td>setScrollX(int value)</td>
+  <td>实质为scrollTo()，只是只改变Y轴滑动。</td>
+</tr>
+<tr>
+  <td>setScrollY(int value)</td>
+  <td>实质为scrollTo()，只是只改变X轴滑动。</td>
+</tr>
+<tr>
+  <td>getScrollX()/getScrollY()</td>
+  <td>获取当前滑动位置偏移量。</td>
+</tr>
+</tbody></table>
+
+
+<p><br>
+关于Android View的scrollBy()和scrollTo()参数传递正数却向坐标系负方向移动的特性可能很多人都有疑惑，甚至是死记结论，这里我们简单给出产生这种特性的真实原因—-源码分析，如下：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs cs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">scrollTo</span>(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y) {
+    <span class="hljs-keyword">if</span> (mScrollX != x || mScrollY != y) {
+        <span class="hljs-keyword">int</span> oldX = mScrollX;
+        <span class="hljs-keyword">int</span> oldY = mScrollY;
+        mScrollX = x;
+        mScrollY = y;
+        invalidateParentCaches();
+        onScrollChanged(mScrollX, mScrollY, oldX, oldY);
+        <span class="hljs-keyword">if</span> (!awakenScrollBars()) {
+        postInvalidateOnAnimation();
+        }
+    }
+}</code></pre>
+
+<p>View的该方法注释里明确说明了调运他会触发onScrollChanged()和invalidated()方法，那我们就将矛头转向invalidated()方法触发的draw()过程，draw()过程中最终其实会触发下面的invalidate()方法，如下：</p>
+
+
+
+<pre class="prettyprint"><code class=" hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">invalidate</span>(<span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> t, <span class="hljs-keyword">int</span> r, <span class="hljs-keyword">int</span> b) {
+    <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> scrollX = mScrollX;
+    <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> scrollY = mScrollY;
+    <span class="hljs-comment">//scroller时为何参数和坐标反向的真实原因</span>
+    invalidateInternal(l - scrollX, t - scrollY, r - scrollX, b - scrollY, <span class="hljs-keyword">true</span>, <span class="hljs-keyword">false</span>);
+}</code></pre>
+
+<p>核心就在这里，相信不用我解释大家也知道咋回事了，自行脑补。</p>
+
+<p><strong>scrollTo()和scrollBy()方法特别注意：</strong>如果你给一个ViewGroup调用scrollTo()方法滚动的是ViewGroup里面的内容，如果想滚动一个ViewGroup则再给他嵌套一个外层，滚动外层即可。</p>
+
+<p><strong>【工匠若水 <a href="http://blog.csdn.net/yanbober">http://blog.csdn.net/yanbober</a> 未经允许严禁转载，请尊重作者劳动成果。<a href="http://weibo.com/yanbober">私信联系我</a>】</strong></p>
+
+
+
+<h1 id="3-总结"><strong>3 总结</strong></h1>
+
+<p>可以发现，上面只是说明了一些View里常用的与坐标相关的概念，关于自定义控件了解学习这些坐标概念只是一个基础，也是一个后续内容的铺垫，所以有必要先完全吃透此部分内容才能继续拓展学习新的东东。</p>
+
+<p>View中还有一些其他与坐标获取相关的方法，但是一般都比较不常用，所以用到时可以现查API或者Debug看现象进行学习即可，这里篇幅和时间有限就不一一道来了。</p>
+
+<p><strong>【工匠若水 <a href="http://blog.csdn.net/yanbober">http://blog.csdn.net/yanbober</a> 未经允许严禁转载，请尊重作者劳动成果。<a href="http://weibo.com/yanbober">私信联系我</a>】</strong></p>
+
+<p><img src="http://img.blog.csdn.net/20160104232849263" alt="这里写图片描述" title=""></p></div>
+        <script  type="text/javascript">
+            $(function () {
+                $('pre.prettyprint code').each(function () {
+                    var lines = $(this).text().split('\n').length;
+                    var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+                    $(this).addClass('has-numbering').parent().append($numbering);
+                    for (i = 1; i <= lines; i++) {
+                        $numbering.append($('<li/>').text(i));
+                    };
+                    $numbering.fadeIn(1700);
+                });
+            });
+        </script>
+   
+</div>
+
+
+
+
+<!-- Baidu Button BEGIN -->
+
+
+
+
+<div class="bdsharebuttonbox" style="float: right;">
+<a href="#" class="bds_more" data-cmd="more" style="background-position:0 0 !important; background-image: url(http://bdimg.share.baidu.com/static/api/img/share/icons_0_16.png?v=d754dcc0.png) !important"></a>
+<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"  style="background-position:0 -52px !important"></a>
+<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"style="background-position:0 -104px !important"></a>
+<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"style="background-position:0 -260px !important"></a>
+<a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"style="background-position:0 -208px !important"></a>
+<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"style="background-position:0 -1612px !important" ></a>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<!-- Baidu Button END -->
+
+   <link rel="stylesheet" href="http://static.blog.csdn.net/css/blog_detail.css" />
+
+    
+<!--172.16.140.11-->
+
+<!-- Baidu Button BEGIN -->
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=1536434" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+    document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->
+
+ 
+
+        <div id="digg" ArticleId="50419117">
+            <dl id="btnDigg" class="digg digg_disable">
+               
+                 <dt>顶</dt>
+                <dd>9</dd>
+            </dl>
+            <dl id="btnBury" class="digg digg_disable">
+              
+                  <dt>踩</dt>
+                <dd>1</dd>
+            </dl>
+        </div>
+
+   <ul class="article_next_prev">
+                <li class="prev_article"><span  onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian']);location.href='/yanbober/article/details/50419059';">上一篇</span><a href="/yanbober/article/details/50419059" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian'])">Android应用ViewDragHelper详解及部分源码浅析</a></li>
+                <li class="next_article"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian']);location.href='/yanbober/article/details/49904715';">下一篇</span><a href="/yanbober/article/details/49904715" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian'])">Android应用开发Scroller详解及源码浅析</a></li>
+    </ul>
+
+    <div style="clear:both; height:10px;"></div>
+
+
+        <div class="similar_article"  style="display:none">
+                <h4>我的同类文章</h4>
+                <div class="similar_c"style="margin:20px 0px 0px 0px">
+                    <div class="similar_c_t">
+                                <label class="similar_cur">
+                                    <span  style="cursor:pointer"  onclick="GetCategoryArticles('1688987','yanbober','foot','50419117');">Android应用开发<em>（10）</em></span>
+                                </label>
+                    </div>
+                   
+                    <div class="similar_wrap tracking-ad" data-mod="popu_141"  style="max-height:195px;">
+                        <a href="http://blog.csdn.net" style="display:none">http://blog.csdn.net</a>
+                        <ul class="similar_list fl">                          
+                        </ul>
+
+                        <ul class="similar_list fr">                           
+                        </ul>
+                    </div>
+                </div>
+            </div>    
+    <script  type="text/javascript">
+        $(function () {
+            GetCategoryArticles('1688987', 'yanbober','foot','50419117');
+        });
+    </script>
+      
+</div>
+<div id="suggest"></div>
+         <script  language="javascript" type='text/javascript'>     
+             $(function(){
+                 $.get("/yanbober/svc/GetSuggestContent/50419117",function(data){
+                     $("#suggest").html(data);
+                 });     
+             });             
+         </script>  
+
+
+<style>
+.blog-ass-articl dd {
+color: #369;
+width: 99%; /*修改行*/
+float: left;
+overflow: hidden;
+font: normal normal 12px/23px "SimSun";
+height: 23px;
+margin: 0;
+padding: 0 0 0 10px;
+margin-right: 30px;
+background: url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px;
+}
+</style>
+
+<dl class="blog-ass-articl" id="res-relatived" > 
+     <dt><span>猜你在找</span></dt>    
+
+
+   
+
+
+    <div id="adCollege" style="width: 42%;float: left;"> 
+        <script src="http://csdnimg.cn/jobreco/job_reco.js" type="text/javascript"></script> 
+        <script type="text/javascript">
+            csdn.position.showEdu({
+                sourceType: "blog",
+                searchType: "detail",
+                searchKey: "50419117",
+                username: "",
+                recordcount: "5",
+                containerId: "adCollege" //容器DIV的id。 
+            });
+        </script> 
+    </div>  
+
+    
+     <div id="res"  data-mod="popu_36"  class="tracking-ad" style="width: 42%;float: left;margin-right: 30px;"></div>
+   
+</dl>
+
+
+
+<script type="text/javascript">
+    $(function () {
+        setTimeout(function () {
+            var searchtitletags = 'Android应用坐标系统全面详解' + ',' + $("#tags").html();
+            searchService({
+                index: 'blog',
+                query: searchtitletags,
+                from: 5,
+                size: 5,
+                appendTo: '#res',
+                url: 'recommend',
+                his: 2,
+                client: "blog_cf_enhance",
+                tmpl: '<dd style="background:url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px;"><a href="#{ url }" title="#{ title }" strategy="#{ strategy }">#{ title }</a></dd>'
+            });
+        }, 500);
+    });    
+
+ </script>   
+
+    <div id="ad_cen">        
+<!--AdForward Begin:-->
+<script type="text/javascript" src="http://csdnim.qtmojo.com/main/s?user=csdn|blog|banner2&db=csdnim&border=0&local=yes&js=ie" charset="gbk"></script>
+<!--AdForward End-->    </div>  
+
+<div class="comment_class">
+    <div id="comment_title" class="panel_head">
+        <span class="see_comment">查看评论</span><a name="comments"></a></div>
+    <div id="comment_list">
+    </div>
+    <div id="comment_bar">
+    </div>
+    <div id="comment_form">
+    </div>
+    <div class="announce">
+        * 以上用户言论只代表其个人观点，不代表CSDN网站的观点或立场<a name="reply"></a><a name="quote"></a></div>
+</div>
+
+<script type="text/javascript">
+    var fileName = '50419117';
+    var commentscount = 31;
+    var islock = false
+</script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/comment.js"></script>
+    <div id="ad_bot">
+    </div>
+<div id="report_dialog">
+</div>
+
+<div id="d-top"  style="bottom:60px;">
+        <a id="quick-reply" class="btn btn-top q-reply" title="快速回复" style="display:none;">
+            <img src="http://static.blog.csdn.net/images/blog-icon-reply.png" alt="快速回复">
+        </a>    
+
+    <a id="d-top-a" class="btn btn-top backtop"  style="display: none;" title="返回顶部" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_huidaodingbu'])" style="">         
+         <img src="http://static.blog.csdn.net/images/top.png" alt="TOP">
+    </a>
+</div>
+<script type="text/javascript">
+    $(function ()
+    {
+        $("#ad_frm_0").height("90px");
+        
+        setTimeout(function(){
+            $("#ad_frm_2").height("200px");
+        },1000);    
+    });
+  
+</script>
+<style type="text/css">
+    .tag_list
+    {
+        background: none repeat scroll 0 0 #FFFFFF;
+        border: 1px solid #D7CBC1;
+        color: #000000;
+        font-size: 12px;
+        line-height: 20px;
+        list-style: none outside none;
+        margin: 10px 2% 0 1%;
+        padding: 1px;
+    }
+    .tag_list h5
+    {
+        background: none repeat scroll 0 0 #E0DBD3;
+        color: #47381C;
+        font-size: 12px;
+        height: 24px;
+        line-height: 24px;
+        padding: 0 5px;
+        margin: 0;
+    }
+    .tag_list h5 a
+    {
+        color: #47381C;
+    }
+    .classify
+    {
+        margin: 10px 0;
+        padding: 4px 12px 8px;
+    }
+    .classify a
+    {
+        margin-right: 20px;
+        white-space: nowrap;
+    }
+</style>
+
+
+<div class="tag_list" style="display:none"></div>
+  <script  language="javascript" type='text/javascript'>     
+      $(function(){
+              setTimeout(function(){
+                  $.get("/yanbober/svc/GetTagContent",function(data){
+                      $(".tag_list").html(data).show();
+                  });     
+              });
+          },500);                       
+ </script> 
+
+
+<div id="pop_win" style="display:none ;position: absolute; z-index: 10000; border: 1px solid rgb(220, 220, 220); top: 222.5px; left: 630px; opacity: 1; background: none 0px 0px repeat scroll rgb(255, 255, 255);">
+    
+</div>
+<div id="popup_mask"></div>
+<style>
+    #popup_mask
+    {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 9999;
+        left: 0px;
+        top: 0px;
+        opacity: 0.3;
+        filter: alpha(opacity=30);
+        display: none;
+    }
+
+</style>
+
+
+
+
+<script type="text/javascript">
+    $(function(){
+        setTimeout(function(){
+            $(".comment_body:contains('回复')").each(function(index,item){
+                var u=$(this).text().split('：')[0].toString().replace("回复","")
+                var thisComment=$(this);
+                if(u)
+                {
+                    $.getJSON("https://passport.csdn.net/get/nick?callback=?", {users: u}, function(a) {
+                        if(a!=null&&a.data!=null&&a.data.length>0)
+                        {
+                            nick=a.data[0].n; 
+                            if(u!=nick)
+                            {
+                                thisComment.text(thisComment.text().replace(u,nick));  
+                            }
+                        }       
+                    });  
+                }
+            });
+        },200);  
+        
+        setTimeout(function(){
+            $("a img[src='http://js.tongji.linezing.com/stats.gif']").parent().css({"position":"absolute","left":"50%"});
+        },300);
+    });
+
+    function loginbox(){
+        var $logpop=$("#pop_win");
+        $logpop.html('<iframe src="https://passport.csdn.net/account/loginbox?service=http://static.blog.csdn.net/callback.htm" frameborder="0" height="600" width="400" scrolling="no"></iframe>');
+
+        $('#popup_mask').css({
+            opacity: 0.5,
+            width: $( document ).width() + 'px',
+            height:  $( document ).height() + 'px'
+        });
+        $('#popup_mask').css("display","block");
+ 
+        $logpop.css( {
+            top: ($( window ).height() - $logpop.height())/ 2  + $( window 
+       ).scrollTop() + 'px',
+            left:($( window ).width() - $logpop.width())/ 2
+        } );
+ 
+        setTimeout( function () {
+            $logpop.show();
+            $logpop.css( {
+                opacity: 1
+            } );
+        }, 200 );
+ 
+        $('#popup_mask').unbind("click");
+        $('#popup_mask').bind("click", function(){
+            $('#popup_mask').hide();
+            var $clopop = $("#pop_win");
+            $("#common_ask_div_sc").css("display","none");
+            $clopop.css( {
+                opacity: 0
+            } );
+            setTimeout( function () {
+                $clopop.hide();
+            }, 350 );
+            return false;
+        });
+    }    
+
+</script>
+                        <div class="clear">
+                        </div>
+                    </div>                   
+                
+            </div>
+                   
+           <div id="side">
+    <div class="side">
+<div id="panel_Profile" class="panel">
+<ul class="panel_head"><span>个人资料</span></ul>
+<ul class="panel_body profile">
+<div id="blog_userface">
+    <a href="http://my.csdn.net/yanbober" target="_blank">
+    <img src="http://avatar.csdn.net/7/3/D/1_yanbober.jpg" title="访问我的空间" style="max-width:90%"/>
+    </a>
+    <br />
+    <span><a href="http://my.csdn.net/yanbober" class="user_name" target="_blank">yanbober</a></span>
+</div>
+<div class="interact">
+
+    <a href="javascript:void(0);" class="attent" id="span_add_follow" title="[加关注]"></a>
+
+ <a href="javascript:void(0);" class="letter"  title="[发私信]" onclick="window.open('http://msg.csdn.net/letters/model?receiver=yanbober','_blank','height=350,width=700');_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_sixin'])"></a>  
+</div>
+<div id="blog_medal">
+                       <div class="ico_expert"  onclick="javascript:location='http://blog.csdn.net/experts/rule.html'" title="CSDN认证专家" style="cursor:pointer;width:60px;height:60px;background:url('http://c.csdnimg.cn/jifen/images/xunzhang/xunzhang/bokezhuanjiamiddle.png') no-repeat" ></div>
+                <div id="bms_box">
+                                            <a  target="_blank">
+                                                    <img src="http://c.csdnimg.cn/jifen/images/xunzhang/xunzhang/zhuanlandaren.png" onmouseover="m_over_m(this,2)" onmouseout="m_out_m()" alt="2" >
+                                            </a>
+               </div>
+</div>
+<ul id="blog_rank">
+    <li>访问：<span>295658次</span></li>
+    <li>积分：<span>4511</span> </li>    
+    <li >等级： <span style="position:relative;display:inline-block;z-index:1" >
+            <img src="http://c.csdnimg.cn/jifen/images/xunzhang/jianzhang/blog5.png" alt="" style="vertical-align: middle;" id="leveImg">
+            <div id="smallTittle" style=" position: absolute;  left: -24px;  top: 25px;  text-align: center;  width: 101px;  height: 32px;  background-color: #fff;  line-height: 32px;  border: 2px #DDDDDD solid;  box-shadow: 0px 2px 2px rgba (0,0,0,0.1);  display: none;   z-index: 999;">
+            <div style="left: 42%;  top: -8px;  position: absolute;  width: 0;  height: 0;  border-left: 10px solid transparent;  border-right: 10px solid transparent;  border-bottom: 8px solid #EAEAEA;"></div>
+            积分：4511 </div>
+        </span>  </li>
+    <li>排名：<span>第3599名</span></li>
+</ul>
+<ul id="blog_statistics">
+    <li>原创：<span>94篇</span></li>
+    <li>转载：<span>10篇</span></li>
+    <li>译文：<span>0篇</span></li>
+    <li>评论：<span>704条</span></li>
+</ul>
+</ul>
+</div>
+
+
+
+
+<div id="custom_column_38580635" class="panel">
+<ul class="panel_head"><span>联系方式</span></ul>
+<ul class="panel_body">
+<h3>QQ交流群: 519666583</h3>
+<h3>Email: yanbober@sina.com </h3>
+<h3><a href="https://github.com/yanbober">GitHub</a> </h3>
+<script type="text/javascript">document.write('<iframe width="150" height="710" frameborder="0" scrolling="no" src="http://widget.weibo.com/relationship/bulkfollow.php?language=zh_cn&uids=1623315217&wide=1&color=FFA3B1,F5E49C,0082CB,666666&showtitle=0&showinfo=1&sense=0&verified=1&count=5&refer='+encodeURIComponent(location.href)+'&dpc=1"></iframe>')</script>
+</ul>
+</div><div id="panel_Category" class="panel">
+<ul class="panel_head"><span>文章分类</span></ul>
+<ul class="panel_body">    
+                 <li>
+                    <a href="/yanbober/article/category/1688987" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Android应用开发</a><span>(10)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/3206943" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Android应用框架浅析</a><span>(15)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/3147653" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Android开源代码学习</a><span>(9)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/3148147" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">android NDK开发</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/3267845" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Android系统源码浅析</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/3148699" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">OO设计模式</a><span>(26)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/3148127" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">服务器接口开发</a><span>(0)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/3201257" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">数据库</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/1296474" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Unix C及C高阶编程</a><span>(13)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/1603655" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Java编程</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/1372181" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">开发设计思想</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/3147575" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">开发工具</a><span>(4)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/1296478" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">嵌入式开发</a><span>(6)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/1532391" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">硬件电路</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/3188449" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">脚本相关</a><span>(4)</span>
+                </li>
+</ul>
+</div><div id="panel_Category" class="panel">
+    <ul class="panel_head"><span>博客专栏</span></ul>
+    <ul class="panel_body" id="sp_column">
+    <table cellpadding="0" cellspacing="0"><tr>
+    <td style="padding:10px 10px 0 0;">
+    <a href="http://blog.csdn.net/column/details/oo-designpattern.html" target="_blank"><img src="http://img.blog.csdn.net/20151123180314145" style="width:75px;height:75px;" /></a>
+    </td>
+    <td style="padding:10px 0; vertical-align:top;">
+    <a href="http://blog.csdn.net/column/details/oo-designpattern.html" target="_blank">面向对象设计模式</a>
+    <p>文章：26篇</p>
+    <span>阅读：16462</span>
+    </td>
+    </tr></table>
+    </ul>
+</div><div class="panel" id="panel_Search">
+    <ul class="panel_head"><span>文章搜索</span></ul>
+    <ul class="panel_body">
+        <form id="frmSearch" action="http://so.csdn.net/search" class="form_search" target="_blank">
+        <span><input id="inputSearch" type="text" class="blogsearch" title="请输入关键字" /></span>
+        <input id="btnSubmit" type="button" value="搜索" title="search in blog" />
+        <input type="hidden" name="q" id="inputQ" />
+        <input type="hidden" name="t" value="blog" />
+        <a id="btnSearchBlog" target="_blank"></a>
+        </form>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {           
+            search();
+        });
+
+        $("#frmSearch").submit(function () {
+            search();
+            return false;
+        });
+
+        function search()
+        {
+            var url = "http://so.csdn.net/so/search/s.do?q=" + encodeURIComponent($("#inputSearch").val()) + "&u=" + username + "&t=blog";
+            window.location.href = url;
+        }   
+    });
+</script><div id="panel_Archive" class="panel">
+<ul class="panel_head"><span>文章存档</span></ul>
+<ul class="panel_body">
+<div id="archive_list">
+<!--归档统计-->
+<li><a href="/yanbober/article/month/2016/01">2016年01月</a><span>(6)</span></li><li><a href="/yanbober/article/month/2015/12">2015年12月</a><span>(1)</span></li><li><a href="/yanbober/article/month/2015/11">2015年11月</a><span>(1)</span></li><li><a href="/yanbober/article/month/2015/10">2015年10月</a><span>(5)</span></li><li><a href="/yanbober/article/month/2015/09">2015年09月</a><span>(2)</span></li><li><a href="/yanbober/article/month/2015/08">2015年08月</a><span>(2)</span></li><li><a href="/yanbober/article/month/2015/07">2015年07月</a><span>(1)</span></li><li><a href="/yanbober/article/month/2015/06">2015年06月</a><span>(2)</span></li><li><a href="/yanbober/article/month/2015/05">2015年05月</a><span>(29)</span></li><li><a href="/yanbober/article/month/2015/04">2015年04月</a><span>(25)</span></li><li><a href="/yanbober/article/month/2014/03">2014年03月</a><span>(1)</span></li><li><a href="/yanbober/article/month/2013/09">2013年09月</a><span>(3)</span></li><li><a href="/yanbober/article/month/2013/08">2013年08月</a><span>(2)</span></li><li><a href="/yanbober/article/month/2013/07">2013年07月</a><span>(1)</span></li><li><a href="/yanbober/article/month/2013/06">2013年06月</a><span>(1)</span></li><li><a href="/yanbober/article/month/2013/04">2013年04月</a><span>(2)</span></li><li><a href="/yanbober/article/month/2013/03">2013年03月</a><span>(9)</span></li><li><a href="/yanbober/article/month/2012/12">2012年12月</a><span>(10)</span></li>
+</div>
+</ul>
+</div>
+<div id="hotarticls" class="panel">
+<ul class="panel_head">
+    <span>       
+阅读排行    </span>
+</ul>
+
+<ul class="panel_body itemlist">
+<li>
+<a href="/yanbober/article/details/46128379" title="Android应用层View绘制流程与源码分析">Android应用层View绘制流程与源码分析</a><span>(15378)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/46481171" title="Android应用开发之所有动画使用详解">Android应用开发之所有动画使用详解</a><span>(13435)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/46361191" title="Android应用Activity、Dialog、PopWindow、Toast窗口添加机制及源码分析">Android应用Activity、Dialog、PopWindow、Toast窗口添加机制及源码分析</a><span>(12290)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/45887547" title="Android触摸屏事件派发机制详解与源码分析一(View篇)">Android触摸屏事件派发机制详解与源码分析一(View篇)</a><span>(11065)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/48394201" title="Android应用开发性能优化完全分析">Android应用开发性能优化完全分析</a><span>(11001)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/45970721" title="Android应用setContentView与LayoutInflater加载解析机制源码分析">Android应用setContentView与LayoutInflater加载解析机制源码分析</a><span>(10919)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/21000579" title="Android一种View动态折线绘制的实现实战">Android一种View动态折线绘制的实现实战</a><span>(10564)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/45306483" title="Android Studio入门到精通">Android Studio入门到精通</a><span>(9640)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/46417531" title="Android应用开发allowBackup敏感信息泄露的一点反思">Android应用开发allowBackup敏感信息泄露的一点反思</a><span>(6757)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/49314255" title="Gradle脚本基础全攻略">Gradle脚本基础全攻略</a><span>(6682)</span>
+</li>
+</ul>
+</div>
+<div id="hotarticls2" class="panel">
+<ul class="panel_head"><span>评论排行</span></ul>
+<ul class="panel_body itemlist">
+<li>
+<a href="/yanbober/article/details/48394201" title="Android应用开发性能优化完全分析">Android应用开发性能优化完全分析</a><span>(71)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/46128379" title="Android应用层View绘制流程与源码分析">Android应用层View绘制流程与源码分析</a><span>(50)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/45887547" title="Android触摸屏事件派发机制详解与源码分析一(View篇)">Android触摸屏事件派发机制详解与源码分析一(View篇)</a><span>(46)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/46481171" title="Android应用开发之所有动画使用详解">Android应用开发之所有动画使用详解</a><span>(45)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/46361191" title="Android应用Activity、Dialog、PopWindow、Toast窗口添加机制及源码分析">Android应用Activity、Dialog、PopWindow、Toast窗口添加机制及源码分析</a><span>(34)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/50419117" title="Android应用坐标系统全面详解">Android应用坐标系统全面详解</a><span>(31)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/45970721" title="Android应用setContentView与LayoutInflater加载解析机制源码分析">Android应用setContentView与LayoutInflater加载解析机制源码分析</a><span>(31)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/46342361" title="Android自定义控件（状态提示图表）">Android自定义控件（状态提示图表）</a><span>(29)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/47866369" title="Android应用Preference相关及源码浅析(SharePreferences篇)">Android应用Preference相关及源码浅析(SharePreferences篇)</a><span>(23)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/45967639" title="Android应用Context详解及源码解析">Android应用Context详解及源码解析</a><span>(22)</span>
+</li>
+</ul>
+</div>
+    </div>
+    <div class="clear">
+    </div>
+ </div>   
+            <div class="clear">
+            </div>
+        </div>
+        
+
+<script type="text/javascript" src="http://c.csdnimg.cn/rabbit/cnick/cnick.js"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/newblog.min.js"></script>
+
+
+<script type="text/javascript" src="http://medal.blog.csdn.net/showblogmedal.ashx?blogid=1382713"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/JavaScript1.js"></script>
+
+    <script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+<script type="text/javascript">document.write("<img src=http://counter.csdn.net/pv.aspx?id=24 border=0 width=0 height=0>");</script>
+<script type="text/javascript" src="http://www.csdn.net/ui/scripts/Csdn/counter.js"></script>
+<script type="text/javascript" src="http://ad.csdn.net/scripts/ad-blog.js"></script>
+<script type="text/javascript">
+    $(function () {
+        function __get_code_toolbar(snippet_id) {
+            return $("<span data-mod='popu_167'><a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "' target='_blank' title='在CODE上查看代码片'  style='text-indent:0;'><img src='https://code.csdn.net/assets/CODE_ico.png' width=12 height=12 alt='在CODE上查看代码片' style='position:relative;top:1px;left:2px;'/></a></span>"
+                    + "<span data-mod='popu_170'><a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "/fork' target='_blank' title='派生到我的代码片' style='text-indent:0;'><img src='https://code.csdn.net/assets/ico_fork.svg' width=12 height=12 alt='派生到我的代码片' style='position:relative;top:2px;left:2px;'/></a></span>");
+        }
+        
+        $("[code_snippet_id]").each(function () {
+            __s_id = $(this).attr("code_snippet_id");
+            if (__s_id != null && __s_id != "" && __s_id != 0 && parseInt(__s_id) > 70020) {
+                __code_tool = __get_code_toolbar(__s_id);
+                $(this).prev().find(".tools").append(__code_tool);
+            }
+        });
+
+        $(".bar").show();
+    });
+</script>
+
+
+
+
+    </div>
+      <!--new top-->
+    
+    <script id="csdn-toolbar-id" btnId="header_notice_num" wrapId="note1" count="5" subCount="5" type="text/javascript" src="http://c.csdnimg.cn/public/common/toolbar/js/toolbar.js"></script>     <!--new top-->
+   
+    <link href="http://c.csdnimg.cn/comm_ask/css/ask_float_block.css" type="text/css" rel="stylesheet" />
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/libs/wmd.js'></script>
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/libs/showdown.js'></script>
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/libs/prettify.js'></script>
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/apps/ask_float_block.js'></script>
+   
+</body>
+</html>   
+ 

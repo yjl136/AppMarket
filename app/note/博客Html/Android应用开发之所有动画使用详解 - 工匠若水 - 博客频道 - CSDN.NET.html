@@ -1,0 +1,2034 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+     
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    
+<head>   
+    
+     
+    <script type="text/javascript" src="http://c.csdnimg.cn/pubfooter/js/tracking.js" charset="utf-8"></script>  
+
+    <script type="text/javascript">
+        var protocol = window.location.protocol;
+        document.write('<script type="text/javascript" src="' + protocol + '//csdnimg.cn/pubfooter/js/repoAddr2.js?v=' + Math.random() + '"></' + 'script>');
+    </script>
+
+  
+ <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+
+    <title>Android应用开发之所有动画使用详解 - 工匠若水
+        - 博客频道 - CSDN.NET</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="这里演示了加密文本，利用特定字符来定位位置sockdata=PHIDOHBBNIEFMNDIBJLENNEBBODILAEAPMIHHKMKBOKILJOJHGPDDBEOPMCEMLAPJNFDLOJCPHEAMEDNPINODFMBMLFPFHLLGBNPPHEEMNFMNMCGNFEJFKIDOGBECBFJEBICBBLPMNHJAHJPCLNHKKEJMBLLNKFFKMPJJH" />
+    <script src="http://static.blog.csdn.net/scripts/jquery.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://static.blog.csdn.net/scripts/ad.js?v=1.1"></script>
+        <!--new top-->
+               <link rel="stylesheet" href="http://c.csdnimg.cn/public/common/toolbar/css/index.css">        <!--new top-->
+
+    <link rel="Stylesheet" type="text/css" href="http://static.blog.csdn.net/skin/skin-white/css/style.css?v=1.1" />
+    <link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="/yanbober/rss/list" />
+    <link rel="shortcut icon" href="http://c.csdnimg.cn/public/favicon.ico" />
+    <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+ 
+
+
+</head>
+<body>
+    
+   
+      <!--new top-->
+    <script id="toolbar-tpl-scriptId" fixed="true" prod="blog" skin="black" src="http://c.csdnimg.cn/public/common/toolbar/js/html.js" type="text/javascript"></script>
+     <!--new top-->
+    <div id="container">
+        <div id="header">
+    <div class="header">
+        <div id="blog_title">
+            <h2>
+                <a href="http://blog.csdn.net/yanbober">工匠若水</a></h2>
+            <h3>知道+做到=得到 </h3>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+</div>
+<div id="navigator">
+    <div class="navigator_bg">
+    </div>
+    <div class="navigator">
+        <ul>
+            
+                <li id="btnContents"><a href="http://blog.csdn.net/yanbober?viewmode=contents"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_mulu'])">
+                    <img src="http://static.blog.csdn.net/images/ico_list.gif">目录视图</span></a></li>
+                <li id="btnView"><a href="http://blog.csdn.net/yanbober?viewmode=list"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_zhaiyao'])">
+                    <img src="http://static.blog.csdn.net/images/ico_summary.gif">摘要视图</span></a></li>
+                <li id="btnRss"><a href="http://blog.csdn.net/yanbober/rss/list"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_RSS'])">
+                    <img src="http://static.blog.csdn.net/images/ico_rss.gif">订阅</span></a></li>                
+
+            </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    var username = "yanbober";
+    var _blogger = username;
+    var blog_address = "http://blog.csdn.net/yanbober";
+    var static_host = "http://static.blog.csdn.net";
+    var currentUserName = "";  
+</script>
+
+        <div id="body">
+            <div id="main">
+                <div class="main">
+                        <div class="ad_class">
+<div class="notice tracking-ad" data-mod='popu_3' > 
+
+<a href="http://huiyi.csdn.net/activity/product/goods_list?project_id=2741">
+<font color=red>2016软考项目经理实战班
+</font></a>
+&nbsp;&nbsp;&nbsp;
+
+<a href="http://edu.csdn.net/yearPromotion">
+<font color=blue>学院周年礼-顶尖课程钜惠呈现
+</font></a>
+&nbsp;&nbsp;&nbsp;
+<a href="http://huiyi.csdn.net/activity/product/goods_list?project_id=2792">
+<font color=red>Hadoop英雄会—暨Hadoop 10周年生日大趴</font>
+&nbsp;&nbsp;&nbsp;
+<a href="http://blog.csdn.net/dba_huangzj/article/details/50469185">
+<font color=blue>【博客专家】有奖试读—Windows PowerShell实战指南
+</font></a>
+
+</div>                        </div>
+                        
+
+<!--AdForward Begin:-->
+<script type="text/javascript" ads-src="http://csdnim.qtmojo.com/main/s?user=csdn|blog|fumeiti&db=csdnim&border=0&local=yes&js=ie" src="http://creatim.qtmojo.cn/td/AllyesDeliver.min.js" charset="gbk"></script>
+<!--AdForward End-->
+
+  
+<link href="http://static.blog.csdn.net/css/comment1.css" type="text/css" rel="stylesheet" />
+<link href="http://static.blog.csdn.net/css/style1.css" type="text/css" rel="stylesheet" />
+<script language='JavaScript' type='text/javascript' src='http://download.csdn.net/js/jquery.cookie.js'></script>
+<script type="text/javascript" src="http://c.csdnimg.cn/rabbit/search-service/main.js"></script>
+<link rel="stylesheet" href="http://static.blog.csdn.net/public/res-min/markdown_views.css?v=1.0" />
+<link rel="stylesheet" href="http://static.blog.csdn.net/css/category.css?v=1.0" />
+<script type="text/javascript" src="http://static.blog.csdn.net/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+
+  <script type="text/ecmascript">
+      window.quickReplyflag = true;
+           
+            var isBole = false;
+            
+          
+    </script>
+<div id="article_details" class="details">
+    <div class="article_title">   
+         <span class="ico ico_type_Original"></span>
+
+
+    <h1>
+        <span class="link_title"><a href="/yanbober/article/details/46481171">
+        Android应用开发之所有动画使用详解            
+        </a></span>
+    </h1>
+</div>
+
+   
+
+        <div class="article_manage clearfix">
+        <div class="article_l">
+            <span class="link_categories">
+            标签：
+              <a href='http://www.csdn.net/tag/android' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">android</a><a href='http://www.csdn.net/tag/%e5%8a%a8%e7%94%bb' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">动画</a><a href='http://www.csdn.net/tag/Animator' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">Animator</a><a href='http://www.csdn.net/tag/Animation' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">Animation</a><a href='http://www.csdn.net/tag/Android%e5%8a%a8%e7%94%bb' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">Android动画</a>
+            </span>
+        </div>
+        <div class="article_r">
+            <span class="link_postdate">2015-08-09 10:15</span>
+            <span class="link_view" title="阅读次数">13464人阅读</span>
+            <span class="link_comments" title="评论次数"> <a href="#comments" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_pinglun'])">评论</a>(45)</span>
+            <span class="link_collect"> <a href="javascript:void(0);" onclick="javascript:collectArticle('Android应用开发之所有动画使用详解','46481171');return false;" title="收藏">收藏</a></span>
+             <span class="link_report"> <a href="#report" onclick="javascript:report(46481171,2);return false;" title="举报">举报</a></span>
+
+        </div>
+    </div>
+      <div class="category clearfix">
+        <div class="category_l">
+           <img src="http://static.blog.csdn.net/images/category_icon.jpg">
+            <span>分类：</span>
+        </div>
+        <div class="category_r">
+                    <label  onclick="GetCategoryArticles('1688987','yanbober','top','46481171');">
+                        <span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_fenlei']);">Android应用开发<em>（10）</em></span>
+                      <img class="arrow-down" src="http://static.blog.csdn.net/images/arrow_triangle _down.jpg" style="display:inline;">
+                      <img class="arrow-up" src="http://static.blog.csdn.net/images/arrow_triangle_up.jpg" style="display:none;">
+                        <div class="subItem">
+                            <div class="subItem_t"><a  href="http://blog.csdn.net/yanbober/article/category/1688987">作者同类文章</a><i class="J_close">X</i></div>
+                            <ul class="subItem_l" id="top_1688987">                            
+                            </ul>
+                        </div>
+                    </label>                    
+        </div>
+    </div>
+    <script   type="text/javascript" src="http://static.blog.csdn.net/scripts/category.js"></script>  
+        <div   class="bog_copyright">         
+            <p  class="copyright_p" >版权声明：本文为博主原创文章，未经博主允许不得转载。</p>
+        </div>
+
+  
+
+  
+  
+     
+
+<div id="article_content" class="article_content">
+        <div class="markdown_views"><p>题外话：有段时间没有更新博客了，这篇文章也是之前写了一半一直放在草稿箱，今天抽空把剩余的补上的。消失的这段时间真的好忙，节奏一下子有些适应不过来，早晨七点四十就得醒来，晚上九点四十才准备下班，好像最近都与世隔离了一样；然而自己每天还要熟悉一大套自己不熟悉、各种协议差异的代码。其实换个角度考虑还是蛮好的，忙，但很充实，有新的挑战与收获。</p>
+
+<p><strong>【工匠若水 <a href="http://blog.csdn.net/yanbober">http://blog.csdn.net/yanbober</a> 转载请注明出处。<a href="https://github.com/yanbober/AndroidCommunication">点我开始Android技术交流</a>】</strong></p>
+
+
+
+<h2 id="1-背景"><strong>1 背景</strong></h2>
+
+<p>不能只分析源码呀，分析的同时也要整理归纳基础知识，刚好有人微博私信让全面说说Android的动画，所以今天来一发Android应用的各种Animation大集合。英文厉害的请直接移步参考<a href="http://developer.android.com/guide/topics/graphics/overview.html">Android Developer</a>。</p>
+
+<p>Android系统提供了很多丰富的API去实现UI的2D与3D动画，最主要的划分可以分为如下几类：</p>
+
+<ul>
+<li><p><strong>View Animation：</strong> 视图动画在古老的Android版本系统中就已经提供了，只能被用来设置View的动画。</p></li>
+<li><p><strong>Drawable Animation：</strong> 这种动画（也叫Frame动画、帧动画）其实可以划分到视图动画的类别，专门用来一个一个的显示Drawable的resources，就像放幻灯片一样。</p></li>
+<li><p><strong>Property Animation：</strong> 属性动画只对Android 3.0（API 11）以上版本的Android系统才有效，这种动画可以设置给任何Object，包括那些还没有渲染到屏幕上的对象。这种动画是可扩展的，可以让你自定义任何类型和属性的动画。</p></li>
+</ul>
+
+<p>可以看见，当前应用程序开发涉及的主要动画也就这三大类，我们接下来以类别为基础来慢慢展开说明。</p>
+
+<p><strong>【工匠若水 <a href="http://blog.csdn.net/yanbober">http://blog.csdn.net/yanbober</a> 转载请注明出处。<a href="https://github.com/yanbober/AndroidCommunication">点我开始Android技术交流</a>】</strong></p>
+
+<h2 id="2-view-animation视图动画使用详解"><strong>2 View Animation（视图动画）使用详解</strong></h2>
+
+
+
+<h3 id="2-1-视图动画概述"><strong>2-1 视图动画概述</strong></h3>
+
+<p>视图动画，也叫Tween（补间）动画可以在一个视图容器内执行一系列简单变换（位置、大小、旋转、透明度）。譬如，如果你有一个TextView对象，您可以移动、旋转、缩放、透明度设置其文本，当然，如果它有一个背景图像，背景图像会随着文本变化。</p>
+
+<p>补间动画通过XML或Android代码定义，建议使用XML文件定义，因为它更具可读性、可重用性。</p>
+
+<p>如下是视图动画相关的类继承关系：</p>
+
+<p><img src="http://img.blog.csdn.net/20150613182703583" alt="这里写图片描述" title=""></p>
+
+<table>
+<thead>
+<tr>
+  <th>java类名</th>
+  <th>xml关键字</th>
+  <th>描述信息</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>AlphaAnimation</td>
+  <td><code>&lt;alpha&gt;</code> 放置在res/anim/目录下</td>
+  <td>渐变透明度动画效果</td>
+</tr>
+<tr>
+  <td>RotateAnimation</td>
+  <td><code>&lt;rotate&gt;</code> 放置在res/anim/目录下</td>
+  <td>画面转移旋转动画效果</td>
+</tr>
+<tr>
+  <td>ScaleAnimation</td>
+  <td><code>&lt;scale&gt;</code> 放置在res/anim/目录下</td>
+  <td>渐变尺寸伸缩动画效果</td>
+</tr>
+<tr>
+  <td>TranslateAnimation</td>
+  <td><code>&lt;translate&gt;</code> 放置在res/anim/目录下</td>
+  <td>画面转换位置移动动画效果</td>
+</tr>
+<tr>
+  <td>AnimationSet</td>
+  <td><code>&lt;set&gt;</code> 放置在res/anim/目录下</td>
+  <td>一个持有其它动画元素alpha、scale、translate、rotate或者其它set元素的容器</td>
+</tr>
+</tbody></table>
+
+
+<p>通过上图和上表可以直观的看出来补间动画的关系及种类了吧，接下来我们就详细一个一个的介绍一下各种补间动画。</p>
+
+
+
+<h3 id="2-2-视图动画详细说明"><strong>2-2 视图动画详细说明</strong></h3>
+
+<p>可以看出来Animation抽象类是所有补间动画类的基类，所以基类会提供一些通用的动画属性方法，如下我们就来详细看看这些属性，关于这些属性详细官方解释<a href="http://www.androidcommunitydocs.com/reference/android/view/animation/package-summary.html">翻墙点击我</a>或者<a href="http://www.androidcommunitydocs.com/guide/topics/resources/animation-resource.html">翻墙点击我</a>。</p>
+
+
+
+<h4 id="2-2-1-animation属性详解"><strong>2-2-1  Animation属性详解</strong></h4>
+
+<table>
+<thead>
+<tr>
+  <th>xml属性</th>
+  <th>java方法</th>
+  <th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>android:detachWallpaper</td>
+  <td>setDetachWallpaper(boolean)</td>
+  <td>是否在壁纸上运行</td>
+</tr>
+<tr>
+  <td>android:duration</td>
+  <td>setDuration(long)</td>
+  <td>动画持续时间，毫秒为单位</td>
+</tr>
+<tr>
+  <td>android:fillAfter</td>
+  <td>setFillAfter(boolean)</td>
+  <td>控件动画结束时是否保持动画最后的状态</td>
+</tr>
+<tr>
+  <td>android:fillBefore</td>
+  <td>setFillBefore(boolean)</td>
+  <td>控件动画结束时是否还原到开始动画前的状态</td>
+</tr>
+<tr>
+  <td>android:fillEnabled</td>
+  <td>setFillEnabled(boolean)</td>
+  <td>与android:fillBefore效果相同</td>
+</tr>
+<tr>
+  <td>android:interpolator</td>
+  <td>setInterpolator(Interpolator)</td>
+  <td>设定插值器（指定的动画效果，譬如回弹等）</td>
+</tr>
+<tr>
+  <td>android:repeatCount</td>
+  <td>setRepeatCount(int)</td>
+  <td>重复次数</td>
+</tr>
+<tr>
+  <td>android:repeatMode</td>
+  <td>setRepeatMode(int)</td>
+  <td>重复类型有两个值，reverse表示倒序回放，restart表示从头播放</td>
+</tr>
+<tr>
+  <td>android:startOffset</td>
+  <td>setStartOffset(long)</td>
+  <td>调用start函数之后等待开始运行的时间，单位为毫秒</td>
+</tr>
+<tr>
+  <td>android:zAdjustment</td>
+  <td>setZAdjustment(int)</td>
+  <td>表示被设置动画的内容运行时在Z轴上的位置（top/bottom/normal），默认为normal</td>
+</tr>
+</tbody></table>
+
+
+<p><br>
+也就是说，无论我们补间动画的哪一种都已经具备了这种属性，也都可以设置使用这些属性中的一个或多个。</p>
+
+<p>那接下来我们就看看每种补间动画特有的一些属性说明吧。</p>
+
+
+
+<h4 id="2-2-2-alpha属性详解"><strong>2-2-2  Alpha属性详解</strong></h4>
+
+<table>
+<thead>
+<tr>
+  <th>xml属性</th>
+  <th>java方法</th>
+  <th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>android:fromAlpha</td>
+  <td>AlphaAnimation(float fromAlpha, …)</td>
+  <td>动画开始的透明度（0.0到1.0，0.0是全透明，1.0是不透明）</td>
+</tr>
+<tr>
+  <td>android:toAlpha</td>
+  <td>AlphaAnimation(…, float toAlpha)</td>
+  <td>动画结束的透明度，同上</td>
+</tr>
+</tbody></table>
+
+
+
+
+<h4 id="2-2-3-rotate属性详解"><strong>2-2-3  Rotate属性详解</strong></h4>
+
+<table>
+<thead>
+<tr>
+  <th>xml属性</th>
+  <th>java方法</th>
+  <th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>android:fromDegrees</td>
+  <td>RotateAnimation(float fromDegrees, …)</td>
+  <td>旋转开始角度，正代表顺时针度数，负代表逆时针度数</td>
+</tr>
+<tr>
+  <td>android:toDegrees</td>
+  <td>RotateAnimation(…, float toDegrees, …)</td>
+  <td>旋转结束角度，正代表顺时针度数，负代表逆时针度数</td>
+</tr>
+<tr>
+  <td>android:pivotX</td>
+  <td>RotateAnimation(…, float pivotX, …)</td>
+  <td>缩放起点X坐标（数值、百分数、百分数p，譬如50表示以当前View左上角坐标加50px为初始点、50%表示以当前View的左上角加上当前View宽高的50%做为初始点、50%p表示以当前View的左上角加上父控件宽高的50%做为初始点）</td>
+</tr>
+<tr>
+  <td>android:pivotY</td>
+  <td>RotateAnimation(…, float pivotY)</td>
+  <td>缩放起点Y坐标，同上规律</td>
+</tr>
+</tbody></table>
+
+
+
+
+<h4 id="2-2-4-scale属性详解"><strong>2-2-4  Scale属性详解</strong></h4>
+
+<table>
+<thead>
+<tr>
+  <th>xml属性</th>
+  <th>java方法</th>
+  <th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>android:fromXScale</td>
+  <td>ScaleAnimation(float fromX, …)</td>
+  <td>初始X轴缩放比例，1.0表示无变化</td>
+</tr>
+<tr>
+  <td>android:toXScale</td>
+  <td>ScaleAnimation(…, float toX, …)</td>
+  <td>结束X轴缩放比例</td>
+</tr>
+<tr>
+  <td>android:fromYScale</td>
+  <td>ScaleAnimation(…, float fromY, …)</td>
+  <td>初始Y轴缩放比例</td>
+</tr>
+<tr>
+  <td>android:toYScale</td>
+  <td>ScaleAnimation(…, float toY, …)</td>
+  <td>结束Y轴缩放比例</td>
+</tr>
+<tr>
+  <td>android:pivotX</td>
+  <td>ScaleAnimation(…, float pivotX, …)</td>
+  <td>缩放起点X轴坐标（数值、百分数、百分数p，譬如50表示以当前View左上角坐标加50px为初始点、50%表示以当前View的左上角加上当前View宽高的50%做为初始点、50%p表示以当前View的左上角加上父控件宽高的50%做为初始点）</td>
+</tr>
+<tr>
+  <td>android:pivotY</td>
+  <td>ScaleAnimation(…, float pivotY)</td>
+  <td>缩放起点Y轴坐标，同上规律</td>
+</tr>
+</tbody></table>
+
+
+
+
+<h4 id="2-2-5-translate属性详解"><strong>2-2-5  Translate属性详解</strong></h4>
+
+<table>
+<thead>
+<tr>
+  <th>xml属性</th>
+  <th>java方法</th>
+  <th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>android:fromXDelta</td>
+  <td>TranslateAnimation(float fromXDelta, …)</td>
+  <td>起始点X轴坐标（数值、百分数、百分数p，譬如50表示以当前View左上角坐标加50px为初始点、50%表示以当前View的左上角加上当前View宽高的50%做为初始点、50%p表示以当前View的左上角加上父控件宽高的50%做为初始点）</td>
+</tr>
+<tr>
+  <td>android:fromYDelta</td>
+  <td>TranslateAnimation(…, float fromYDelta, …)</td>
+  <td>起始点Y轴从标，同上规律</td>
+</tr>
+<tr>
+  <td>android:toXDelta</td>
+  <td>TranslateAnimation(…, float toXDelta, …)</td>
+  <td>结束点X轴坐标，同上规律</td>
+</tr>
+<tr>
+  <td>android:toYDelta</td>
+  <td>TranslateAnimation(…, float toYDelta)</td>
+  <td>结束点Y轴坐标，同上规律</td>
+</tr>
+</tbody></table>
+
+
+
+
+<h4 id="2-2-6-animationset详解"><strong>2-2-6  AnimationSet详解</strong></h4>
+
+<p>AnimationSet继承自Animation，是上面四种的组合容器管理类，没有自己特有的属性，他的属性继承自Animation，所以特别注意，<strong><em>当我们对set标签使用Animation的属性时会对该标签下的所有子控件都产生影响。</em></strong></p>
+
+
+
+<h3 id="2-3-视图动画使用方法"><strong>2-3 视图动画使用方法</strong></h3>
+
+<p>通过上面对于动画的属性介绍之后我们来看看在Android中这些动画如何使用（PS：这里直接演示xml方式，至于java方式太简单了就不说了），如下：</p>
+
+
+
+<pre class="prettyprint"><code class="language-xml hljs "><span class="hljs-pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">set</span> <span class="hljs-attribute">xmlns:android</span>=<span class="hljs-value">"http://schemas.android.com/apk/res/android"</span>
+    <span class="hljs-attribute">android:interpolator</span>=<span class="hljs-value">"@[package:]anim/interpolator_resource"</span>
+    <span class="hljs-attribute">android:shareInterpolator</span>=<span class="hljs-value">["true"</span> | "<span class="hljs-attribute">false</span>"] &gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">alpha
+</span>        <span class="hljs-attribute">android:fromAlpha</span>=<span class="hljs-value">"float"</span>
+        <span class="hljs-attribute">android:toAlpha</span>=<span class="hljs-value">"float"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">scale
+</span>        <span class="hljs-attribute">android:fromXScale</span>=<span class="hljs-value">"float"</span>
+        <span class="hljs-attribute">android:toXScale</span>=<span class="hljs-value">"float"</span>
+        <span class="hljs-attribute">android:fromYScale</span>=<span class="hljs-value">"float"</span>
+        <span class="hljs-attribute">android:toYScale</span>=<span class="hljs-value">"float"</span>
+        <span class="hljs-attribute">android:pivotX</span>=<span class="hljs-value">"float"</span>
+        <span class="hljs-attribute">android:pivotY</span>=<span class="hljs-value">"float"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">translate
+</span>        <span class="hljs-attribute">android:fromXDelta</span>=<span class="hljs-value">"float"</span>
+        <span class="hljs-attribute">android:toXDelta</span>=<span class="hljs-value">"float"</span>
+        <span class="hljs-attribute">android:fromYDelta</span>=<span class="hljs-value">"float"</span>
+        <span class="hljs-attribute">android:toYDelta</span>=<span class="hljs-value">"float"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">rotate
+</span>        <span class="hljs-attribute">android:fromDegrees</span>=<span class="hljs-value">"float"</span>
+        <span class="hljs-attribute">android:toDegrees</span>=<span class="hljs-value">"float"</span>
+        <span class="hljs-attribute">android:pivotX</span>=<span class="hljs-value">"float"</span>
+        <span class="hljs-attribute">android:pivotY</span>=<span class="hljs-value">"float"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">set</span>&gt;</span>
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-title">set</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">set</span>&gt;</span></code></pre>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs ">ImageView spaceshipImage = (ImageView) findViewById(R.id.spaceshipImage);
+Animation hyperspaceJumpAnimation = AnimationUtils.loadAnimation(<span class="hljs-keyword">this</span>, R.anim.hyperspace_jump);
+spaceshipImage.startAnimation(hyperspaceJumpAnimation);</code></pre>
+
+<p>上面就是一个标准的使用我们定义的补间动画的模板。至于补间动画的使用，Animation还有如下一些比较实用的方法介绍：</p>
+
+<table>
+<thead>
+<tr>
+  <th>Animation类的方法</th>
+  <th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>reset()</td>
+  <td>重置Animation的初始化</td>
+</tr>
+<tr>
+  <td>cancel()</td>
+  <td>取消Animation动画</td>
+</tr>
+<tr>
+  <td>start()</td>
+  <td>开始Animation动画</td>
+</tr>
+<tr>
+  <td>setAnimationListener(AnimationListener listener)</td>
+  <td>给当前Animation设置动画监听</td>
+</tr>
+<tr>
+  <td>hasStarted()</td>
+  <td>判断当前Animation是否开始</td>
+</tr>
+<tr>
+  <td>hasEnded()</td>
+  <td>判断当前Animation是否结束</td>
+</tr>
+</tbody></table>
+
+
+<p><br>
+既然补间动画只能给View使用，那就来看看View中和动画相关的几个常用方法吧，如下：</p>
+
+<table>
+<thead>
+<tr>
+  <th>View类的常用动画操作方法</th>
+  <th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>startAnimation(Animation animation)</td>
+  <td>对当前View开始设置的Animation动画</td>
+</tr>
+<tr>
+  <td>clearAnimation()</td>
+  <td>取消当View在执行的Animation动画</td>
+</tr>
+</tbody></table>
+
+
+<p>到此整个Android的补间动画常用详细属性及方法全部介绍完毕，如有特殊的属性需求可以访问Android Developer查阅即可。如下我们就来个综合大演练。</p>
+
+
+
+<h3 id="2-4-视图动画注意事项"><strong>2-4 视图动画注意事项</strong></h3>
+
+<p>关于视图动画（补间动画）的例子我就不介绍了，网上简直多的都泛滥了。只是强调在使用补间动画时注意如下一点即可：</p>
+
+<p><strong><em>特别特别注意：补间动画执行之后并未改变View的真实布局属性值。切记这一点，譬如我们在Activity中有一个Button在屏幕上方，我们设置了平移动画移动到屏幕下方然后保持动画最后执行状态呆在屏幕下方，这时如果点击屏幕下方动画执行之后的Button是没有任何反应的，而点击原来屏幕上方没有Button的地方却响应的是点击Button的事件。</em></strong></p>
+
+
+
+<h3 id="2-5-视图动画interpolator插值器详解"><strong>2-5 视图动画Interpolator插值器详解</strong></h3>
+
+
+
+<h4 id="2-5-1-插值器简介"><strong>2-5-1  插值器简介</strong></h4>
+
+<p>介绍补间动画插值器之前我们先来看一幅图，如下：</p>
+
+<p><img src="http://img.blog.csdn.net/20150614183554244" alt="这里写图片描述" title=""></p>
+
+<p>可以看见其实各种插值器都是实现了Interpolator接口而已，同时可以看见系统提供了许多已经实现OK的插值器，具体如下：</p>
+
+<table>
+<thead>
+<tr>
+  <th>java类</th>
+  <th>xml id值</th>
+  <th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>AccelerateDecelerateInterpolator</td>
+  <td>@android:anim/accelerate_decelerate_interpolator</td>
+  <td>动画始末速率较慢，中间加速</td>
+</tr>
+<tr>
+  <td>AccelerateInterpolator</td>
+  <td>@android:anim/accelerate_interpolator</td>
+  <td>动画开始速率较慢，之后慢慢加速</td>
+</tr>
+<tr>
+  <td>AnticipateInterpolator</td>
+  <td>@android:anim/anticipate_interpolator</td>
+  <td>开始的时候从后向前甩</td>
+</tr>
+<tr>
+  <td>AnticipateOvershootInterpolator</td>
+  <td>@android:anim/anticipate_overshoot_interpolator</td>
+  <td>类似上面AnticipateInterpolator</td>
+</tr>
+<tr>
+  <td>BounceInterpolator</td>
+  <td>@android:anim/bounce_interpolator</td>
+  <td>动画结束时弹起</td>
+</tr>
+<tr>
+  <td>CycleInterpolator</td>
+  <td>@android:anim/cycle_interpolator</td>
+  <td>循环播放速率改变为正弦曲线</td>
+</tr>
+<tr>
+  <td>DecelerateInterpolator</td>
+  <td>@android:anim/decelerate_interpolator</td>
+  <td>动画开始快然后慢</td>
+</tr>
+<tr>
+  <td>LinearInterpolator</td>
+  <td>@android:anim/linear_interpolator</td>
+  <td>动画匀速改变</td>
+</tr>
+<tr>
+  <td>OvershootInterpolator</td>
+  <td>@android:anim/overshoot_interpolator</td>
+  <td>向前弹出一定值之后回到原来位置</td>
+</tr>
+</tbody></table>
+
+
+<p>如上就是系统提供的一些插值器，下面我们来看看怎么使用他们。</p>
+
+
+
+<h4 id="2-5-2-插值器使用方法"><strong>2-5-2 插值器使用方法</strong></h4>
+
+<p>插值器的使用比较简答，如下：</p>
+
+
+
+<pre class="prettyprint"><code class="language-xml hljs "><span class="hljs-tag">&lt;<span class="hljs-title">set</span> <span class="hljs-attribute">android:interpolator</span>=<span class="hljs-value">"@android:anim/accelerate_interpolator"</span>&gt;</span>
+    ...
+<span class="hljs-tag">&lt;/<span class="hljs-title">set</span>&gt;</span></code></pre>
+
+
+
+<h4 id="2-5-3-插值器的自定义"><strong>2-5-3 插值器的自定义</strong></h4>
+
+<p>有时候你会发现系统提供的插值器不够用，可能就像View一样需要自定义。所以接下来我们来看看插值器的自定义，关于插值器的自定义分为两种实现方式，xml自定义实现（其实就是对现有的插值器的一些属性修改）或者java代码实现方式。如下我们来说说。</p>
+
+<p>先看看XML自定义插值器的步骤：</p>
+
+<ul>
+<li>在res/anim/目录下创建filename.xml文件。</li>
+<li>修改你准备自定义的插值器如下：</li>
+</ul>
+
+
+
+<pre class="prettyprint"><code class="language-xml hljs "><span class="hljs-pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">InterpolatorName</span> <span class="hljs-attribute">xmlns:android</span>=<span class="hljs-value">"http://schemas.android.com/apk/res/android"</span>
+    <span class="hljs-attribute">android:attribute_name</span>=<span class="hljs-value">"value"</span>
+    /&gt;</span></code></pre>
+
+<ul>
+<li>在你的补间动画文件中引用该文件即可。</li>
+</ul>
+
+<p>可以看见上面第二步修改的是现有插值器的一些属性，但是有些插值器却不具备修改属性，具体如下：</p>
+
+<p><strong><code>&lt;accelerateDecelerateInterpolator&gt;</code></strong></p>
+
+<p>无可自定义的attribute。</p>
+
+<p><strong><code>&lt;accelerateInterpolator&gt;</code></strong></p>
+
+<p>android:factor 浮点值，加速速率（默认值为1）。</p>
+
+<p><strong><code>&lt;anticipateInterploator&gt;</code></strong></p>
+
+<p>android:tension 浮点值，起始点后拉的张力数（默认值为2）。</p>
+
+<p><strong><code>&lt;anticipateOvershootInterpolator&gt;</code></strong> </p>
+
+<p>android:tension 浮点值，起始点后拉的张力数（默认值为2）。 <br>
+android:extraTension 浮点值，拉力的倍数（默认值为1.5）。</p>
+
+<p><strong><code>&lt;bounceInterpolator&gt;</code></strong></p>
+
+<p>无可自定义的attribute。</p>
+
+<p><strong><code>&lt;cycleInterplolator&gt;</code></strong></p>
+
+<p>android:cycles 整形，循环的个数（默认为1）。</p>
+
+<p><strong><code>&lt;decelerateInterpolator&gt;</code></strong></p>
+
+<p>android:factor 浮点值，减速的速率（默认为1）。</p>
+
+<p><strong><code>&lt;linearInterpolator&gt;</code></strong> </p>
+
+<p>无可自定义的attribute。</p>
+
+<p><strong><code>&lt;overshootInterpolator&gt;</code></strong> </p>
+
+<p>android:tension 浮点值，超出终点后的张力（默认为2）。</p>
+
+<p>再来看看Java自定义插值器的（Java自定义插值器其实是xml自定义的升级，也就是说如果我们修改xml的属性还不能满足需求，那就可以选择通过Java来实现）方式。</p>
+
+<p>可以看见上面所有的Interpolator都实现了Interpolator接口，而Interpolator接口又继承自TimeInterpolator，TimeInterpolator接口定义了一个float getInterpolation(float input);方法，这个方法是由系统调用的，其中的参数input代表动画的时间，在0和1之间，也就是开始和结束之间。</p>
+
+<p>如下就是一个动画始末速率较慢、中间加速的AccelerateDecelerateInterpolator插值器：</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs "><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AccelerateDecelerateInterpolator</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BaseInterpolator</span>
+        <span class="hljs-keyword">implements</span> <span class="hljs-title">NativeInterpolatorFactory</span> {</span>
+    ......
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span> <span class="hljs-title">getInterpolation</span>(<span class="hljs-keyword">float</span> input) {
+        <span class="hljs-keyword">return</span> (<span class="hljs-keyword">float</span>)(Math.cos((input + <span class="hljs-number">1</span>) * Math.PI) / <span class="hljs-number">2.0</span>f) + <span class="hljs-number">0.5</span>f;
+    }
+    ......
+}</code></pre>
+
+<p>到此整个补间动画与补间动画的插值器都分析完毕了，接下来看下别的动画。</p>
+
+<p><strong>【工匠若水 <a href="http://blog.csdn.net/yanbober">http://blog.csdn.net/yanbober</a> 转载请注明出处。<a href="https://github.com/yanbober/AndroidCommunication">点我开始Android技术交流</a>】</strong></p>
+
+
+
+<h2 id="3-drawable-animationdrawable动画使用详解"><strong>3 Drawable Animation（Drawable动画）使用详解</strong></h2>
+
+
+
+<h3 id="3-1-drawable动画概述"><strong>3-1 Drawable动画概述</strong></h3>
+
+<p>Drawable动画其实就是Frame动画（帧动画），它允许你实现像播放幻灯片一样的效果，这种动画的实质其实是Drawable，所以这种动画的XML定义方式文件一般放在res/drawable/目录下。具体关于帧动画的xml使用方式<a href="http://www.androidcommunitydocs.com/guide/topics/resources/animation-resource.html#Frame">翻墙点击我</a>查看，java方式<a href="http://www.androidcommunitydocs.com/guide/topics/graphics/drawable-animation.html">翻墙点击我</a>查看。</p>
+
+<p>如下图就是帧动画的源码文件：</p>
+
+<p><img src="http://img.blog.csdn.net/20150614180304132" alt="这里写图片描述" title=""></p>
+
+<p>可以看见实际的真实父类就是Drawable。</p>
+
+
+
+<h3 id="3-2-drawable动画详细说明"><strong>3-2 Drawable动画详细说明</strong></h3>
+
+<p>我们依旧可以使用xml或者java方式实现帧动画。但是依旧推荐使用xml，具体如下：</p>
+
+<p><strong><code>&lt;animation-list&gt;</code></strong> 必须是根节点，包含一个或者多个<code>&lt;item&gt;</code>元素，属性有：</p>
+
+<ul>
+<li><strong>android:oneshot</strong> true代表只执行一次，false循环执行。</li>
+<li><strong><code>&lt;item&gt;</code></strong> 类似一帧的动画资源。</li>
+</ul>
+
+<p><strong><code>&lt;item&gt;</code></strong> animation-list的子项，包含属性如下：</p>
+
+<ul>
+<li><strong>android:drawable</strong> 一个frame的Drawable资源。</li>
+<li><strong>android:duration</strong> 一个frame显示多长时间。</li>
+</ul>
+
+
+
+<h3 id="3-3-drawable动画实例演示"><strong>3-3 Drawable动画实例演示</strong></h3>
+
+<p>关于帧动画相对来说比较简单，这里给出一个常规使用框架，如下：</p>
+
+
+
+<pre class="prettyprint"><code class="language-xml hljs "><span class="hljs-comment">&lt;!-- 注意：rocket.xml文件位于res/drawable/目录下 --&gt;</span>
+<span class="hljs-pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">animation-list</span> <span class="hljs-attribute">xmlns:android</span>=<span class="hljs-value">"http://schemas.android.com/apk/res/android"</span>
+    <span class="hljs-attribute">android:oneshot</span>=<span class="hljs-value">["true"</span> | "<span class="hljs-attribute">false</span>"] &gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">item
+</span>        <span class="hljs-attribute">android:drawable</span>=<span class="hljs-value">"@[package:]drawable/drawable_resource_name"</span>
+        <span class="hljs-attribute">android:duration</span>=<span class="hljs-value">"integer"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">animation-list</span>&gt;</span></code></pre>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs ">ImageView rocketImage = (ImageView) findViewById(R.id.rocket_image);
+rocketImage.setBackgroundResource(R.drawable.rocket_thrust);
+
+rocketAnimation = (AnimationDrawable) rocketImage.getBackground();
+rocketAnimation.start();</code></pre>
+
+<p><strong><em>特别注意，AnimationDrawable的start()方法不能在Activity的onCreate方法中调运，因为AnimationDrawable还未完全附着到window上，所以最好的调运时机是onWindowFocusChanged()方法中。</em></strong></p>
+
+<p>至此帧动画也就说明完成了。让我们接下来进入Android更牛叉的动画类型。</p>
+
+<p><strong>【工匠若水 <a href="http://blog.csdn.net/yanbober">http://blog.csdn.net/yanbober</a> 转载请注明出处。<a href="https://github.com/yanbober/AndroidCommunication">点我开始Android技术交流</a>】</strong></p>
+
+
+
+<h2 id="4-property-animation属性动画使用详解"><strong>4 Property Animation（属性动画）使用详解</strong></h2>
+
+<p>在使用属性动画之前先来看几个常用的View属性成员：</p>
+
+<ul>
+<li>translationX，translationY：控制View的位置，值是相对于View容器左上角坐标的偏移。</li>
+<li>rotationX，rotationY：控制相对于轴心旋转。</li>
+<li>x，y：控制View在容器中的位置，即左上角坐标加上translationX和translationY的值。</li>
+<li>alpha：控制View对象的alpha透明度值。</li>
+</ul>
+
+<p>这几个常用的属性相信大家都很熟悉，接下来的属性动画我们就从这里展开。</p>
+
+
+
+<h3 id="4-1-属性动画概述"><strong>4-1 属性动画概述</strong></h3>
+
+<p>Android 3.0以后引入了属性动画，属性动画可以轻而易举的实现许多View动画做不到的事，上面也看见了，View动画无非也就做那几种事情，别的也搞不定，而属性动画就可以的，譬如3D旋转一张图片。其实说白了，你记住一点就行，属性动画实现原理就是修改控件的属性值实现的动画。</p>
+
+<p>具体先看下类关系：</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs "><span class="hljs-javadoc">/**
+ * This is the superclass for classes which provide basic support for animations which can be
+ * started, ended, and have &lt;code&gt;AnimatorListeners&lt;/code&gt; added to them.
+ */</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Animator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Cloneable</span> {</span>
+    ......
+}</code></pre>
+
+<p>所有的属性动画的抽象基类就是他。我们看下他的实现子类： <br>
+<img src="http://img.blog.csdn.net/20150802113525715" alt="这里写图片描述" title=""> <br>
+其实可以看见，属性动画的实现有7个类（PS，之所以类继承关系列表会出来那么多是因为我下载了所有版本的SDK，你只用关注我红点标注的就行，妹的，ubuntu下图片处理工具怎么都这么难用），进去粗略分析可以发现，好几个是hide的类，而其他可用的类继承关系又如下：</p>
+
+<p><img src="http://img.blog.csdn.net/20150802115618101" alt="这里写图片描述" title=""></p>
+
+<table>
+<thead>
+<tr>
+  <th>java类名</th>
+  <th>xml关键字</th>
+  <th>描述信息</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>ValueAnimator</td>
+  <td><code>&lt;animator&gt;</code> 放置在res/animator/目录下</td>
+  <td>在一个特定的时间里执行一个动画</td>
+</tr>
+<tr>
+  <td>TimeAnimator</td>
+  <td>不支持<a href="http://developer.android.com/guide/topics/resources/animation-resource.html">/点我查看原因</a></td>
+  <td>时序监听回调工具</td>
+</tr>
+<tr>
+  <td>ObjectAnimator</td>
+  <td><code>&lt;objectAnimator&gt;</code> 放置在res/animator/目录下</td>
+  <td>一个对象的一个属性动画</td>
+</tr>
+<tr>
+  <td>AnimatorSet</td>
+  <td><code>&lt;set&gt;</code> 放置在res/animator/目录下</td>
+  <td>动画集合</td>
+</tr>
+</tbody></table>
+
+
+<p>所以可以看见，我们平时使用属性动画的重点就在于AnimatorSet、ObjectAnimator、TimeAnimator、ValueAnimator。所以接下来我们就来依次说说如何使用。</p>
+
+
+
+<h3 id="4-2-属性动画详细说明"><strong>4-2 属性动画详细说明</strong></h3>
+
+
+
+<h4 id="4-2-1-属性动画计算原理"><strong>4-2-1 属性动画计算原理</strong></h4>
+
+<p><a href="http://developer.android.com/guide/topics/graphics/prop-animation.html">参看Android官方文档，英文原版详情点我查看！</a></p>
+
+<p>Android属性动画（注意最低兼容版本，不过可以使用开源项目来替代低版本问题）提供了以下属性：</p>
+
+<ul>
+<li>Duration：动画的持续时间；</li>
+<li>TimeInterpolation：定义动画变化速率的接口，所有插值器都必须实现此接口，如线性、非线性插值器；</li>
+<li>TypeEvaluator：用于定义属性值计算方式的接口，有int、float、color类型，根据属性的起始、结束值和插值一起计算出当前时间的属性值；</li>
+<li>Animation sets：动画集合，即可以同时对一个对象应用多个动画，这些动画可以同时播放也可以对不同动画设置不同的延迟；</li>
+<li>Frame refreash delay：多少时间刷新一次，即每隔多少时间计算一次属性值，默认为10ms，最终刷新时间还受系统进程调度与硬件的影响；</li>
+<li>Repeat Country and behavoir：重复次数与方式，如播放3次、5次、无限循环，可以让此动画一直重复，或播放完时向反向播放；</li>
+</ul>
+
+<p>接下来先来看官方为了解释原理给出的两幅图（其实就是初中物理题，不解释）：</p>
+
+<p><img src="http://img.blog.csdn.net/20150802164617045" alt="这里写图片描述" title=""> <br>
+上面就是一个线性匀速动画，描述了一个Object的X属性运动动画，该对象的X坐标在40ms内从0移动到40，每10ms刷新一次，移动4次，每次移动为40/4=10pixel。 <br>
+<img src="http://img.blog.csdn.net/20150802164526966" alt="这里写图片描述" title=""> <br>
+上面是一个非匀速动画，描述了一个Object的X属性运动动画，该对象的X坐标在40ms内从0移动到40，每10ms刷新一次，移动4次，但是速率不同，开始和结束的速度要比中间部分慢，即先加速后减速。</p>
+
+<p>接下来我们来详细的看一下，属性动画系统的重要组成部分是如何计算动画值的，下图描述了如上面所示动画的实现作用过程。</p>
+
+<p><img src="http://img.blog.csdn.net/20150802165058201" alt="这里写图片描述" title=""></p>
+
+<p>其中的ValueAnimator是动画的执行类，跟踪了当前动画的执行时间和当前时间下的属性值；ValueAnimator封装了动画的TimeInterpolator时间插值器和一个TypeEvaluator类型估值，用于设置动画属性的值，就像上面图2非线性动画里，TimeInterpolator使用了AccelerateDecelerateInterpolator、TypeEvaluator使用了IntEvaluator。</p>
+
+<p>为了执行一个动画，你需要创建一个ValueAnimator，并且指定目标对象属性的开始、结束值和持续时间。在调用start后，整个动画过程中， ValueAnimator会根据已经完成的动画时间计算得到一个0到1之间的分数，代表该动画的已完成动画百分比。0表示0%，1表示100%，譬如上面图一线性匀速动画中总时间 t = 40 ms，t = 10 ms的时候是 0.25。</p>
+
+<p>当ValueAnimator计算完已完成动画分数后，它会调用当前设置的TimeInterpolator，去计算得到一个interpolated（插值）分数，在计算过程中，已完成动画百分比会被加入到新的插值计算中。如上图2非线性动画中，因为动画的运动是缓慢加速的，它的插值分数大约是 0.15，小于t = 10ms时的已完成动画分数0.25。而在上图1中，这个插值分数一直和已完成动画分数是相同的。</p>
+
+<p>当插值分数计算完成后，ValueAnimator会根据插值分数调用合适的 TypeEvaluator去计算运动中的属性值。</p>
+
+<p>好了，现在我们来看下代码就明白这段话了，上面图2非线性动画里，TimeInterpolator使用了AccelerateDecelerateInterpolator、TypeEvaluator使用了IntEvaluator。所以这些类都是标准的API，我们来看下标准API就能类比自己写了，如下：</p>
+
+<p>首先计算已完成动画时间分数（以10ms为例）：t=10ms/40ms=0.25。</p>
+
+<p>接着看如下源码如何实现计算差值分数的：</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs "><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AccelerateDecelerateInterpolator</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">BaseInterpolator</span>
+        <span class="hljs-keyword">implements</span> <span class="hljs-title">NativeInterpolatorFactory</span> {</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-title">AccelerateDecelerateInterpolator</span>() {
+    }
+    ......
+    <span class="hljs-comment">//这是我们关注重点，可以发现如下计算公式计算后（input即为时间因子）插值大约为0.15。</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span> <span class="hljs-title">getInterpolation</span>(<span class="hljs-keyword">float</span> input) {
+        <span class="hljs-keyword">return</span> (<span class="hljs-keyword">float</span>)(Math.cos((input + <span class="hljs-number">1</span>) * Math.PI) / <span class="hljs-number">2.0</span>f) + <span class="hljs-number">0.5</span>f;
+    }
+    ......
+}</code></pre>
+
+<p>其实AccelerateDecelerateInterpolator的基类接口就是TimeInterpolator，如下，他只有getInterpolation方法，也就是上面我们关注的方法。</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs "><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">TimeInterpolator</span> {</span>
+    <span class="hljs-keyword">float</span> getInterpolation(<span class="hljs-keyword">float</span> input);
+}</code></pre>
+
+<p>接着ValueAnimator会根据插值分数调用合适的TypeEvaluator（IntEvaluator）去计算运动中的属性值，如下，因为startValue = 0，所以属性值：0+0.15*（40-0）= 6。</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs "><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IntEvaluator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">TypeEvaluator</span>&lt;<span class="hljs-title">Integer</span>&gt; {</span>
+    <span class="hljs-keyword">public</span> Integer <span class="hljs-title">evaluate</span>(<span class="hljs-keyword">float</span> fraction, Integer startValue, Integer endValue) {
+        <span class="hljs-keyword">int</span> startInt = startValue;
+        <span class="hljs-keyword">return</span> (<span class="hljs-keyword">int</span>)(startInt + fraction * (endValue - startInt));
+    }
+}</code></pre>
+
+<p>这就是官方给的一个关于属性动画实现的过程及基本原理解释，相信你看到这里是会有些迷糊的，没关系，你先有个大致概念就行，接下来我们会慢慢进入实战，因为Android的属性动画相对于其他动画来说涉及的知识点本来就比较复杂，所以我们慢慢来。</p>
+
+
+
+<h4 id="4-2-2-xml方式属性动画"><strong>4-2-2 XML方式属性动画</strong></h4>
+
+<p>在xml中可直接用的属性动画节点有ValueAnimator、ObjectAnimator、AnimatorSet。如下是官方的一个例子和解释（<a href="http://developer.android.com/guide/topics/resources/animation-resource.html">详情点我</a>）：</p>
+
+
+
+<pre class="prettyprint"><code class="language-xml hljs "><span class="hljs-tag">&lt;<span class="hljs-title">set
+</span>  <span class="hljs-attribute">android:ordering</span>=<span class="hljs-value">["together"</span> | "<span class="hljs-attribute">sequentially</span>"]&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-title">objectAnimator
+</span>        <span class="hljs-attribute">android:propertyName</span>=<span class="hljs-value">"string"</span>
+        <span class="hljs-attribute">android:duration</span>=<span class="hljs-value">"int"</span>
+        <span class="hljs-attribute">android:valueFrom</span>=<span class="hljs-value">"float | int | color"</span>
+        <span class="hljs-attribute">android:valueTo</span>=<span class="hljs-value">"float | int | color"</span>
+        <span class="hljs-attribute">android:startOffset</span>=<span class="hljs-value">"int"</span>
+        <span class="hljs-attribute">android:repeatCount</span>=<span class="hljs-value">"int"</span>
+        <span class="hljs-attribute">android:repeatMode</span>=<span class="hljs-value">["repeat"</span> | "<span class="hljs-attribute">reverse</span>"]
+        <span class="hljs-attribute">android:valueType</span>=<span class="hljs-value">["intType"</span> | "<span class="hljs-attribute">floatType</span>"]/&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-title">animator
+</span>        <span class="hljs-attribute">android:duration</span>=<span class="hljs-value">"int"</span>
+        <span class="hljs-attribute">android:valueFrom</span>=<span class="hljs-value">"float | int | color"</span>
+        <span class="hljs-attribute">android:valueTo</span>=<span class="hljs-value">"float | int | color"</span>
+        <span class="hljs-attribute">android:startOffset</span>=<span class="hljs-value">"int"</span>
+        <span class="hljs-attribute">android:repeatCount</span>=<span class="hljs-value">"int"</span>
+        <span class="hljs-attribute">android:repeatMode</span>=<span class="hljs-value">["repeat"</span> | "<span class="hljs-attribute">reverse</span>"]
+        <span class="hljs-attribute">android:valueType</span>=<span class="hljs-value">["intType"</span> | "<span class="hljs-attribute">floatType</span>"]/&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-title">set</span>&gt;</span>
+        ...
+    <span class="hljs-tag">&lt;/<span class="hljs-title">set</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">set</span>&gt;</span></code></pre>
+
+<p><strong><code>&lt;set&gt;</code>属性解释：</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>xml属性</th>
+  <th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>android:ordering</td>
+  <td>控制子动画启动方式是先后有序的还是同时进行。sequentially:动画按照先后顺序；together(默认):动画同时启动；</td>
+</tr>
+</tbody></table>
+
+
+<p><br>
+<strong><code>&lt;objectAnimator&gt;</code>属性解释：</strong></p>
+
+<table>
+<thead>
+<tr>
+  <th>xml属性</th>
+  <th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+  <td>android:propertyName</td>
+  <td>String类型，必须要设置的节点属性，代表要执行动画的属性（通过名字引用），辟如你可以指定了一个View的”alpha” 或者 “backgroundColor” ，这个objectAnimator元素没有对外说明target属性，所以你不能在XML中设置执行这个动画，必须通过调用loadAnimator()方法加载你的XML动画资源，然后调用setTarget()应用到具备这个属性的目标对象上（譬如TextView）。</td>
+</tr>
+<tr>
+  <td>android:valueTo</td>
+  <td>float、int或者color类型，必须要设置的节点属性，表明动画结束的点；如果是颜色的话，由6位十六进制的数字表示。</td>
+</tr>
+<tr>
+  <td>android:valueFrom</td>
+  <td>相对应valueTo，动画的起始点，如果没有指定，系统会通过属性的get方法获取，颜色也是6位十六进制的数字表示。</td>
+</tr>
+<tr>
+  <td>android:duration</td>
+  <td>动画的时长，int类型，以毫秒为单位，默认为300毫秒。</td>
+</tr>
+<tr>
+  <td>android:startOffset</td>
+  <td>动画延迟的时间，从调用start方法后开始计算，int型，毫秒为单位。</td>
+</tr>
+<tr>
+  <td>android:repeatCount</td>
+  <td>一个动画的重复次数，int型，”-1“表示无限循环，”1“表示动画在第一次执行完成后重复执行一次，也就是两次，默认为0，不重复执行。</td>
+</tr>
+<tr>
+  <td>android:repeatMode</td>
+  <td>重复模式：int型，当一个动画执行完的时候应该如何处理。该值必须是正数或者是-1，“reverse”会使得按照动画向相反的方向执行，可实现类似钟摆效果。“repeat”会使得动画每次都从头开始循环。</td>
+</tr>
+<tr>
+  <td>android:valueType</td>
+  <td>关键参数，如果该value是一个颜色，那么就不需要指定，因为动画框架会自动的处理颜色值。有intType和floatType（默认）两种：分别说明动画值为int和float型。</td>
+</tr>
+</tbody></table>
+
+
+<p><br>
+<strong><code>&lt;objectAnimator&gt;</code>属性解释：</strong> <br>
+同上<code>&lt;objectAnimator&gt;</code>属性，不多介绍。</p>
+
+<p><strong>XML属性动画使用方法：</strong></p>
+
+
+
+<pre class="prettyprint"><code class="language-android hljs avrasm">AnimatorSet <span class="hljs-keyword">set</span> = (AnimatorSet) AnimatorInflater<span class="hljs-preprocessor">.loadAnimator</span>(myContext,
+    R<span class="hljs-preprocessor">.animtor</span><span class="hljs-preprocessor">.property</span>_animator)<span class="hljs-comment">;</span>
+<span class="hljs-keyword">set</span><span class="hljs-preprocessor">.setTarget</span>(myObject)<span class="hljs-comment">;</span>
+<span class="hljs-keyword">set</span><span class="hljs-preprocessor">.start</span>()<span class="hljs-comment">;</span></code></pre>
+
+
+
+<h4 id="4-2-3-java方式属性动画"><strong>4-2-3 Java方式属性动画</strong></h4>
+
+<p>1、<strong>ObjectAnimator：</strong>继承自ValueAnimator，允许你指定要进行动画的对象以及该对象的一个属性。该类会根据计算得到的新值自动更新属性。大多数的情况使用ObjectAnimator就足够了，因为它使得目标对象动画值的处理过程变得足够简单，不用像ValueAnimator那样自己写动画更新的逻辑，但是ObjectAnimator有一定的限制，比如它需要目标对象的属性提供指定的处理方法（譬如提供getXXX，setXXX方法），这时候你就需要根据自己的需求在ObjectAnimator和ValueAnimator中看哪种实现更方便了。</p>
+
+<pre><code>ObjectAnimator类提供了ofInt、ofFloat、ofObject这个三个常用的方法，这些方法都是设置动画作用的元素、属性、开始、结束等任意属性值。当属性值（上面方法的参数）只设置一个时就把通过getXXX反射获取的值作为起点，设置的值作为终点；如果设置两个（参数），那么一个是开始、另一个是结束。
+
+特别注意：ObjectAnimator的动画原理是不停的调用setXXX方法更新属性值，所有使用ObjectAnimator更新属性时的前提是Object必须声明有getXXX和setXXX方法。
+</code></pre>
+
+<p>我们通常使用ObjectAnimator设置View已知的属性来生成动画，而一般View已知属性变化时都会主动触发重绘图操作，所以动画会自动实现；但是也有特殊情况，譬如作用Object不是View，或者作用的属性没有触发重绘，或者我们在重绘时需要做自己的操作，那都可以通过如下方法手动设置：</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs ">ObjectAnimator mObjectAnimator= ObjectAnimator.ofInt(view, <span class="hljs-string">"customerDefineAnyThingName"</span>, <span class="hljs-number">0</span>,  <span class="hljs-number">1</span>).setDuration(<span class="hljs-number">2000</span>);
+mObjectAnimator.addUpdateListener(<span class="hljs-keyword">new</span> AnimatorUpdateListener()
+        {
+            <span class="hljs-annotation">@Override</span>
+            <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onAnimationUpdate</span>(ValueAnimator animation)
+            {
+                <span class="hljs-comment">//int value = animation.getAnimatedValue();  可以获取当前属性值</span>
+                <span class="hljs-comment">//view.postInvalidate();  可以主动刷新</span>
+                <span class="hljs-comment">//view.setXXX(value);</span>
+                <span class="hljs-comment">//view.setXXX(value);</span>
+                <span class="hljs-comment">//......可以批量修改属性</span>
+            }
+        });</code></pre>
+
+<p>如下是一个我在项目中的Y轴3D旋转动画实现实例：</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs ">ObjectAnimator.ofFloat(view, <span class="hljs-string">"rotationY"</span>, <span class="hljs-number">0.0</span>f, <span class="hljs-number">360.0</span>f).setDuration(<span class="hljs-number">1000</span>).start();</code></pre>
+
+<p>2、<strong>PropertyValuesHolder：</strong>多属性动画同时工作管理类。有时候我们需要同时修改多个属性，那就可以用到此类，具体如下：</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs ">PropertyValuesHolder a1 = PropertyValuesHolder.ofFloat(<span class="hljs-string">"alpha"</span>, <span class="hljs-number">0</span>f, <span class="hljs-number">1</span>f);  
+PropertyValuesHolder a2 = PropertyValuesHolder.ofFloat(<span class="hljs-string">"translationY"</span>, <span class="hljs-number">0</span>, viewWidth);  
+......
+ObjectAnimator.ofPropertyValuesHolder(view, a1, a2, ......).setDuration(<span class="hljs-number">1000</span>).start();</code></pre>
+
+<p>如上代码就可以实现同时修改多个属性的动画啦。</p>
+
+<p>3、<strong>ValueAnimator：</strong>属性动画中的时间驱动，管理着动画时间的开始、结束属性值，相应时间属性值计算方法等。包含所有计算动画值的核心函数以及每一个动画时间节点上的信息、一个动画是否重复、是否监听更新事件等，并且还可以设置自定义的计算类型。</p>
+
+<pre><code>特别注意：ValueAnimator只是动画计算管理驱动，设置了作用目标，但没有设置属性，需要通过updateListener里设置属性才会生效。
+</code></pre>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs ">ValueAnimator animator = ValueAnimator.ofFloat(<span class="hljs-number">0</span>, mContentHeight);  <span class="hljs-comment">//定义动画</span>
+animator.setTarget(view);   <span class="hljs-comment">//设置作用目标</span>
+animator.setDuration(<span class="hljs-number">5000</span>).start();
+animator.addUpdateListener(<span class="hljs-keyword">new</span> AnimatorUpdateListener() {
+    <span class="hljs-annotation">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onAnimationUpdate</span>(ValueAnimator animation){
+        <span class="hljs-keyword">float</span> value = (<span class="hljs-keyword">float</span>) animation.getAnimatedValue();
+        view.setXXX(value);  <span class="hljs-comment">//必须通过这里设置属性值才有效</span>
+        view.mXXX = value;  <span class="hljs-comment">//不需要setXXX属性方法</span>
+    }
+});</code></pre>
+
+<p>大眼看上去可以发现和ObjectAnimator没啥区别，实际上正是由于ValueAnimator不直接操作属性值，所以要操作对象的属性可以不需要setXXX与getXXX方法，你完全可以通过当前动画的计算去修改任何属性。</p>
+
+<p>4、<strong>AnimationSet：</strong>动画集合，提供把多个动画组合成一个组合的机制，并可设置动画的时序关系，如同时播放、顺序播放或延迟播放。具体使用方法比较简单，如下：</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs ">ObjectAnimator a1 = ObjectAnimator.ofFloat(view, <span class="hljs-string">"alpha"</span>, <span class="hljs-number">1.0</span>f, <span class="hljs-number">0</span>f);  
+ObjectAnimator a2 = ObjectAnimator.ofFloat(view, <span class="hljs-string">"translationY"</span>, <span class="hljs-number">0</span>f, viewWidth);  
+......
+AnimatorSet animSet = <span class="hljs-keyword">new</span> AnimatorSet();  
+animSet.setDuration(<span class="hljs-number">5000</span>);  
+animSet.setInterpolator(<span class="hljs-keyword">new</span> LinearInterpolator());   
+<span class="hljs-comment">//animSet.playTogether(a1, a2, ...); //两个动画同时执行  </span>
+animSet.play(a1).after(a2); <span class="hljs-comment">//先后执行</span>
+......<span class="hljs-comment">//其他组合方式</span>
+animSet.start();  </code></pre>
+
+<p>5、<strong>Evaluators相关类解释：</strong> Evaluators就是属性动画系统如何去计算一个属性值。它们通过Animator提供的动画的起始和结束值去计算一个动画的属性值。</p>
+
+<ul>
+<li><p><strong>IntEvaluator：</strong>整数属性值。</p></li>
+<li><p><strong>FloatEvaluator：</strong>浮点数属性值。</p></li>
+<li><p><strong>ArgbEvaluator：</strong>十六进制color属性值。</p></li>
+<li><p><strong>TypeEvaluator：</strong>用户自定义属性值接口，譬如对象属性值类型不是int、float、color类型，你必须实现这个接口去定义自己的数据类型。</p></li>
+</ul>
+
+<p>既然说到这了，那就来个例子吧，譬如我们需要实现一个自定义属性类型和计算规则的属性动画，如下类型float[]：</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs ">ValueAnimator valueAnimator = <span class="hljs-keyword">new</span> ValueAnimator();
+valueAnimator.setDuration(<span class="hljs-number">5000</span>);
+valueAnimator.setObjectValues(<span class="hljs-keyword">new</span> <span class="hljs-keyword">float</span>[<span class="hljs-number">2</span>]); <span class="hljs-comment">//设置属性值类型</span>
+valueAnimator.setInterpolator(<span class="hljs-keyword">new</span> LinearInterpolator());
+valueAnimator.setEvaluator(<span class="hljs-keyword">new</span> TypeEvaluator&lt;<span class="hljs-keyword">float</span>[]&gt;()
+{
+    <span class="hljs-annotation">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span>[] <span class="hljs-title">evaluate</span>(<span class="hljs-keyword">float</span> fraction, <span class="hljs-keyword">float</span>[] startValue,
+                            <span class="hljs-keyword">float</span>[] endValue)
+    {
+        <span class="hljs-comment">//实现自定义规则计算的float[]类型的属性值</span>
+        <span class="hljs-keyword">float</span>[] temp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">float</span>[<span class="hljs-number">2</span>];
+        temp[<span class="hljs-number">0</span>] = fraction * <span class="hljs-number">2</span>;
+        temp[<span class="hljs-number">1</span>] = (<span class="hljs-keyword">float</span>)Math.random() * <span class="hljs-number">10</span> * fraction;
+        <span class="hljs-keyword">return</span> temp;
+    }
+});
+
+valueAnimator.start();
+valueAnimator.addUpdateListener(<span class="hljs-keyword">new</span> ValueAnimator.AnimatorUpdateListener()
+{
+    <span class="hljs-annotation">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onAnimationUpdate</span>(ValueAnimator animation)
+    {
+        <span class="hljs-keyword">float</span>[] xyPos = (<span class="hljs-keyword">float</span>[]) animation.getAnimatedValue();
+        view.setHeight(xyPos[<span class="hljs-number">0</span>]);   <span class="hljs-comment">//通过属性值设置View属性动画</span>
+        view.setWidth(xyPos[<span class="hljs-number">1</span>]);    <span class="hljs-comment">//通过属性值设置View属性动画</span>
+    }
+});</code></pre>
+
+<p>6、<strong>Interpolators相关类解释：</strong></p>
+
+<ul>
+<li><p><strong>AccelerateDecelerateInterolator：</strong>先加速后减速。</p></li>
+<li><p><strong>AccelerateInterpolator：</strong>加速。</p></li>
+<li><p><strong>DecelerateInterpolator：</strong>减速。</p></li>
+<li><p><strong>AnticipateInterpolator：</strong>先向相反方向改变一段再加速播放。</p></li>
+<li><p><strong>AnticipateOvershootInterpolator：</strong>先向相反方向改变，再加速播放，会超出目标值然后缓慢移动至目标值，类似于弹簧回弹。</p></li>
+<li><p><strong>BounceInterpolator：</strong>快到目标值时值会跳跃。</p></li>
+<li><p><strong>CycleIinterpolator：</strong>动画循环一定次数，值的改变为一正弦函数：Math.sin(2 * mCycles * Math.PI * input)。</p></li>
+<li><p><strong>LinearInterpolator：</strong>线性均匀改变。</p></li>
+<li><p><strong>OvershottInterpolator：</strong>最后超出目标值然后缓慢改变到目标值。</p></li>
+<li><p><strong>TimeInterpolator：</strong>一个允许自定义Interpolator的接口，以上都实现了该接口。</p></li>
+</ul>
+
+<p>举个例子，就像系统提供的标准API一样，如下就是加速插值器的实现代码，我们自定义时也可以类似实现：</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs "><span class="hljs-comment">//开始很慢然后不断加速的插值器。</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AccelerateInterpolator</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Interpolator</span> {</span>
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">float</span> mFactor;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">double</span> mDoubleFactor;
+
+    <span class="hljs-keyword">public</span> <span class="hljs-title">AccelerateInterpolator</span>() {
+        mFactor = <span class="hljs-number">1.0</span>f;
+        mDoubleFactor = <span class="hljs-number">2.0</span>;
+    }
+
+    ......
+
+    <span class="hljs-comment">//input  0到1.0。表示动画当前点的值，0表示开头，1表示结尾。</span>
+    <span class="hljs-comment">//return  插值。值可以大于1超出目标值，也可以小于0突破低值。</span>
+    <span class="hljs-annotation">@Override</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span> <span class="hljs-title">getInterpolation</span>(<span class="hljs-keyword">float</span> input) {
+        <span class="hljs-comment">//实现核心代码块</span>
+        <span class="hljs-keyword">if</span> (mFactor == <span class="hljs-number">1.0</span>f) {
+            <span class="hljs-keyword">return</span> input * input;
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-keyword">return</span> (<span class="hljs-keyword">float</span>)Math.pow(input, mDoubleFactor);
+        }
+    }
+}</code></pre>
+
+<p>综上可以发现，我们可以使用现有系统提供标准的东东实现属性动画，也可以通过自定义继承相关接口实现自己的动画，只要实现上面提到的那些主要方法即可。</p>
+
+
+
+<h4 id="4-2-4-java属性动画拓展之viewpropertyanimator动画"><strong>4-2-4 Java属性动画拓展之ViewPropertyAnimator动画</strong></h4>
+
+<p>在Android API 12时，View中添加了animate方法，具体如下：</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs "><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">View</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Drawable</span>.<span class="hljs-title">Callback</span>, <span class="hljs-title">KeyEvent</span>.<span class="hljs-title">Callback</span>,
+        <span class="hljs-title">AccessibilityEventSource</span> {</span>
+     ......
+     <span class="hljs-javadoc">/**
+     * This method returns a ViewPropertyAnimator object, which can be used to animate
+     * specific properties on this View.
+     *
+     *<span class="hljs-javadoctag"> @return</span> ViewPropertyAnimator The ViewPropertyAnimator associated with this View.
+     */</span>
+    <span class="hljs-keyword">public</span> ViewPropertyAnimator <span class="hljs-title">animate</span>() {
+        <span class="hljs-keyword">if</span> (mAnimator == <span class="hljs-keyword">null</span>) {
+            mAnimator = <span class="hljs-keyword">new</span> ViewPropertyAnimator(<span class="hljs-keyword">this</span>);
+        }
+        <span class="hljs-keyword">return</span> mAnimator;
+    }
+    ......
+}</code></pre>
+
+<p>可以看见通过View的animate()方法可以得到一个ViewPropertyAnimator的属性动画（有人说他没有继承Animator类，是的，他是成员关系，不是之前那种继承关系）。</p>
+
+<p>ViewPropertyAnimator提供了一种非常方便的方法为View的部分属性设置动画（切记，是部分属性），它可以直接使用一个Animator对象设置多个属性的动画；在多属性设置动画时，它比 上面的ObjectAnimator更加牛逼、高效，因为他会管理多个属性的invalidate方法统一调运触发，而不像上面分别调用，所以还会有一些性能优化。如下就是一个例子：</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs ">myView.animate().x(<span class="hljs-number">0</span>f).y(<span class="hljs-number">100</span>f).start(); </code></pre>
+
+
+
+<h4 id="4-2-5-java属性动画拓展之layoutanimator容器布局动画"><strong>4-2-5 Java属性动画拓展之LayoutAnimator容器布局动画</strong></h4>
+
+<p>Property动画系统还提供了对ViewGroup中View添加时的动画功能，我们可以用LayoutTransition对ViewGroup中的View进行动画设置显示。LayoutTransition的动画效果都是设置给ViewGroup，然后当被设置动画的ViewGroup中添加删除View时体现出来。该类用于当前布局容器中有View添加、删除、隐藏、显示等时候定义布局容器自身的动画和View的动画，也就是说当在一个LinerLayout中隐藏一个View的时候，我们可以自定义 整个由于LinerLayout隐藏View而改变的动画，同时还可以自定义被隐藏的View自己消失时候的动画等。</p>
+
+<p>我们可以发现LayoutTransition类中主要有五种容器转换动画类型，具体如下：</p>
+
+<ul>
+<li><p>LayoutTransition.APPEARING：当View出现或者添加的时候View出现的动画。</p></li>
+<li><p>LayoutTransition.CHANGE_APPEARING：当添加View导致布局容器改变的时候整个布局容器的动画。</p></li>
+<li><p>LayoutTransition.DISAPPEARING：当View消失或者隐藏的时候View消失的动画。</p></li>
+<li><p>LayoutTransition.CHANGE_DISAPPEARING：当删除或者隐藏View导致布局容器改变的时候整个布局容器的动画。</p></li>
+<li><p>LayoutTransition.CHANGE：当不是由于View出现或消失造成对其他View位置造成改变的时候整个布局容器的动画。</p></li>
+</ul>
+
+<p><strong>XML方式使用系统提供的默认LayoutTransition动画：</strong></p>
+
+<p>我们可以通过如下方式使用系统提供的默认ViewGroup的LayoutTransition动画：</p>
+
+
+
+<pre class="prettyprint"><code class="language-xml hljs ">android:animateLayoutChanges=”true”</code></pre>
+
+<p>在ViewGroup添加如上xml属性默认是没有任何动画效果的，因为前面说了，该动画针对于ViewGroup内部东东发生改变时才有效，所以当我们设置如上属性然后调运ViewGroup的addView、removeView方法时就能看见系统默认的动画效果了。</p>
+
+<p>还有一种就是通过如下方式设置：</p>
+
+
+
+<pre class="prettyprint"><code class="language-xml hljs ">android:layoutAnimation=”@anim/customer_anim”</code></pre>
+
+<p>通过这种方式就能实现很多吊炸天的动画。</p>
+
+<p><strong>Java方式使用系统提供的默认LayoutTransition动画：</strong></p>
+
+<p>在使用LayoutTransition时，你可以自定义这几种事件类型的动画，也可以使用默认的动画，总之最终都是通过setLayoutTransition(LayoutTransition lt)方法把这些动画以一个LayoutTransition对象设置给一个ViewGroup。</p>
+
+<p>譬如实现如上Xml方式的默认系统LayoutTransition动画如下：</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs ">mTransitioner = <span class="hljs-keyword">new</span> LayoutTransition();
+mViewGroup.setLayoutTransition(mTransitioner);</code></pre>
+
+<p>稍微再高端一点吧，我们来自定义这几类事件的动画，分别实现他们，那么你可以像下面这么处理：</p>
+
+
+
+<pre class="prettyprint"><code class="language-java hljs ">mTransitioner = <span class="hljs-keyword">new</span> LayoutTransition();
+......
+ObjectAnimator anim = ObjectAnimator.ofFloat(<span class="hljs-keyword">this</span>, <span class="hljs-string">"scaleX"</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+......<span class="hljs-comment">//设置更多动画</span>
+mTransition.setAnimator(LayoutTransition.APPEARING, anim);
+......<span class="hljs-comment">//设置更多类型的动画                mViewGroup.setLayoutTransition(mTransitioner);</span></code></pre>
+
+<p>到此通过LayoutTransition你就能实现类似小米手机计算器切换普通型和科学型的炫酷动画了。</p>
+
+<p><strong>【工匠若水 <a href="http://blog.csdn.net/yanbober">http://blog.csdn.net/yanbober</a> 转载请注明出处。<a href="https://github.com/yanbober/AndroidCommunication">点我开始Android技术交流</a>】</strong></p>
+
+
+
+<h2 id="5-android动画总结"><strong>5 Android动画总结</strong></h2>
+
+<p>到此Android动画基本已经描述OK了，也就这么三大类，尤其是属性动画更加一筹。但是特别说一句，上面基本都没有提及到各种动画的Listener接口，原因是这个玩意太简单，所以不提了，相信你会监听View的onClickListener就一定会触类旁通动画的Listener方法的。有了这些基础相信无论是自定义控件时还是自定义动画时都会起到直接的指导参考作用。其实对于Android的动画实现远远不止现在提到的这些，但是这些又是基础，所以后面还会写文章说说Android提供的其他动画参考工具类的。</p>
+
+<p>现在我们继续沿用官方的对比，翻译一下这些动画的区别，具体如下（<a href="http://developer.android.com/guide/topics/graphics/prop-animation.html#property-vs-view">点我参看原文How Property Animation Differs from View Animation</a>）：</p>
+
+<p><strong>View动画：</strong></p>
+
+<p>View动画只能够为View添加动画，如果想为非View对象添加动画须自己实现；且View动画支持的种类很少；<em>尤其是他改变的是View的绘制效果，View的属性没有改变，其位置与大小都不变；</em> View动画代码量少，使用简单方便。</p>
+
+<p><strong>Property动画：</strong></p>
+
+<p>弥补了View动画的缺陷，你可以为一个对象的任意属性添加动画，对象自己的属性会被真的改变；当对象的属性变化的时候，属性动画会自动刷新屏幕；属性动画改变的是对象的真实属性，而且属性动画不止用于View，还可以用于任何对象。</p>
+
+<p>好了，太不容易了！这一篇文章差点难产了，断断续续各种事，终于追求完美OK了，接下来博客恢复正常更新。</p>
+
+<p><strong>【工匠若水 <a href="http://blog.csdn.net/yanbober">http://blog.csdn.net/yanbober</a> 转载请注明出处。<a href="https://github.com/yanbober/AndroidCommunication">点我开始Android技术交流</a>】</strong></p>
+
+<p>PS：欢迎拍砖（提出你想了解的东东，也欢迎大家积极讨论：<a href="https://github.com/yanbober/AndroidCommunication">点我开始Android技术交流</a>）微博私信秒回复（微博账号：工匠若水）。</p>
+
+<p><img src="http://img.blog.csdn.net/20151115202142922" alt="这里写图片描述" title=""></p></div>
+        <script  type="text/javascript">
+            $(function () {
+                $('pre.prettyprint code').each(function () {
+                    var lines = $(this).text().split('\n').length;
+                    var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+                    $(this).addClass('has-numbering').parent().append($numbering);
+                    for (i = 1; i <= lines; i++) {
+                        $numbering.append($('<li/>').text(i));
+                    };
+                    $numbering.fadeIn(1700);
+                });
+            });
+        </script>
+   
+</div>
+
+
+
+
+<!-- Baidu Button BEGIN -->
+
+
+
+
+<div class="bdsharebuttonbox" style="float: right;">
+<a href="#" class="bds_more" data-cmd="more" style="background-position:0 0 !important; background-image: url(http://bdimg.share.baidu.com/static/api/img/share/icons_0_16.png?v=d754dcc0.png) !important"></a>
+<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"  style="background-position:0 -52px !important"></a>
+<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"style="background-position:0 -104px !important"></a>
+<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"style="background-position:0 -260px !important"></a>
+<a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"style="background-position:0 -208px !important"></a>
+<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"style="background-position:0 -1612px !important" ></a>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<!-- Baidu Button END -->
+
+   <link rel="stylesheet" href="http://static.blog.csdn.net/css/blog_detail.css" />
+
+    
+<!--172.16.140.13-->
+
+<!-- Baidu Button BEGIN -->
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=1536434" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+    document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->
+
+ 
+
+        <div id="digg" ArticleId="46481171">
+            <dl id="btnDigg" class="digg digg_disable">
+               
+                 <dt>顶</dt>
+                <dd>28</dd>
+            </dl>
+            <dl id="btnBury" class="digg digg_disable">
+              
+                  <dt>踩</dt>
+                <dd>3</dd>
+            </dl>
+        </div>
+
+   <ul class="article_next_prev">
+                <li class="prev_article"><span  onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian']);location.href='/yanbober/article/details/46753743';">上一篇</span><a href="/yanbober/article/details/46753743" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian'])">特别声明</a></li>
+                <li class="next_article"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian']);location.href='/yanbober/article/details/47866369';">下一篇</span><a href="/yanbober/article/details/47866369" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian'])">Android应用Preference相关及源码浅析(SharePreferences篇)</a></li>
+    </ul>
+
+    <div style="clear:both; height:10px;"></div>
+
+
+        <div class="similar_article"  style="display:none">
+                <h4>我的同类文章</h4>
+                <div class="similar_c"style="margin:20px 0px 0px 0px">
+                    <div class="similar_c_t">
+                                <label class="similar_cur">
+                                    <span  style="cursor:pointer"  onclick="GetCategoryArticles('1688987','yanbober','foot','46481171');">Android应用开发<em>（10）</em></span>
+                                </label>
+                    </div>
+                   
+                    <div class="similar_wrap tracking-ad" data-mod="popu_141"  style="max-height:195px;">
+                        <a href="http://blog.csdn.net" style="display:none">http://blog.csdn.net</a>
+                        <ul class="similar_list fl">                          
+                        </ul>
+
+                        <ul class="similar_list fr">                           
+                        </ul>
+                    </div>
+                </div>
+            </div>    
+    <script  type="text/javascript">
+        $(function () {
+            GetCategoryArticles('1688987', 'yanbober','foot','46481171');
+        });
+    </script>
+      
+</div>
+<div id="suggest"></div>
+         <script  language="javascript" type='text/javascript'>     
+             $(function(){
+                 $.get("/yanbober/svc/GetSuggestContent/46481171",function(data){
+                     $("#suggest").html(data);
+                 });     
+             });             
+         </script>  
+
+
+<style>
+.blog-ass-articl dd {
+color: #369;
+width: 99%; /*修改行*/
+float: left;
+overflow: hidden;
+font: normal normal 12px/23px "SimSun";
+height: 23px;
+margin: 0;
+padding: 0 0 0 10px;
+margin-right: 30px;
+background: url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px;
+}
+</style>
+
+<dl class="blog-ass-articl" id="res-relatived" > 
+     <dt><span>猜你在找</span></dt>    
+
+
+   
+
+
+    <div id="adCollege" style="width: 42%;float: left;"> 
+        <script src="http://csdnimg.cn/jobreco/job_reco.js" type="text/javascript"></script> 
+        <script type="text/javascript">
+            csdn.position.showEdu({
+                sourceType: "blog",
+                searchType: "detail",
+                searchKey: "46481171",
+                username: "",
+                recordcount: "5",
+                containerId: "adCollege" //容器DIV的id。 
+            });
+        </script> 
+    </div>  
+
+    
+     <div id="res"  data-mod="popu_36"  class="tracking-ad" style="width: 42%;float: left;margin-right: 30px;"></div>
+   
+</dl>
+
+
+
+<script type="text/javascript">
+    $(function () {
+        setTimeout(function () {
+            var searchtitletags = 'Android应用开发之所有动画使用详解' + ',' + $("#tags").html();
+            searchService({
+                index: 'blog',
+                query: searchtitletags,
+                from: 5,
+                size: 5,
+                appendTo: '#res',
+                url: 'recommend',
+                his: 2,
+                client: "blog_cf_enhance",
+                tmpl: '<dd style="background:url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px;"><a href="#{ url }" title="#{ title }" strategy="#{ strategy }">#{ title }</a></dd>'
+            });
+        }, 500);
+    });    
+
+ </script>   
+
+    <div id="ad_cen">        
+<!--AdForward Begin:-->
+<script type="text/javascript" src="http://csdnim.qtmojo.com/main/s?user=csdn|blog|banner2&db=csdnim&border=0&local=yes&js=ie" charset="gbk"></script>
+<!--AdForward End-->    </div>  
+
+<div class="comment_class">
+    <div id="comment_title" class="panel_head">
+        <span class="see_comment">查看评论</span><a name="comments"></a></div>
+    <div id="comment_list">
+    </div>
+    <div id="comment_bar">
+    </div>
+    <div id="comment_form">
+    </div>
+    <div class="announce">
+        * 以上用户言论只代表其个人观点，不代表CSDN网站的观点或立场<a name="reply"></a><a name="quote"></a></div>
+</div>
+
+<script type="text/javascript">
+    var fileName = '46481171';
+    var commentscount = 45;
+    var islock = false
+</script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/comment.js"></script>
+    <div id="ad_bot">
+    </div>
+<div id="report_dialog">
+</div>
+
+<div id="d-top"  style="bottom:60px;">
+        <a id="quick-reply" class="btn btn-top q-reply" title="快速回复" style="display:none;">
+            <img src="http://static.blog.csdn.net/images/blog-icon-reply.png" alt="快速回复">
+        </a>    
+
+    <a id="d-top-a" class="btn btn-top backtop"  style="display: none;" title="返回顶部" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_huidaodingbu'])" style="">         
+         <img src="http://static.blog.csdn.net/images/top.png" alt="TOP">
+    </a>
+</div>
+<script type="text/javascript">
+    $(function ()
+    {
+        $("#ad_frm_0").height("90px");
+        
+        setTimeout(function(){
+            $("#ad_frm_2").height("200px");
+        },1000);    
+    });
+  
+</script>
+<style type="text/css">
+    .tag_list
+    {
+        background: none repeat scroll 0 0 #FFFFFF;
+        border: 1px solid #D7CBC1;
+        color: #000000;
+        font-size: 12px;
+        line-height: 20px;
+        list-style: none outside none;
+        margin: 10px 2% 0 1%;
+        padding: 1px;
+    }
+    .tag_list h5
+    {
+        background: none repeat scroll 0 0 #E0DBD3;
+        color: #47381C;
+        font-size: 12px;
+        height: 24px;
+        line-height: 24px;
+        padding: 0 5px;
+        margin: 0;
+    }
+    .tag_list h5 a
+    {
+        color: #47381C;
+    }
+    .classify
+    {
+        margin: 10px 0;
+        padding: 4px 12px 8px;
+    }
+    .classify a
+    {
+        margin-right: 20px;
+        white-space: nowrap;
+    }
+</style>
+
+
+<div class="tag_list" style="display:none"></div>
+  <script  language="javascript" type='text/javascript'>     
+      $(function(){
+              setTimeout(function(){
+                  $.get("/yanbober/svc/GetTagContent",function(data){
+                      $(".tag_list").html(data).show();
+                  });     
+              });
+          },500);                       
+ </script> 
+
+
+<div id="pop_win" style="display:none ;position: absolute; z-index: 10000; border: 1px solid rgb(220, 220, 220); top: 222.5px; left: 630px; opacity: 1; background: none 0px 0px repeat scroll rgb(255, 255, 255);">
+    
+</div>
+<div id="popup_mask"></div>
+<style>
+    #popup_mask
+    {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 9999;
+        left: 0px;
+        top: 0px;
+        opacity: 0.3;
+        filter: alpha(opacity=30);
+        display: none;
+    }
+
+</style>
+
+
+
+
+<script type="text/javascript">
+    $(function(){
+        setTimeout(function(){
+            $(".comment_body:contains('回复')").each(function(index,item){
+                var u=$(this).text().split('：')[0].toString().replace("回复","")
+                var thisComment=$(this);
+                if(u)
+                {
+                    $.getJSON("https://passport.csdn.net/get/nick?callback=?", {users: u}, function(a) {
+                        if(a!=null&&a.data!=null&&a.data.length>0)
+                        {
+                            nick=a.data[0].n; 
+                            if(u!=nick)
+                            {
+                                thisComment.text(thisComment.text().replace(u,nick));  
+                            }
+                        }       
+                    });  
+                }
+            });
+        },200);  
+        
+        setTimeout(function(){
+            $("a img[src='http://js.tongji.linezing.com/stats.gif']").parent().css({"position":"absolute","left":"50%"});
+        },300);
+    });
+
+    function loginbox(){
+        var $logpop=$("#pop_win");
+        $logpop.html('<iframe src="https://passport.csdn.net/account/loginbox?service=http://static.blog.csdn.net/callback.htm" frameborder="0" height="600" width="400" scrolling="no"></iframe>');
+
+        $('#popup_mask').css({
+            opacity: 0.5,
+            width: $( document ).width() + 'px',
+            height:  $( document ).height() + 'px'
+        });
+        $('#popup_mask').css("display","block");
+ 
+        $logpop.css( {
+            top: ($( window ).height() - $logpop.height())/ 2  + $( window 
+       ).scrollTop() + 'px',
+            left:($( window ).width() - $logpop.width())/ 2
+        } );
+ 
+        setTimeout( function () {
+            $logpop.show();
+            $logpop.css( {
+                opacity: 1
+            } );
+        }, 200 );
+ 
+        $('#popup_mask').unbind("click");
+        $('#popup_mask').bind("click", function(){
+            $('#popup_mask').hide();
+            var $clopop = $("#pop_win");
+            $("#common_ask_div_sc").css("display","none");
+            $clopop.css( {
+                opacity: 0
+            } );
+            setTimeout( function () {
+                $clopop.hide();
+            }, 350 );
+            return false;
+        });
+    }    
+
+</script>
+                        <div class="clear">
+                        </div>
+                    </div>                   
+                
+            </div>
+                   
+           <div id="side">
+    <div class="side">
+<div id="panel_Profile" class="panel">
+<ul class="panel_head"><span>个人资料</span></ul>
+<ul class="panel_body profile">
+<div id="blog_userface">
+    <a href="http://my.csdn.net/yanbober" target="_blank">
+    <img src="http://avatar.csdn.net/7/3/D/1_yanbober.jpg" title="访问我的空间" style="max-width:90%"/>
+    </a>
+    <br />
+    <span><a href="http://my.csdn.net/yanbober" class="user_name" target="_blank">yanbober</a></span>
+</div>
+<div class="interact">
+
+    <a href="javascript:void(0);" class="attent" id="span_add_follow" title="[加关注]"></a>
+
+ <a href="javascript:void(0);" class="letter"  title="[发私信]" onclick="window.open('http://msg.csdn.net/letters/model?receiver=yanbober','_blank','height=350,width=700');_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_sixin'])"></a>  
+</div>
+<div id="blog_medal">
+                       <div class="ico_expert"  onclick="javascript:location='http://blog.csdn.net/experts/rule.html'" title="CSDN认证专家" style="cursor:pointer;width:60px;height:60px;background:url('http://c.csdnimg.cn/jifen/images/xunzhang/xunzhang/bokezhuanjiamiddle.png') no-repeat" ></div>
+                <div id="bms_box">
+                                            <a  target="_blank">
+                                                    <img src="http://c.csdnimg.cn/jifen/images/xunzhang/xunzhang/zhuanlandaren.png" onmouseover="m_over_m(this,2)" onmouseout="m_out_m()" alt="2" >
+                                            </a>
+               </div>
+</div>
+<ul id="blog_rank">
+    <li>访问：<span>295559次</span></li>
+    <li>积分：<span>4508</span> </li>    
+    <li >等级： <span style="position:relative;display:inline-block;z-index:1" >
+            <img src="http://c.csdnimg.cn/jifen/images/xunzhang/jianzhang/blog5.png" alt="" style="vertical-align: middle;" id="leveImg">
+            <div id="smallTittle" style=" position: absolute;  left: -24px;  top: 25px;  text-align: center;  width: 101px;  height: 32px;  background-color: #fff;  line-height: 32px;  border: 2px #DDDDDD solid;  box-shadow: 0px 2px 2px rgba (0,0,0,0.1);  display: none;   z-index: 999;">
+            <div style="left: 42%;  top: -8px;  position: absolute;  width: 0;  height: 0;  border-left: 10px solid transparent;  border-right: 10px solid transparent;  border-bottom: 8px solid #EAEAEA;"></div>
+            积分：4508 </div>
+        </span>  </li>
+    <li>排名：<span>第3599名</span></li>
+</ul>
+<ul id="blog_statistics">
+    <li>原创：<span>94篇</span></li>
+    <li>转载：<span>10篇</span></li>
+    <li>译文：<span>0篇</span></li>
+    <li>评论：<span>702条</span></li>
+</ul>
+</ul>
+</div>
+
+
+
+
+<div id="custom_column_38580635" class="panel">
+<ul class="panel_head"><span>联系方式</span></ul>
+<ul class="panel_body">
+<h3>QQ交流群: 519666583</h3>
+<h3>Email: yanbober@sina.com </h3>
+<h3><a href="https://github.com/yanbober">GitHub</a> </h3>
+<script type="text/javascript">document.write('<iframe width="150" height="710" frameborder="0" scrolling="no" src="http://widget.weibo.com/relationship/bulkfollow.php?language=zh_cn&uids=1623315217&wide=1&color=FFA3B1,F5E49C,0082CB,666666&showtitle=0&showinfo=1&sense=0&verified=1&count=5&refer='+encodeURIComponent(location.href)+'&dpc=1"></iframe>')</script>
+</ul>
+</div><div id="panel_Category" class="panel">
+<ul class="panel_head"><span>文章分类</span></ul>
+<ul class="panel_body">    
+                 <li>
+                    <a href="/yanbober/article/category/1688987" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Android应用开发</a><span>(10)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/3206943" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Android应用框架浅析</a><span>(15)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/3147653" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Android开源代码学习</a><span>(9)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/3148147" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">android NDK开发</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/3267845" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Android系统源码浅析</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/3148699" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">OO设计模式</a><span>(26)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/3148127" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">服务器接口开发</a><span>(0)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/3201257" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">数据库</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/1296474" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Unix C及C高阶编程</a><span>(13)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/1603655" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">Java编程</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/1372181" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">开发设计思想</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/3147575" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">开发工具</a><span>(4)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/1296478" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">嵌入式开发</a><span>(6)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/1532391" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">硬件电路</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/yanbober/article/category/3188449" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">脚本相关</a><span>(4)</span>
+                </li>
+</ul>
+</div><div id="panel_Category" class="panel">
+    <ul class="panel_head"><span>博客专栏</span></ul>
+    <ul class="panel_body" id="sp_column">
+    <table cellpadding="0" cellspacing="0"><tr>
+    <td style="padding:10px 10px 0 0;">
+    <a href="http://blog.csdn.net/column/details/oo-designpattern.html" target="_blank"><img src="http://img.blog.csdn.net/20151123180314145" style="width:75px;height:75px;" /></a>
+    </td>
+    <td style="padding:10px 0; vertical-align:top;">
+    <a href="http://blog.csdn.net/column/details/oo-designpattern.html" target="_blank">面向对象设计模式</a>
+    <p>文章：26篇</p>
+    <span>阅读：16459</span>
+    </td>
+    </tr></table>
+    </ul>
+</div><div class="panel" id="panel_Search">
+    <ul class="panel_head"><span>文章搜索</span></ul>
+    <ul class="panel_body">
+        <form id="frmSearch" action="http://so.csdn.net/search" class="form_search" target="_blank">
+        <span><input id="inputSearch" type="text" class="blogsearch" title="请输入关键字" /></span>
+        <input id="btnSubmit" type="button" value="搜索" title="search in blog" />
+        <input type="hidden" name="q" id="inputQ" />
+        <input type="hidden" name="t" value="blog" />
+        <a id="btnSearchBlog" target="_blank"></a>
+        </form>
+    </ul>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {           
+            search();
+        });
+
+        $("#frmSearch").submit(function () {
+            search();
+            return false;
+        });
+
+        function search()
+        {
+            var url = "http://so.csdn.net/so/search/s.do?q=" + encodeURIComponent($("#inputSearch").val()) + "&u=" + username + "&t=blog";
+            window.location.href = url;
+        }   
+    });
+</script><div id="panel_Archive" class="panel">
+<ul class="panel_head"><span>文章存档</span></ul>
+<ul class="panel_body">
+<div id="archive_list">
+<!--归档统计-->
+<li><a href="/yanbober/article/month/2016/01">2016年01月</a><span>(6)</span></li><li><a href="/yanbober/article/month/2015/12">2015年12月</a><span>(1)</span></li><li><a href="/yanbober/article/month/2015/11">2015年11月</a><span>(1)</span></li><li><a href="/yanbober/article/month/2015/10">2015年10月</a><span>(5)</span></li><li><a href="/yanbober/article/month/2015/09">2015年09月</a><span>(2)</span></li><li><a href="/yanbober/article/month/2015/08">2015年08月</a><span>(2)</span></li><li><a href="/yanbober/article/month/2015/07">2015年07月</a><span>(1)</span></li><li><a href="/yanbober/article/month/2015/06">2015年06月</a><span>(2)</span></li><li><a href="/yanbober/article/month/2015/05">2015年05月</a><span>(29)</span></li><li><a href="/yanbober/article/month/2015/04">2015年04月</a><span>(25)</span></li><li><a href="/yanbober/article/month/2014/03">2014年03月</a><span>(1)</span></li><li><a href="/yanbober/article/month/2013/09">2013年09月</a><span>(3)</span></li><li><a href="/yanbober/article/month/2013/08">2013年08月</a><span>(2)</span></li><li><a href="/yanbober/article/month/2013/07">2013年07月</a><span>(1)</span></li><li><a href="/yanbober/article/month/2013/06">2013年06月</a><span>(1)</span></li><li><a href="/yanbober/article/month/2013/04">2013年04月</a><span>(2)</span></li><li><a href="/yanbober/article/month/2013/03">2013年03月</a><span>(9)</span></li><li><a href="/yanbober/article/month/2012/12">2012年12月</a><span>(10)</span></li>
+</div>
+</ul>
+</div>
+<div id="hotarticls" class="panel">
+<ul class="panel_head">
+    <span>       
+阅读排行    </span>
+</ul>
+
+<ul class="panel_body itemlist">
+<li>
+<a href="/yanbober/article/details/46128379" title="Android应用层View绘制流程与源码分析">Android应用层View绘制流程与源码分析</a><span>(15378)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/46481171" title="Android应用开发之所有动画使用详解">Android应用开发之所有动画使用详解</a><span>(13435)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/46361191" title="Android应用Activity、Dialog、PopWindow、Toast窗口添加机制及源码分析">Android应用Activity、Dialog、PopWindow、Toast窗口添加机制及源码分析</a><span>(12290)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/45887547" title="Android触摸屏事件派发机制详解与源码分析一(View篇)">Android触摸屏事件派发机制详解与源码分析一(View篇)</a><span>(11065)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/48394201" title="Android应用开发性能优化完全分析">Android应用开发性能优化完全分析</a><span>(11001)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/45970721" title="Android应用setContentView与LayoutInflater加载解析机制源码分析">Android应用setContentView与LayoutInflater加载解析机制源码分析</a><span>(10919)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/21000579" title="Android一种View动态折线绘制的实现实战">Android一种View动态折线绘制的实现实战</a><span>(10564)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/45306483" title="Android Studio入门到精通">Android Studio入门到精通</a><span>(9640)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/46417531" title="Android应用开发allowBackup敏感信息泄露的一点反思">Android应用开发allowBackup敏感信息泄露的一点反思</a><span>(6757)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/49314255" title="Gradle脚本基础全攻略">Gradle脚本基础全攻略</a><span>(6682)</span>
+</li>
+</ul>
+</div>
+<div id="hotarticls2" class="panel">
+<ul class="panel_head"><span>评论排行</span></ul>
+<ul class="panel_body itemlist">
+<li>
+<a href="/yanbober/article/details/48394201" title="Android应用开发性能优化完全分析">Android应用开发性能优化完全分析</a><span>(71)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/46128379" title="Android应用层View绘制流程与源码分析">Android应用层View绘制流程与源码分析</a><span>(50)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/45887547" title="Android触摸屏事件派发机制详解与源码分析一(View篇)">Android触摸屏事件派发机制详解与源码分析一(View篇)</a><span>(46)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/46481171" title="Android应用开发之所有动画使用详解">Android应用开发之所有动画使用详解</a><span>(45)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/46361191" title="Android应用Activity、Dialog、PopWindow、Toast窗口添加机制及源码分析">Android应用Activity、Dialog、PopWindow、Toast窗口添加机制及源码分析</a><span>(34)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/50419117" title="Android应用坐标系统全面详解">Android应用坐标系统全面详解</a><span>(31)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/45970721" title="Android应用setContentView与LayoutInflater加载解析机制源码分析">Android应用setContentView与LayoutInflater加载解析机制源码分析</a><span>(31)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/46342361" title="Android自定义控件（状态提示图表）">Android自定义控件（状态提示图表）</a><span>(29)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/47866369" title="Android应用Preference相关及源码浅析(SharePreferences篇)">Android应用Preference相关及源码浅析(SharePreferences篇)</a><span>(23)</span>
+</li>
+<li>
+<a href="/yanbober/article/details/45967639" title="Android应用Context详解及源码解析">Android应用Context详解及源码解析</a><span>(22)</span>
+</li>
+</ul>
+</div>
+    </div>
+    <div class="clear">
+    </div>
+ </div>   
+            <div class="clear">
+            </div>
+        </div>
+        
+
+<script type="text/javascript" src="http://c.csdnimg.cn/rabbit/cnick/cnick.js"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/newblog.min.js"></script>
+
+
+<script type="text/javascript" src="http://medal.blog.csdn.net/showblogmedal.ashx?blogid=1382713"></script>
+<script type="text/javascript" src="http://static.blog.csdn.net/scripts/JavaScript1.js"></script>
+
+    <script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+<script type="text/javascript">document.write("<img src=http://counter.csdn.net/pv.aspx?id=24 border=0 width=0 height=0>");</script>
+<script type="text/javascript" src="http://www.csdn.net/ui/scripts/Csdn/counter.js"></script>
+<script type="text/javascript" src="http://ad.csdn.net/scripts/ad-blog.js"></script>
+<script type="text/javascript">
+    $(function () {
+        function __get_code_toolbar(snippet_id) {
+            return $("<span data-mod='popu_167'><a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "' target='_blank' title='在CODE上查看代码片'  style='text-indent:0;'><img src='https://code.csdn.net/assets/CODE_ico.png' width=12 height=12 alt='在CODE上查看代码片' style='position:relative;top:1px;left:2px;'/></a></span>"
+                    + "<span data-mod='popu_170'><a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "/fork' target='_blank' title='派生到我的代码片' style='text-indent:0;'><img src='https://code.csdn.net/assets/ico_fork.svg' width=12 height=12 alt='派生到我的代码片' style='position:relative;top:2px;left:2px;'/></a></span>");
+        }
+        
+        $("[code_snippet_id]").each(function () {
+            __s_id = $(this).attr("code_snippet_id");
+            if (__s_id != null && __s_id != "" && __s_id != 0 && parseInt(__s_id) > 70020) {
+                __code_tool = __get_code_toolbar(__s_id);
+                $(this).prev().find(".tools").append(__code_tool);
+            }
+        });
+
+        $(".bar").show();
+    });
+</script>
+
+
+
+
+    </div>
+      <!--new top-->
+    
+    <script id="csdn-toolbar-id" btnId="header_notice_num" wrapId="note1" count="5" subCount="5" type="text/javascript" src="http://c.csdnimg.cn/public/common/toolbar/js/toolbar.js"></script>     <!--new top-->
+   
+    <link href="http://c.csdnimg.cn/comm_ask/css/ask_float_block.css" type="text/css" rel="stylesheet" />
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/libs/wmd.js'></script>
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/libs/showdown.js'></script>
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/libs/prettify.js'></script>
+    <script language='JavaScript' type='text/javascript' src='http://c.csdnimg.cn/comm_ask/js/apps/ask_float_block.js'></script>
+   
+</body>
+</html>   
+ 
