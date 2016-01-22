@@ -13,6 +13,7 @@
         android:id="@+id/appIcon"
         android:layout_width="86dp"
         android:layout_height="86dp"
+        android:layout_marginLeft="5dp"
         android:src="@mipmap/icon_empty"
         />
     <TextView

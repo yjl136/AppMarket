@@ -1,1 +1,1 @@
-include ':ViewPageIndictor_lib','app','IflytekVoice'
+include ':ViewPageIndictor_lib', ':uidemo','app','IflytekVoice'

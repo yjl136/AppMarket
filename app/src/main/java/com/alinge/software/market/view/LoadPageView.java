@@ -3,6 +3,7 @@ package com.alinge.software.market.view;
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -112,7 +113,9 @@ public abstract class LoadPageView extends FrameLayout {
      * @param view
      */
     private void addContentView(View view) {
-        addView(view, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        FrameLayout.LayoutParams lp=new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lp.gravity= Gravity.CENTER;
+        addView(view,lp );
     }
     /**
      * 根据不同状态显示不同页面

@@ -41,7 +41,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-      AppInfo app= apps.get(position);
+        AppInfo app= apps.get(position);
         //异步加载图片
         VolleyUtils.display(holder.appIcon,app.getAppIcon());
         holder.appName.setText(app.getSoftwareName());
@@ -49,7 +49,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.ViewHolder> {
 
     @Override
     public AppAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = inflater.inflate(R.layout.app_item, null);
+        View itemView = inflater.inflate(R.layout.app_item,parent, false);
         ViewHolder vh = new ViewHolder(itemView);
         return vh;
     }
