@@ -1,6 +1,5 @@
 package com.alinge.software.market.fragment.home;
 
-import android.animation.LayoutTransition;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -84,7 +83,7 @@ public class TabFragment extends VolleyResponseFragment {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new AppItemDecoration());
+        recyclerView.addItemDecoration(new AppItemDecoration(getActivity(),LinearLayoutManager.VERTICAL));
         mAppAdapter = new AppAdapter(getActivity());
         recyclerView.setAdapter(mAppAdapter);
         return view;
@@ -125,17 +124,22 @@ public class TabFragment extends VolleyResponseFragment {
         if (!TextUtils.isEmpty(object.toString())) {
             try {
                 QualityResultInfo result = new QualityResultInfo();
-                result.fromJson((JSONObject)object);
-                List<AppInfo> apps=null;
-                if (Type.HOTS.equals(mTitle)) {
-                    apps=result.getGiftsLists();
-                } else if (Type.RECOMMEND.equals(mTitle)) {
-                    apps=result.getRecommendLists();
-                } else if (Type.NEWS.equals(mTitle)) {
-                    apps=result.getNewestLists();
+                result.fromJson((JSONObject) object);
+                if(result.getResultCode()>0){
+                    List<AppInfo> apps=null;
+                    if (Type.HOTS.equals(mTitle)) {
+                        apps=result.getGiftsLists();
+                    } else if (Type.RECOMMEND.equals(mTitle)) {
+                        apps=result.getRecommendLists();
+                    } else if (Type.NEWS.equals(mTitle)) {
+                        apps=result.getNewestLists();
+                    }
+                    mAppAdapter.setLists(apps);
+                    loadPageView.stateChange(LoadPageView.STATE_SUCCESS);
+                }else{
+                    loadPageView.stateChange(LoadPageView.STATE_ERROR);
                 }
-                mAppAdapter.setLists(apps);
-                loadPageView.stateChange(LoadPageView.STATE_SUCCESS);
+
             } catch (Exception e) {
                 loadPageView.stateChange(LoadPageView.STATE_ERROR);
             }

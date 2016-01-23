@@ -29,4 +29,8 @@ public class FieldUtils {
     public static String Version="Version";
     public static String FileSize="FileSize";
 
+    public static String ReturnCode="ReturnCode";
+    public static String ReturnMessage="ReturnMessage";
+
+
 }

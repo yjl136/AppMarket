@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.alinge.software.market.R;
+import com.alinge.software.market.utils.LogUtils;
 
 /**
  * 作者： yejianlin
@@ -79,8 +80,10 @@ public abstract class LoadPageView extends FrameLayout {
      * @return
      */
     private View createErrorView() {
-     View view=View.inflate(getContext(), R.layout.loading_layout, null);
-        return view;
+        TextView tv=new TextView(getContext());
+        tv.setText("加载错误");
+        tv.setTextSize(25);
+        return tv;
     }
 
     /**
@@ -136,6 +139,7 @@ public abstract class LoadPageView extends FrameLayout {
      * @param state
      */
     public void stateChange(int state){
+        LogUtils.info(null,"state:"+state );
         this.state=state;
         showView();
     }
