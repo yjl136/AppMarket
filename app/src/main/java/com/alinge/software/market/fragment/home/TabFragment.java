@@ -1,9 +1,11 @@
 package com.alinge.software.market.fragment.home;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,11 +29,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TabFragment extends VolleyResponseFragment {
+public class TabFragment extends VolleyResponseFragment implements SwipeRefreshLayout.OnRefreshListener {
     public static final String TITLE = "title";
     private String mTitle = "Defaut Value";
     private LoadPageView loadPageView;
     private AppAdapter mAppAdapter;
+    private  SwipeRefreshLayout layout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,7 +71,12 @@ public class TabFragment extends VolleyResponseFragment {
                 load();
             }
         };
-        return loadPageView;
+        layout=new SwipeRefreshLayout(getActivity());
+        SwipeRefreshLayout.LayoutParams lp=new SwipeRefreshLayout.LayoutParams(-1,-1);
+        layout.addView(loadPageView,lp);
+        layout.setColorSchemeColors(R.color.HomeTitleBarBg);
+        layout.setOnRefreshListener(this);
+        return layout;
 
     }
 
@@ -83,7 +91,7 @@ public class TabFragment extends VolleyResponseFragment {
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new AppItemDecoration(getActivity(),LinearLayoutManager.VERTICAL));
+        recyclerView.addItemDecoration(new AppItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         mAppAdapter = new AppAdapter(getActivity());
         recyclerView.setAdapter(mAppAdapter);
         return view;
@@ -113,6 +121,7 @@ public class TabFragment extends VolleyResponseFragment {
         if (volleyError != null) {
             loadPageView.stateChange(LoadPageView.STATE_ERROR);
         }
+        layout.setRefreshing(false);
     }
 
     /**
@@ -146,6 +155,12 @@ public class TabFragment extends VolleyResponseFragment {
         } else {
             loadPageView.stateChange(LoadPageView.STATE_EMPTY);
         }
+        layout.setRefreshing(false);
+    }
+
+    @Override
+    public void onRefresh() {
+        load();
     }
 
     public static TabFragment newInstance(String title) {
