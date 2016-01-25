@@ -26,6 +26,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.ViewHolder> {
     private List<AppInfo> apps;
     private Context context;
     private LayoutInflater inflater;
+    private OnItemClickListener mListener;
 
     public AppAdapter(Context context) {
         super();
@@ -52,15 +53,29 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.ViewHolder> {
         //scale.setDuration(300);
         Animation scale=AnimationUtils.loadAnimation(context, R.anim.app_item_scale);
         holder.itemView.startAnimation(scale);
+        holder.itemView.setTag(app);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+              if(mListener!=null){
+                  mListener.onItemClick(v);
+              }
+          }
+      });
     }
 
     @Override
     public AppAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = inflater.inflate(R.layout.app_item,parent, false);
+        View itemView = inflater.inflate(R.layout.app_item, parent, false);
         ViewHolder vh = new ViewHolder(itemView);
         return vh;
     }
-
+    public void addOnItemClickListener(OnItemClickListener itemClickListener){
+        this.mListener=itemClickListener;
+    }
+    public interface  OnItemClickListener{
+         void onItemClick(View itemView);
+    }
     class ViewHolder extends RecyclerView.ViewHolder {
         public AsycImageView appIcon;
         public  TextView appName;

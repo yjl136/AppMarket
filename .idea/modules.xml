@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AppMarket.iml" filepath="$PROJECT_DIR$/AppMarket.iml" />
+      <module fileurl="file://$PROJECT_DIR$/BasePopup/BasePopup.iml" filepath="$PROJECT_DIR$/BasePopup/BasePopup.iml" />
       <module fileurl="file://$PROJECT_DIR$/IflytekVoice/IflytekVoice.iml" filepath="$PROJECT_DIR$/IflytekVoice/IflytekVoice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/UiDemo/UiDemo.iml" filepath="$PROJECT_DIR$/UiDemo/UiDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/ViewPageIndictor_lib/ViewPageIndictor_lib.iml" filepath="$PROJECT_DIR$/ViewPageIndictor_lib/ViewPageIndictor_lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/UiDemo/uidemo.iml" filepath="$PROJECT_DIR$/UiDemo/uidemo.iml" />

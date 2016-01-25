@@ -82,12 +82,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        understanderBt.setOnClickListener(new View.OnClickListener() {
+      /*  understanderBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 understander.understanderVoice();
             }
-        });
+        });*/
         textUnderstanderBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //检查是否安装了语记
-                if(!SpeechUtility.getUtility().checkServiceInstalled()){
+                if(SpeechUtility.getUtility().checkServiceInstalled()){
                     ApkInstaller installer=new ApkInstaller(MainActivity.this);
                     installer.install();
                 }else{

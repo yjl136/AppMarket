@@ -125,7 +125,7 @@ public class IflytekSynthesizer {
         // 设置在线合成发音人
         mSynthesizer.setParameter(SpeechConstant.VOICE_NAME, "aisxa");
         //设置合成语速
-        mSynthesizer.setParameter(SpeechConstant.SPEED, "80");
+        mSynthesizer.setParameter(SpeechConstant.SPEED, "70");
         //  mSynthesizer.setParameter(SpeechConstant.BACKGROUND_SOUND,"1");
         //设置合成音调
         mSynthesizer.setParameter(SpeechConstant.PITCH, "60");

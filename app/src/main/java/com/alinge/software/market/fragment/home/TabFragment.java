@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.alinge.software.market.R;
 import com.alinge.software.market.adapter.AppAdapter;
@@ -29,7 +30,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TabFragment extends VolleyResponseFragment implements SwipeRefreshLayout.OnRefreshListener {
+public class TabFragment extends VolleyResponseFragment implements SwipeRefreshLayout.OnRefreshListener,AppAdapter.OnItemClickListener {
     public static final String TITLE = "title";
     private String mTitle = "Defaut Value";
     private LoadPageView loadPageView;
@@ -171,4 +172,11 @@ public class TabFragment extends VolleyResponseFragment implements SwipeRefreshL
         return tabFragment;
     }
 
+    @Override
+    public void onItemClick(View itemView) {
+       AppInfo app = (AppInfo)itemView.getTag();
+        if(app!=null){
+            Toast.makeText(getActivity(),app.getSoftwareName(),Toast.LENGTH_SHORT).show();
+        }
+    }
 }

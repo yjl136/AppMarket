@@ -1,1 +1,2 @@
+include ':BasePopup'
 include 'app', 'IflytekVoice', 'ViewPageIndictor_lib', 'UiDemo'
