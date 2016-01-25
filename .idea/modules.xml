@@ -6,7 +6,6 @@
       <module fileurl="file://$PROJECT_DIR$/IflytekVoice/IflytekVoice.iml" filepath="$PROJECT_DIR$/IflytekVoice/IflytekVoice.iml" />
       <module fileurl="file://$PROJECT_DIR$/ViewPageIndictor_lib/ViewPageIndictor_lib.iml" filepath="$PROJECT_DIR$/ViewPageIndictor_lib/ViewPageIndictor_lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/UiDemo/uidemo.iml" filepath="$PROJECT_DIR$/UiDemo/uidemo.iml" />
     </modules>
   </component>
 </project>
