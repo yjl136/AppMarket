@@ -91,7 +91,7 @@ public class TabFragment extends VolleyResponseFragment implements SwipeRefreshL
         View view = inflate.inflate(R.layout.fragment_tab, null);
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-       recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new AppItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         mAppAdapter = new AppAdapter(getActivity());
         recyclerView.setAdapter(mAppAdapter);

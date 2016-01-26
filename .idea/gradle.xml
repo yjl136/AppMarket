@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/IflytekVoice" />
             <option value="$PROJECT_DIR$/ViewPageIndictor_lib" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/wcl-leakcanary-demo" />
           </set>
         </option>
       </GradleProjectSettings>

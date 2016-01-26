@@ -25,7 +25,7 @@ public class IflytekSynthesizer {
     private int curentCode = Code.SYNTHESIZER_FREE;
 
     public IflytekSynthesizer(Context context) {
-        this.context = context;
+        this.context = context.getApplicationContext();
     }
 
     private SynthesizerListener mSynthesizerListener = new SynthesizerListener() {
@@ -158,4 +158,9 @@ public class IflytekSynthesizer {
         }
     }
 
+    public void stopSpeeking() {
+        if (mSynthesizer != null) {
+            mSynthesizer.stopSpeaking();
+        }
+    }
 }

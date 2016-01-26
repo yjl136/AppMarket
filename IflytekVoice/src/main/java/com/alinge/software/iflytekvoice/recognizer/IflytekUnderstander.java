@@ -205,7 +205,7 @@ public class IflytekUnderstander {
         if (mTextUnderstander == null) {
             mTextUnderstander = TextUnderstander.getTextUnderstander();
             if (mTextUnderstander == null) {
-                mTextUnderstander = TextUnderstander.createTextUnderstander(context, new KimiInitListener("TextUnderstander"));
+                mTextUnderstander = TextUnderstander.createTextUnderstander(context.getApplicationContext(), new KimiInitListener("TextUnderstander"));
             }
         }
     }
@@ -248,6 +248,11 @@ public class IflytekUnderstander {
             curentCode = Code.UNDERSTANDER_FREE;
         } else {
             curentCode = code;
+        }
+    }
+    public  void stopUnderstanding(){
+        if(mSpeechUnderstander!=null){
+            mSpeechUnderstander.stopUnderstanding();
         }
     }
 }
