@@ -41,7 +41,7 @@ public class IflytekRecognizer {
     private HashMap<String, String> mResults = new LinkedHashMap<String, String>();
 
     public IflytekRecognizer(Context context) {
-        this.context = context;
+        this.context = context.getApplicationContext();
     }
 
     private RecognizerListener mRecognizerListener = new RecognizerListener() {
@@ -203,7 +203,7 @@ public class IflytekRecognizer {
      */
     private synchronized void startRecognizerDialog() {
         if (mRecognizerDialog == null) {
-            mRecognizerDialog = new RecognizerDialog(context.getApplicationContext(), new InitListener() {
+            mRecognizerDialog = new RecognizerDialog(context, new InitListener() {
                 @Override
                 public void onInit(int code) {
                     if (code == ErrorCode.SUCCESS) {
@@ -227,7 +227,7 @@ public class IflytekRecognizer {
             //SpeechRecognizer默认是单列，先获取，获取不到才去创建
             mRecognizer = SpeechRecognizer.getRecognizer();
             if (mRecognizer == null) {
-                mRecognizer = SpeechRecognizer.createRecognizer(context.getApplicationContext(), new InitListener() {
+                mRecognizer = SpeechRecognizer.createRecognizer(context, new InitListener() {
                     @Override
                     public void onInit(int code) {
                         if (code == ErrorCode.SUCCESS) {

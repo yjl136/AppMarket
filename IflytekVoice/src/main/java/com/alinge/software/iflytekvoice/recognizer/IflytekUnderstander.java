@@ -31,7 +31,7 @@ public class IflytekUnderstander {
     private int curentCode = Code.UNDERSTANDER_FREE;
 
     public IflytekUnderstander(Context context) {
-        this.context = context;
+        this.context = context.getApplicationContext();
     }
 
     /**
@@ -205,7 +205,7 @@ public class IflytekUnderstander {
         if (mTextUnderstander == null) {
             mTextUnderstander = TextUnderstander.getTextUnderstander();
             if (mTextUnderstander == null) {
-                mTextUnderstander = TextUnderstander.createTextUnderstander(context.getApplicationContext(), new KimiInitListener("TextUnderstander"));
+                mTextUnderstander = TextUnderstander.createTextUnderstander(context, new KimiInitListener("TextUnderstander"));
             }
         }
     }

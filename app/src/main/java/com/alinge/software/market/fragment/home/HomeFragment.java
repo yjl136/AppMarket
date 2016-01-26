@@ -100,7 +100,7 @@ public class HomeFragment extends BaseFragment {
     private void initView(View content) {
         mPagerIndicator = (TitlePageIndicator) content.findViewById(R.id.pagerIndicator);
         mViewPager = (ViewPager) content.findViewById(R.id.viewPager);
-        //mViewPager.setOffscreenPageLimit(2);
+        mViewPager.setOffscreenPageLimit(2);
 
     }
 
