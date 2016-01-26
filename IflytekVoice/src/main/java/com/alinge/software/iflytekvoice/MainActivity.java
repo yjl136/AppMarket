@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.alinge.software.iflytekvoice.popup.ScalePopupWindow;
 import com.alinge.software.iflytekvoice.recognizer.IflytekRecognizer;
 import com.alinge.software.iflytekvoice.recognizer.IflytekSynthesizer;
 import com.alinge.software.iflytekvoice.recognizer.IflytekUnderstander;
@@ -110,13 +111,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //检查是否安装了语记
-                if(SpeechUtility.getUtility().checkServiceInstalled()){
+                if(!SpeechUtility.getUtility().checkServiceInstalled()){
                     ApkInstaller installer=new ApkInstaller(MainActivity.this);
                     installer.install();
                 }else{
                     //已经安装了语记
-                    Intent intent=new Intent(MainActivity.this,VoiceHelperActivity.class);
-                    startActivity(intent);
+                   // Intent intent=new Intent(MainActivity.this,VoiceHelperActivity.class);
+                    //startActivity(intent);
+                    ScalePopupWindow scalePopupWindow=new ScalePopupWindow(MainActivity.this);
+                    scalePopupWindow.show();
                 }
             }
         });
