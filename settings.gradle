@@ -1,2 +1,2 @@
-include ':wcl-leakcanary-demo', ':pulltorefreshandload'
+include ':wcl-leakcanary-demo', ':pulltorefreshandload', ':PullZoomView', ':pulltozoomview-library'
 include 'app', 'IflytekVoice', 'ViewPageIndictor_lib'
