@@ -14,15 +14,16 @@ import com.alinge.software.market.fragment.factory.FragmentFactory;
  */
 public class FragmentAdapter extends FragmentPagerAdapter {
          private int tabCount;
-
+         private FragmentFactory factory;
         public FragmentAdapter(FragmentManager fm,int count) {
             super(fm);
             this.tabCount=count;
+            factory=new FragmentFactory();
         }
 
         @Override
         public Fragment getItem(int position) {
-            return FragmentFactory.createFragment(position);
+            return factory.createFragment(position);
         }
 
         @Override

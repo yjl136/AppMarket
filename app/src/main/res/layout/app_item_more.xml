@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="76dp"
+    >
+<TextView
+    android:id="@+id/moreTv"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textSize="50sp"
+    android:gravity="center"
+    android:text="+"
+    />
+</android.support.v7.widget.CardView>

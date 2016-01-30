@@ -5,7 +5,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -94,6 +93,7 @@ public class TabFragment extends VolleyResponseFragment implements SwipeRefreshL
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new AppItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         mAppAdapter = new AppAdapter(getActivity());
+        mAppAdapter.addOnItemClickListener(this);
         recyclerView.setAdapter(mAppAdapter);
         return view;
     }

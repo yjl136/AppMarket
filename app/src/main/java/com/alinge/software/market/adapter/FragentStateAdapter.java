@@ -13,17 +13,17 @@ import com.alinge.software.market.fragment.factory.FragmentFactory;
  */
 public class FragentStateAdapter extends FragmentStatePagerAdapter {
     private int tabCount;
+    private FragmentFactory factory;
 
-    public FragentStateAdapter(FragmentManager fm,int count) {
+    public FragentStateAdapter(FragmentManager fm, int count) {
         super(fm);
-        this.tabCount=count;
+        this.tabCount = count;
+        factory = new FragmentFactory();
     }
-
     @Override
     public Fragment getItem(int position) {
-        return FragmentFactory.createFragment(position);
+        return factory.createFragment(position);
     }
-
     @Override
     public int getCount() {
         return tabCount;

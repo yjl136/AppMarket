@@ -29,7 +29,7 @@ public class VolleyUtils {
     private  Context context;
     private static RequestQueue queue;
     private VolleyUtils(Context context){
-        this.context=context;
+        this.context=context.getApplicationContext();
         queue= Volley.newRequestQueue(context);
     }
     public static VolleyUtils createVolleyUtils(Context context){

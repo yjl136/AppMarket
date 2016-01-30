@@ -37,7 +37,6 @@ public class DotsTextView extends TextView {
     private boolean lockDotTwo;
     private boolean lockDotThree;
 
-    private Handler handler;
     private AnimatorSet mAnimatorSet = new AnimatorSet();
     private float textWidth;
 
@@ -57,7 +56,6 @@ public class DotsTextView extends TextView {
     }
 
     private void init(Context context, AttributeSet attrs) {
-        handler = new Handler(Looper.getMainLooper());
 
         if (attrs != null) {
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.WaitingDots);

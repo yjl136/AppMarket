@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //检查是否安装了语记
-                if(!SpeechUtility.getUtility().checkServiceInstalled()){
+                if(SpeechUtility.getUtility().checkServiceInstalled()){
                     ApkInstaller installer=new ApkInstaller(MainActivity.this);
                     installer.install();
                 }else{

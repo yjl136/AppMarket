@@ -226,19 +226,19 @@ public class ScalePopupWindow extends PopupWindow implements Animation.Animation
         if(hours<10){
             //早上
             drawble=R.drawable.voice_morning_animation;
-            text="早上好！，小朋友,我是皮皮猴";
+            text="早上好！，小朋友";
         }else if(hours>=10 && hours<=14){
             //中午
             drawble=R.drawable.voice_midday_animation;
-            text="中午好！，小朋友我是皮皮猴";
+            text="中午好！，小朋友";
         }else if(hours>14 && hours<20){
             //下午
             drawble=R.drawable.voice_morning_animation;
-            text="下午好！，小朋友我是皮皮猴";
+            text="下午好！，小朋友";
         }else {
             //晚上
             drawble=R.drawable.voice_night_animation;
-            text="晚上好！，小朋友我是皮皮猴";
+            text="晚上好！，小朋友";
         }
         imageView.setBackgroundResource(drawble);
         drawable=(AnimationDrawable)imageView.getBackground();
