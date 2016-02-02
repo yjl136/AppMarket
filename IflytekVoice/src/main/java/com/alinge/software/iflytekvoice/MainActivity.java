@@ -39,17 +39,19 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private TextView resultTv;
     private Button recognizerBt, synthesizerBt, shakeBt, understanderBt, textUnderstanderBt;
+/*
     private IflytekRecognizer recognizer;
-    private IflytekSynthesizer synthesizer;
-    private RecognizerReceiver mRecognizerReceiver;
-    private IflytekUnderstander understander;
+*/
+   // private IflytekSynthesizer synthesizer;
+   // private RecognizerReceiver mRecognizerReceiver;
+   // private IflytekUnderstander understander;
     private Button uploadBt, voiceHelper, changeFileName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initReceiver();
+      //  initReceiver();
         resultTv = (TextView) findViewById(R.id.showResult);
         recognizerBt = (Button) findViewById(R.id.recognizer);
         synthesizerBt = (Button) findViewById(R.id.synthesizer);
@@ -60,10 +62,10 @@ public class MainActivity extends AppCompatActivity {
         uploadBt = (Button) findViewById(R.id.upload);
         shakeBt = (Button) findViewById(R.id.shake);
         resultTv.setText("onSpeakProgress。。。。。");
-        recognizer = new IflytekRecognizer(this);
+     /*   recognizer = new IflytekRecognizer(this);
         synthesizer = new IflytekSynthesizer(this);
-        understander = new IflytekUnderstander(this);
-        recognizerBt.setOnClickListener(new View.OnClickListener() {
+        understander = new IflytekUnderstander(this);*/
+      /*  recognizerBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 recognizer.recognizer(false);
@@ -74,14 +76,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 synthesizer.synthesizer(resultTv.getText().toString());
             }
-        });
+        });*/
 
-        shakeBt.setOnClickListener(new View.OnClickListener() {
+     /*   shakeBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startTipService();
             }
-        });
+        });*/
 
       /*  understanderBt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,13 +91,13 @@ public class MainActivity extends AppCompatActivity {
                 understander.understanderVoice();
             }
         });*/
-        textUnderstanderBt.setOnClickListener(new View.OnClickListener() {
+       /* textUnderstanderBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 understander.understanderText("斗鱼Tv");
             }
-        });
-        uploadBt.setOnClickListener(new View.OnClickListener() {
+        });*/
+      /*  uploadBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 UserWords uw = new UserWords();
@@ -106,12 +108,12 @@ public class MainActivity extends AppCompatActivity {
                 uw.putWords("家长助手", words);
                 recognizer.uploadUserWords(uw.toString());
             }
-        });
+        });*/
         voiceHelper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //检查是否安装了语记
-                if(SpeechUtility.getUtility().checkServiceInstalled()){
+                if(!SpeechUtility.getUtility().checkServiceInstalled()){
                     ApkInstaller installer=new ApkInstaller(MainActivity.this);
                     installer.install();
                 }else{
@@ -123,15 +125,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        changeFileName.setOnClickListener(new View.OnClickListener() {
+     /*   changeFileName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
             }
-        });
+        });*/
     }
 
-    private void initReceiver() {
+  /*  private void initReceiver() {
         IntentFilter filter = new IntentFilter();
         filter.addAction(Code.RECOGNIZER_ACTION);
         filter.addAction(Code.UNDERSTANDER_ACTION);
@@ -142,9 +144,9 @@ public class MainActivity extends AppCompatActivity {
     private void startTipService() {
         Intent intent = new Intent(this, TipService.class);
         startService(intent);
-    }
+    }*/
 
-    @Override
+   /* @Override
     protected void onDestroy() {
         super.onDestroy();
         recognizer.release();
@@ -157,9 +159,9 @@ public class MainActivity extends AppCompatActivity {
             String result = intent.getStringExtra(Code.RECOGNIZER_RESULT);
             doRecognizerResult(code, result);
         }
-    }
+    }*/
 
-    private void doRecognizerResult(int code, String result) {
+/*    private void doRecognizerResult(int code, String result) {
         LogUtils.info(null, "code:" + code + "  result:" + result);
         try {
             if (code == Code.UNDERSTANDER_SUCCESS) {
@@ -237,5 +239,5 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-    }
+    }*/
 }

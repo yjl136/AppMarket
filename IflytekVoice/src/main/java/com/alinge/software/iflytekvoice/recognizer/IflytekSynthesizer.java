@@ -75,7 +75,11 @@ public class IflytekSynthesizer {
         }
     };
 
-    public void synthesizer(String text) {
+    public  synchronized  void synthesizer(String text) {
+        if (curentCode != Code.SYNTHESIZER_FREE) {
+            LogUtils.error(null, " synthesizer wait for me....");
+            return;
+        }
         initSynthesizer();
         if (mSynthesizer != null) {
             int code = mSynthesizer.startSpeaking(text, mSynthesizerListener);
@@ -129,6 +133,7 @@ public class IflytekSynthesizer {
         //  mSynthesizer.setParameter(SpeechConstant.BACKGROUND_SOUND,"1");
         //设置合成音调
         mSynthesizer.setParameter(SpeechConstant.PITCH, "60");
+        mSynthesizer.setParameter(SpeechConstant.NET_TIMEOUT, "3000");
         //设置合成音量
         mSynthesizer.setParameter(SpeechConstant.VOLUME, "100");
         //设置播放器音频流类型

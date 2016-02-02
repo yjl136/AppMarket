@@ -18,6 +18,7 @@ import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 import com.alinge.software.iflytekvoice.R;
 import com.alinge.software.iflytekvoice.recognizer.IflytekSynthesizer;
@@ -266,7 +267,8 @@ public class ScalePopupWindow extends PopupWindow implements Animation.Animation
                 synthesizer.synthesizer("你好像没有说话哦！");
                 return;
             }else if(code==Code.NETWORK_ERROR_XUNFEI || code==Code.NETWORK_TIMEOUT_XUNFEI){
-                synthesizer.synthesizer("网络错误，快叫爸爸、妈妈来连接网络吧！");
+                //synthesizer.synthesizer("网络错误");
+                Toast.makeText(context,"网络异常",Toast.LENGTH_SHORT).show();
                 return;
             }else if (code==Code.UNDERSTANDER_FAILD){
                 synthesizer.synthesizer("我听不清楚，请大点声");
@@ -300,7 +302,7 @@ public class ScalePopupWindow extends PopupWindow implements Animation.Animation
                             AppHelper.launchApp(context,resolveInfo);
                         }
                     }else{
-                        synthesizer.synthesizer("你说清楚点，我不知道你想干什么");
+                        synthesizer.synthesizer("你说清楚点");
                     }
                 }
             }
@@ -325,6 +327,9 @@ public class ScalePopupWindow extends PopupWindow implements Animation.Animation
                     int frameNum=drawable.getNumberOfFrames();
                     Drawable lastDrawable=drawable.getFrame(frameNum - 1);
                     imageView.setBackground(lastDrawable);
+                }
+                if(code==Code.SYNTHESIZER_FAILD){
+                    Toast.makeText(context,"网络异常",Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -355,6 +360,7 @@ public class ScalePopupWindow extends PopupWindow implements Animation.Animation
                 LogUtils.info(null, " app oparation:" + opration);
             }
         } else if (ServiceType.MAP.equals(serviceType)) {
+            synthesizer.synthesizer("暂时不支持地图相关功能");
 
         } else if (ServiceType.MESSAGE.equals(serviceType)) {
             SemanticResult sms = filterResult.getSemanticResult();
@@ -372,17 +378,17 @@ public class ScalePopupWindow extends PopupWindow implements Animation.Animation
             }
 
         } else if (ServiceType.TELEPHONE.equals(serviceType)) {
-
+            synthesizer.synthesizer("暂时不支持电话相关功能");
         } else if (ServiceType.SCHEDULE.equals(serviceType)) {
-
+            synthesizer.synthesizer("暂时不支持计划相关功能");
         } else if (ServiceType.TRANSLATION.equals(serviceType)) {
-
+            synthesizer.synthesizer("暂时不支持翻译相关功能");
         } else if (ServiceType.WEATHER.equals(serviceType)) {
-
+            synthesizer.synthesizer("暂时不支持天气相关功能");
         } else if (ServiceType.WEBSITE.equals(serviceType)) {
-
+            synthesizer.synthesizer("暂时不支持网址相关功能");
         } else if (ServiceType.WEBSEARCH.equals(serviceType)) {
-
+            synthesizer.synthesizer("暂时不支持网络搜索相关功能");
         }
 
     }

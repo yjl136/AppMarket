@@ -9,13 +9,14 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/CommentView" />
+            <option value="$PROJECT_DIR$/CommentView_lib" />
             <option value="$PROJECT_DIR$/IflytekVoice" />
             <option value="$PROJECT_DIR$/PullZoomView" />
             <option value="$PROJECT_DIR$/ViewPageIndictor_lib" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/pulltorefreshandload" />
             <option value="$PROJECT_DIR$/pulltozoomview-library" />
-            <option value="$PROJECT_DIR$/wcl-leakcanary-demo" />
           </set>
         </option>
       </GradleProjectSettings>

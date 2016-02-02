@@ -3,13 +3,14 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AppMarket.iml" filepath="$PROJECT_DIR$/AppMarket.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CommentView/CommentView.iml" filepath="$PROJECT_DIR$/CommentView/CommentView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CommentView_lib/CommentView_lib.iml" filepath="$PROJECT_DIR$/CommentView_lib/CommentView_lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/IflytekVoice/IflytekVoice.iml" filepath="$PROJECT_DIR$/IflytekVoice/IflytekVoice.iml" />
       <module fileurl="file://$PROJECT_DIR$/PullZoomView/PullZoomView.iml" filepath="$PROJECT_DIR$/PullZoomView/PullZoomView.iml" />
       <module fileurl="file://$PROJECT_DIR$/ViewPageIndictor_lib/ViewPageIndictor_lib.iml" filepath="$PROJECT_DIR$/ViewPageIndictor_lib/ViewPageIndictor_lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/pulltorefreshandload/pulltorefreshandload.iml" filepath="$PROJECT_DIR$/pulltorefreshandload/pulltorefreshandload.iml" />
       <module fileurl="file://$PROJECT_DIR$/pulltozoomview-library/pulltozoomview-library.iml" filepath="$PROJECT_DIR$/pulltozoomview-library/pulltozoomview-library.iml" />
-      <module fileurl="file://$PROJECT_DIR$/wcl-leakcanary-demo/wcl-leakcanary-demo.iml" filepath="$PROJECT_DIR$/wcl-leakcanary-demo/wcl-leakcanary-demo.iml" />
     </modules>
   </component>
 </project>
