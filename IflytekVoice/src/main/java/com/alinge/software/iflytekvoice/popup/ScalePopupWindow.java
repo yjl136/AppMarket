@@ -231,11 +231,12 @@ public class ScalePopupWindow extends PopupWindow implements Animation.Animation
         }else if(hours>=10 && hours<=14){
             //中午
             drawble=R.drawable.voice_midday_animation;
-            text="中午好！，小朋友";
+            text="中午好！，小朋友,很高兴见到你，我是皮皮猴";
         }else if(hours>14 && hours<20){
             //下午
             drawble=R.drawable.voice_morning_animation;
-            text="下午好！，小朋友";
+         //   text="下午好！，小朋友,很高兴见到你，我是皮皮猴";
+            text="这样看kimi太近了，屏幕离的远一点，才不会伤害眼睛哦！记住了吗？";
         }else {
             //晚上
             drawble=R.drawable.voice_night_animation;
