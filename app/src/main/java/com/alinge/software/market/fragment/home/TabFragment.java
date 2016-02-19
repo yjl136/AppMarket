@@ -1,5 +1,6 @@
 package com.alinge.software.market.fragment.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.alinge.software.market.AppDetailActivity;
 import com.alinge.software.market.R;
 import com.alinge.software.market.adapter.AppAdapter;
 import com.alinge.software.market.adapter.decoration.AppItemDecoration;
@@ -176,6 +178,9 @@ public class TabFragment extends VolleyResponseFragment implements SwipeRefreshL
     public void onItemClick(View itemView) {
        AppInfo app = (AppInfo)itemView.getTag();
         if(app!=null){
+            Intent intent = new Intent();
+            intent.setClass(getActivity(), AppDetailActivity.class);
+            getActivity().startActivity(intent);
             Toast.makeText(getActivity(),app.getSoftwareName(),Toast.LENGTH_SHORT).show();
         }
     }
