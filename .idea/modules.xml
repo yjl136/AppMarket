@@ -11,6 +11,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/pulltorefreshandload/pulltorefreshandload.iml" filepath="$PROJECT_DIR$/pulltorefreshandload/pulltorefreshandload.iml" />
       <module fileurl="file://$PROJECT_DIR$/pulltozoomview-library/pulltozoomview-library.iml" filepath="$PROJECT_DIR$/pulltozoomview-library/pulltozoomview-library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sensordemo/sensordemo.iml" filepath="$PROJECT_DIR$/sensordemo/sensordemo.iml" />
     </modules>
   </component>
 </project>

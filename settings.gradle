@@ -1,2 +1,2 @@
-include ':pulltorefreshandload', ':PullZoomView', ':pulltozoomview-library', ':CommentView_lib', ':CommentView'
+include ':pulltorefreshandload', ':PullZoomView', ':pulltozoomview-library', ':CommentView_lib', ':CommentView', ':sensordemo'
 include 'app', 'IflytekVoice', 'ViewPageIndictor_lib'

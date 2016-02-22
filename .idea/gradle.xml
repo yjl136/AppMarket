@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/pulltorefreshandload" />
             <option value="$PROJECT_DIR$/pulltozoomview-library" />
+            <option value="$PROJECT_DIR$/sensordemo" />
           </set>
         </option>
       </GradleProjectSettings>
