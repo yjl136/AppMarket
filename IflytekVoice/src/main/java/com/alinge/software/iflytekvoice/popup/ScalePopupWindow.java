@@ -236,7 +236,8 @@ public class ScalePopupWindow extends PopupWindow implements Animation.Animation
             //下午
             drawble=R.drawable.voice_morning_animation;
          //   text="下午好！，小朋友,很高兴见到你，我是皮皮猴";
-            text="这样看kimi太近了，屏幕离的远一点，才不会伤害眼睛哦！记住了吗？";
+            text = "小朋友，这里好暗啊，我们换个地方玩吧！";
+
         }else {
             //晚上
             drawble=R.drawable.voice_night_animation;
